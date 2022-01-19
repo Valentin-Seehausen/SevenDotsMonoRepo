@@ -136,7 +136,14 @@ async function writeAddresses(
   contracts: deployContractReturnObject,
   chainId: Number
 ) {
+  // Constants
   const timestamp = Math.floor(Date.now() / 1000);
+  const _dirCurrent = path.join(
+    __dirname,
+    "../../deployments/",
+    chainId.toString(),
+    "current"
+  );
   const _dir = path.join(
     __dirname,
     "../../deployments/",
@@ -149,8 +156,10 @@ async function writeAddresses(
   await fs.mkdirSync(path.join(_dir, "abis"), { recursive: true });
 
   let addressesJson = JSON.parse("{}");
+  // All promises go here
   let copyJobs = [];
 
+  // Each contract goes into promises
   for (const [name, address] of Object.entries(contracts)) {
     console.log(name, address);
     addressesJson[name] = address;
@@ -165,8 +174,13 @@ async function writeAddresses(
     );
   }
 
+  // Create dir
   copyJobs.push(fs.writeFileSync(_path, JSON.stringify(addressesJson)));
   await Promise.all(copyJobs);
+  try {
+    await fs.unlinkSync(_dirCurrent);
+  } catch {}
+  await fs.symlinkSync(_dir, _dirCurrent, "dir");
   console.log("Saved in file:", _path);
 }
 
