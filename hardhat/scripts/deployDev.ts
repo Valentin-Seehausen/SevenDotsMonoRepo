@@ -137,20 +137,36 @@ async function writeAddresses(
   chainId: Number
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
-  const _path = path.join(
+  const _dir = path.join(
     __dirname,
-    "../deployments/",
-    chainId.toString() + "_" + timestamp.toString() + ".json"
+    "../../deployments/",
+    chainId.toString(),
+    timestamp.toString()
   );
+  const _filename = "addresses.json";
+  const _path = path.join(_dir, _filename);
+  console.log("creating dir ", path.join(_dir, "abis"));
+  await fs.mkdirSync(path.join(_dir, "abis"), { recursive: true });
 
   let addressesJson = JSON.parse("{}");
+  let copyJobs = [];
 
   for (const [name, address] of Object.entries(contracts)) {
     console.log(name, address);
     addressesJson[name] = address;
+    copyJobs.push(
+      fs.copyFileSync(
+        path.join(
+          __dirname,
+          "../artifacts/contracts/" + name + ".sol/" + name + ".json"
+        ), //sourc
+        path.join(_dir, "abis", name + ".json") // destination
+      )
+    );
   }
 
-  await fs.writeFileSync(_path, JSON.stringify(addressesJson));
+  copyJobs.push(fs.writeFileSync(_path, JSON.stringify(addressesJson)));
+  await Promise.all(copyJobs);
   console.log("Saved in file:", _path);
 }
 

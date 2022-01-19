@@ -1,0 +1,3 @@
+# Ignore deployments in local networks
+/deployments/1337/*
+/deployments/31337/*
