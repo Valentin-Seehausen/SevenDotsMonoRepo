@@ -153,17 +153,20 @@ async function writeAddresses(
   const _filename = "addresses.json";
   const _path = path.join(_dir, _filename);
   console.log("creating dir ", path.join(_dir, "abis"));
+  // Create new dir now
   await fs.mkdirSync(path.join(_dir, "abis"), { recursive: true });
+  await fs.mkdirSync(path.join(_dir, "types"), { recursive: true });
 
   let addressesJson = JSON.parse("{}");
-  // All promises go here
+  // All promises go in here to be solved sync
   let copyJobs = [];
 
-  // Each contract goes into promises
+  // Each contract
   for (const [name, address] of Object.entries(contracts)) {
     console.log(name, address);
     addressesJson[name] = address;
     copyJobs.push(
+      // Copy ABI
       fs.copyFileSync(
         path.join(
           __dirname,
@@ -172,9 +175,15 @@ async function writeAddresses(
         path.join(_dir, "abis", name + ".json") // destination
       )
     );
+    // Copy Types
+    copyJobs.push(
+      fs.copyFileSync(
+        path.join(__dirname, "../typechain-types/" + name + ".ts"), //sourc
+        path.join(_dir, "types", name + ".ts") // destination
+      )
+    );
   }
 
-  // Create dir
   copyJobs.push(fs.writeFileSync(_path, JSON.stringify(addressesJson)));
   await Promise.all(copyJobs);
   try {
