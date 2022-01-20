@@ -60,10 +60,16 @@ describe("Big Merges", function () {
     await token.approve(stackFactory.address, 3);
     await expect(stackFactory.stackTokens(2, 3)).to.be.reverted;
 
+    // This too, but it should also revert
+    await token.safeMint(deployer.address, constants.seed.rareRainbowTwo);
+    await token.approve(stackFactory.address, 4);
+    await token.approve(stackFactory.address, 3);
+    await expect(stackFactory.stackTokens(2, 3)).to.be.reverted;
+
     // This should work. 49 dots, but not the same
     await token.safeMint(deployer.address, constants.seed.commonRainbowOne);
-    await token.approve(stackFactory.address, 4);
-    await expect(stackFactory.stackTokens(2, 4)).not.to.be.reverted;
+    await token.approve(stackFactory.address, 5);
+    await expect(stackFactory.stackTokens(2, 5)).not.to.be.reverted;
   });
 
   it("Cannot stack unique tokens", async function () {
