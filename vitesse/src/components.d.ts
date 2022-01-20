@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Auction: typeof import('./components/Auction.vue')['default']
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     Counter: typeof import('./components/Counter.vue')['default']

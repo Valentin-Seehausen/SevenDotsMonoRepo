@@ -1,3 +1,5 @@
+auction:
+  bid: Bid on Auction
 auctions:
   createAuction: Create Auction
 button:

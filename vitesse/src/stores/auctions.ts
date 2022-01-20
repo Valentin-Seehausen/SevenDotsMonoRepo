@@ -1,14 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import type Auction from 'types/Auction'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
-
-interface Auction {
-  highestBid: number
-  highestBidder: string
-  end: number
-  seed: string
-  id: number
-}
 
 export const useAuctionStore = defineStore('auctionStore', () => {
   const wallet = useWalletStore()
