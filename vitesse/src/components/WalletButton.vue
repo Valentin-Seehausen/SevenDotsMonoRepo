@@ -4,10 +4,19 @@ import { useWalletStore } from '~/stores/wallet'
 const wallet = useWalletStore()
 
 const { t } = useI18n()
+const onClick = () => {
+  if (!wallet.isMetaMaskInstalled) return
+  if (!wallet.isConnected) {
+    wallet.requestConnection()
+  }
+  else {
+    // disconnect
+  }
+}
 </script>
 
 <template>
-  <button class="w-34 overflow-hidden btn hover:btn-dark border-white">
+  <button class="w-34 overflow-hidden btn hover:btn-dark border-white" @click="onClick">
     <div v-if="!wallet.isMetaMaskInstalled">
       Please install Metamask
     </div>

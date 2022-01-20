@@ -3,34 +3,32 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 declare let window: any
 
 export const useWalletStore = defineStore('wallet', () => {
-  const isLoading = ref(false)
   const isConnected = ref(false)
   const isMetaMaskInstalled = ref(false)
-  const provider = ref<ethers.providers.Web3Provider>()
-  const signer = ref<ethers.Signer>()
+  const signer = ref()
   const account = ref('')
 
-  const checkMetaMask = () => {
+  const checkMetaMask = async() => {
     const { ethereum } = window
     isMetaMaskInstalled.value = Boolean(ethereum && ethereum.isMetaMask)
-    provider.value = new ethers.providers.Web3Provider(window.ethereum)
-    signer.value = provider.value.getSigner()
   }
 
   const checkConnection = async() => {
     const _accounts = await window.ethereum.request({
       method: 'eth_accounts',
     })
-    isConnected.value = Boolean(_accounts.length > 0)
-    account.value = _accounts[0]
+    if (_accounts.length > 0) {
+      signer.value = new ethers.providers.Web3Provider(window.ethereum)
+      isConnected.value = true
+      account.value = _accounts[0]
+    }
   }
 
   const requestConnection = async() => {
-    const _accounts = await window.ethereum.request({
+    await window.ethereum.request({
       method: 'eth_requestAccounts',
     })
-    isConnected.value = Boolean(_accounts.length > 0)
-    account.value = _accounts[0]
+    checkConnection()
   }
 
   const accountName = computed(() =>
@@ -43,10 +41,8 @@ export const useWalletStore = defineStore('wallet', () => {
   }
 
   return {
-    isLoading,
     isConnected,
     isMetaMaskInstalled,
-    provider,
     signer,
     account,
     accountName,
