@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <style>
-    path { fill: #222; }
-    @media (prefers-color-scheme: dark) {
-      path { fill: #ffffff; }
-    }
-  </style>
-  <path d="M27.562 26L17.17 8.928l2.366-3.888L17.828 4L16 7.005L14.17 4l-1.708 1.04l2.366 3.888L4.438 26H2v2h28v-2zM16 10.85L25.22 26H17v-8h-2v8H6.78z" />
-</svg>
+<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='24' height='24' viewbox='0 0 24 24'><style>#bg {fill: #000}.c1 {fill: #FF0000}.c2 {fill: #FFB300}.c3 {fill: #DDFF00}.c4 {fill: #00FF5E}.c5 {fill: #0091FF}.c6 {fill: #4800FF}.c7 {fill: #FF00D9}</style><rect id='bg' x='0' y='0' width='24' height='24'/><rect class='c1' x='2' y='11' width='2' height='2'/><rect class='c2' x='5' y='11' width='2' height='2'/><rect class='c3' x='8' y='11' width='2' height='2'/><rect class='c4' x='11' y='11' width='2' height='2'/><rect class='c5' x='14' y='11' width='2' height='2'/><rect class='c6' x='17' y='11' width='2' height='2'/><rect class='c7' x='20' y='11' width='2' height='2'/></svg>

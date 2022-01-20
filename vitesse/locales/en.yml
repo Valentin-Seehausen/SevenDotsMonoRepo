@@ -10,7 +10,7 @@ button:
   toggle_langs: Change languages
 intro:
   aka: Also known as
-  desc: Opinionated Vite Starter Template
+  desc: Where does NFT end and DeFi begin?
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
   whats-your-name: What's your name?
