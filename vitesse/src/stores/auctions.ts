@@ -1,4 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
 
 interface Auction {
@@ -10,7 +11,8 @@ interface Auction {
 }
 
 export const useAuctionStore = defineStore('auctionStore', () => {
-  const auctionHouse = useContractStore().auctionHouse
+  const wallet = useWalletStore()
+  const auctionHouse = useContractStore().auctionHouse()
   const auctions = ref<Auction[]>()
 
   const loadAuctions = async() => {
@@ -25,7 +27,12 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     })
   }
 
-  return { auctions, loadAuctions }
+  const createAuction = async() => {
+    if (!wallet.isConnected) return
+    auctionHouse.connect(unref(wallet.signer)).createAuction()
+  }
+
+  return { auctions, loadAuctions, createAuction }
 })
 
 if (import.meta.hot)

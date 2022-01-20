@@ -5,7 +5,7 @@ declare let window: any
 export const useWalletStore = defineStore('wallet', () => {
   const isConnected = ref(false)
   const isMetaMaskInstalled = ref(false)
-  const signer = ref()
+  const signer = ref<ethers.providers.JsonRpcSigner>()
   const account = ref('')
 
   const checkMetaMask = async() => {
@@ -18,10 +18,16 @@ export const useWalletStore = defineStore('wallet', () => {
       method: 'eth_accounts',
     })
     if (_accounts.length > 0) {
-      signer.value = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      signer.value = provider.getSigner()
       isConnected.value = true
       account.value = _accounts[0]
     }
+  }
+
+  const getSigner = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    return provider.getSigner()
   }
 
   const requestConnection = async() => {
@@ -48,6 +54,7 @@ export const useWalletStore = defineStore('wallet', () => {
     accountName,
     requestConnection,
     initWallet,
+    getSigner,
   }
 })
 if (import.meta.hot)
