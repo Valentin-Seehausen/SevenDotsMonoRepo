@@ -4,7 +4,7 @@ import { useWalletStore } from '~/stores/wallet'
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Vitesse Test for Seven Dots',
+  title: 'Seven Dots',
   meta: [
     { name: 'description', content: 'Seven Dots NFT DeFi' },
   ],

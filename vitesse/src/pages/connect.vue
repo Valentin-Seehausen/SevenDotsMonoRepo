@@ -21,6 +21,7 @@ const { t } = useI18n()
       <p class="truncate overflow-hidden">
         {{ t("wallet.connected", {account: wallet.accountName}) }}
       </p>
+      {{}}
     </button>
   </div>
 </template>

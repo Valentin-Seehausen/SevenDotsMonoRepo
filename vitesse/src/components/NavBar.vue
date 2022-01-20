@@ -1,6 +1,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { isDark, toggleDark } from '~/composables'
+const { t } = useI18n()
+
 const showMenu = ref(false)
 const toggleNav = () => (showMenu.value = !showMenu.value)
 </script>
@@ -9,8 +12,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
   <div class="overflow-visible h-20 z-50 fixed inset-x-0 top-0 ">
     <nav class="flex items-center justify-between flex-wrap bg-gray-500 p-6 ">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" /></svg>
-        <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span>
+        <span class="font-semibold text-xl tracking-tight">Seven Dots</span>
       </div>
       <div class="block lg:hidden">
         <button class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white" @click="toggleNav">
@@ -19,18 +21,22 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
       </div>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto" :class="{'<lg:hidden': !showMenu}">
         <div class="text-sm lg:flex-grow">
-          <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
-            Docs
-          </a>
-          <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
-            Examples
-          </a>
-          <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white">
-            Blog
-          </a>
+          <router-link to="/" :title="t('button.auctions')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
+            {{ t('button.auctions') }}
+          </router-link>
+          <router-link to="/" :title="t('button.stacking')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
+            {{ t('button.stacking') }}
+          </router-link>
+          <router-link to="/" :title="t('button.staking')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white">
+            {{ t('button.staking') }}
+          </router-link>
         </div>
         <div>
-          <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+          <button class="icon-btn mx-2 !outline-none rounded-full bg-light-50 p-1.5 align-top" :title="t('button.toggle_dark')" @click="toggleDark()">
+            <carbon-moon v-if="isDark" />
+            <carbon-sun v-else />
+          </button>
+          <WalletButton />
         </div>
       </div>
     </nav>

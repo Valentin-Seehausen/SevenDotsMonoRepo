@@ -1,8 +1,11 @@
 button:
   about: About
+  auctions: Auctions
   back: Back
   go: GO
   home: Home
+  stacking: Stacking
+  staking: Staking
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
 intro:
