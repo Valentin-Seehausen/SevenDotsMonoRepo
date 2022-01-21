@@ -6,7 +6,7 @@ import { useContractStore } from './contracts'
 export const useAuctionStore = defineStore('auctionStore', () => {
   const wallet = useWalletStore()
   const auctionHouse = useContractStore().auctionHouse()
-  const auctions = ref<Auction[]>()
+  const auctions = ref<Auction[]>([])
 
   const loadAuctions = async() => {
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
@@ -25,7 +25,9 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     auctionHouse.connect(unref(wallet.signer)).createAuction()
   }
 
-  return { auctions, loadAuctions, createAuction }
+  const getAuction = ref((id: number) => auctions.value.find(auction => auction.id === id))
+
+  return { auctions, loadAuctions, createAuction, getAuction }
 })
 
 if (import.meta.hot)
