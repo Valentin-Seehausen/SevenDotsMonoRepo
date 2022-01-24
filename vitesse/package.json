@@ -12,6 +12,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@types/dateformat": "^5.0.0",
     "@vueuse/core": "^7.5.3",
     "@vueuse/head": "^0.7.4",
     "dateformat": "^5.0.2",

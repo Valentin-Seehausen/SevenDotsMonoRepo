@@ -1,8 +1,10 @@
 auction:
   bid: Bid on Auction
+  ended: Ended
   ends: Ends
   highestBid: Highest Bid
   highestBidder: Highest Bidder
+  isOpen: Open
   price: Price
 auctions:
   createAuction: Create Auction

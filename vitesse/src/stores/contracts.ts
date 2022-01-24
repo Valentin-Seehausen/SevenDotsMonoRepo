@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ethers } from 'ethers'
+import dateFormat from 'dateformat'
 import SevenDotsAuctionHouseInfo from '../../../deployments/1337/current/abis/SevenDotsAuctionHouse.json'
 import type { SevenDotsAuctionHouse } from '../../../deployments/1337/current/types/SevenDotsAuctionHouse'
 import MaticWETHInfo from '../../../deployments/1337/current/abis/MaticWETH.json'
@@ -14,6 +15,8 @@ export const useContractStore = defineStore('chain', () => {
     SevenDotsAuctionHouseInfo.abi,
     provider,
   ) as unknown as SevenDotsAuctionHouse
+
+  provider.getBlockNumber().then(n => provider.getBlock(n)).then(b => console.log(dateFormat(new Date(b.timestamp * 1000), 'HH:MM:ss TT, mmmm dS')))
 
   const WETH = () => new ethers.Contract(
     addresses.MaticWETH,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ethers } from 'ethers'
-import dateFormat, { masks } from 'dateformat'
+import dateFormat from 'dateformat'
 import type Auction from 'types/Auction'
 import constants from '~/constants'
 import { useAuctionStore } from '~/stores/auctions'
@@ -10,10 +10,12 @@ const { t } = useI18n()
 const auctions = useAuctionStore()
 auctions.loadAuctions()
 const auction = ref<Auction>()
+const isOpen = ref<boolean>()
 const bid = ref()
 watchEffect(() => {
   auction.value = auctions.auctions.find(auction => auction.id === parseInt(props.id))
   if (!auction.value) return
+  isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end < new Date()
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
 })
 const onBid = async() => {
@@ -36,6 +38,9 @@ const onBid = async() => {
         {{ t("dots.one") }}
       </h3>
       <p class="mt-4 text-lg font-thin">
+        <span v-if="isOpen">{{ t("auction.isOpen") }}</span><span v-else>{{ t("auction.ended") }}</span>
+      </p>
+      <p class="mt-4 text-lg font-thin">
         {{ t("auction.ends") }}: {{ dateFormat(auction.end, "HH:MM:ss TT, mmmm dS") }}
       </p>
       <p class="mt-4 text-lg font-thin">
@@ -44,10 +49,10 @@ const onBid = async() => {
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBid") }}: {{ ethers.utils.formatEther(auction.highestBid) }}
       </p>
-      <div class="py-4 px-4">
+      <div v-if="isOpen" class="py-4 px-4">
         <input v-model="bid" type="text" class="border-black border-2 p-2">
       </div>
-      <button class="w-56  border-black bg-black text-white border-2 p-2 items-center justify-center " @click="onBid">
+      <button v-if="isOpen" class="w-56  border-black bg-black text-white border-2 p-2 items-center justify-center " @click="onBid">
         {{ t("auction.bid") }}
       </button>
     </div>
