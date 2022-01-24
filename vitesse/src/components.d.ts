@@ -11,6 +11,7 @@ declare module 'vue' {
     Counter: typeof import('./components/Counter.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     README: typeof import('./components/README.md')['default']
+    Token: typeof import('./components/Token.vue')['default']
     WalletButton: typeof import('./components/WalletButton.vue')['default']
   }
 }

@@ -26,6 +26,9 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
           <router-link to="/auctions" :title="t('button.auctions')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
             {{ t('button.auctions') }}
           </router-link>
+          <router-link to="/token" :title="t('button.dots')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
+            {{ t('button.dots') }}
+          </router-link>
           <router-link to="/" :title="t('button.stacking')" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4">
             {{ t('button.stacking') }}
           </router-link>
