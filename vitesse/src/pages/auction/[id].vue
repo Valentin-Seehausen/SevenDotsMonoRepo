@@ -17,7 +17,6 @@ const bid = ref()
 watchEffect(() => {
   auction.value = auctions.auctions.find(auction => auction.id === parseInt(props.id))
   if (!auction.value) return
-  console.log(contracts.getDateOnChain())
   isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
 })
