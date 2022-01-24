@@ -3,6 +3,14 @@ import type Auction from 'types/Auction'
 import type { BigNumber } from 'ethers'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
+import constants from '~/constants'
+
+export enum AuctionsFilter {
+  All,
+  Open,
+  Closed,
+  Mine,
+}
 
 export const useAuctionStore = defineStore('auctionStore', () => {
   const wallet = useWalletStore()
@@ -10,6 +18,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const auctionHouse = contracts.auctionHouse()
   const WETH = contracts.WETH()
   const auctions = ref<Auction[]>([])
+  const activeFilter = ref<AuctionsFilter>(AuctionsFilter.Open)
 
   const loadAuctions = async() => {
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
@@ -34,7 +43,24 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
   }
 
-  return { auctions, loadAuctions, createAuction, bidOnAuction }
+  const setFilter = (_filter: AuctionsFilter) => {
+    activeFilter.value = _filter
+  }
+
+  const filteredAuctions = computed(() => {
+    switch (activeFilter.value) {
+      case AuctionsFilter.Open:
+        return auctions.value.filter(auction => auction.highestBidder === constants.zeroAddress || auction.end > contracts.getDateOnChain())
+      case AuctionsFilter.Closed:
+        return auctions.value.filter(auction => !(auction.highestBidder === constants.zeroAddress || auction.end > contracts.getDateOnChain()))
+      case AuctionsFilter.Mine:
+        return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase())
+      default:
+        return auctions.value
+    }
+  })
+
+  return { auctions, loadAuctions, createAuction, bidOnAuction, setFilter, activeFilter, filteredAuctions }
 })
 
 if (import.meta.hot)
