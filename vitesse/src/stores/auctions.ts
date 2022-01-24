@@ -40,7 +40,12 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const bidOnAuction = async(auctionId: number, amount: BigNumber) => {
     if (!wallet.isConnected) return
     await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
-    auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
+    await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
+  }
+
+  const redeemAuction = async(auctionId: number) => {
+    if (!wallet.isConnected) return
+    await auctionHouse.connect(wallet.getSigner()).redeemAuction(auctionId)
   }
 
   const setFilter = (_filter: AuctionsFilter) => {
@@ -60,7 +65,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     }
   })
 
-  return { auctions, loadAuctions, createAuction, bidOnAuction, setFilter, activeFilter, filteredAuctions }
+  return { auctions, loadAuctions, createAuction, bidOnAuction, redeemAuction, setFilter, activeFilter, filteredAuctions }
 })
 
 if (import.meta.hot)

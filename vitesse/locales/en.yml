@@ -6,8 +6,10 @@ auction:
   highestBidder: Highest Bidder
   isOpen: Open
   price: Price
+  redeem: Redeem Auction
 auctions:
   createAuction: Create Auction
+  notFound: Auction not found. It got likey redeemed.
 button:
   about: About
   auctions: Auctions
