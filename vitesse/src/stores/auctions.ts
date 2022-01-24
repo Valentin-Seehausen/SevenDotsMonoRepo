@@ -22,7 +22,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
 
   const createAuction = async() => {
     if (!wallet.isConnected) return
-    auctionHouse.connect(unref(wallet.signer)).createAuction()
+    auctionHouse.connect(wallet.getSigner()).createAuction()
   }
 
   const getAuction = ref((id: number) => auctions.value.find(auction => auction.id === id))
