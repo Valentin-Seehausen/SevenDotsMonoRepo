@@ -4,9 +4,11 @@ import dateFormat from 'dateformat'
 import type Auction from 'types/Auction'
 import constants from '~/constants'
 import { useAuctionStore } from '~/stores/auctions'
+import { useContractStore } from '~/stores/contracts'
 
 const props = defineProps<{ id: string }>()
 const { t } = useI18n()
+const contracts = useContractStore()
 const auctions = useAuctionStore()
 auctions.loadAuctions()
 const auction = ref<Auction>()
@@ -15,7 +17,8 @@ const bid = ref()
 watchEffect(() => {
   auction.value = auctions.auctions.find(auction => auction.id === parseInt(props.id))
   if (!auction.value) return
-  isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end < new Date()
+  console.log(contracts.getDateOnChain())
+  isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
 })
 const onBid = async() => {

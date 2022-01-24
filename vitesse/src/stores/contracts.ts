@@ -10,13 +10,21 @@ import addresses1337 from '../../../deployments/1337/current/addresses.json'
 export const useContractStore = defineStore('chain', () => {
   const addresses = addresses1337
   const provider = ethers.getDefaultProvider('http://localhost:8545')
+  const timeDifference = ref(0)
   const auctionHouse = () => new ethers.Contract(
     addresses.SevenDotsAuctionHouse,
     SevenDotsAuctionHouseInfo.abi,
     provider,
   ) as unknown as SevenDotsAuctionHouse
 
-  provider.getBlockNumber().then(n => provider.getBlock(n)).then(b => console.log(dateFormat(new Date(b.timestamp * 1000), 'HH:MM:ss TT, mmmm dS')))
+  provider.getBlockNumber().then(n => provider.getBlock(n)).then((b) => {
+    timeDifference.value = b.timestamp * 1000 - Date.now()
+    console.log('Blockchain time:', dateFormat(new Date(b.timestamp * 1000), 'HH:MM:ss TT, mmmm dS'))
+  })
+
+  const getDateOnChain = () => {
+    return new Date(Date.now() + timeDifference.value)
+  }
 
   const WETH = () => new ethers.Contract(
     addresses.MaticWETH,
@@ -28,6 +36,7 @@ export const useContractStore = defineStore('chain', () => {
     auctionHouse,
     WETH,
     addresses,
+    getDateOnChain,
   }
 })
 
