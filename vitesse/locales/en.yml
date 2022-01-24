@@ -1,5 +1,9 @@
 auction:
   bid: Bid on Auction
+  ends: Ends
+  highestBid: Highest Bid
+  highestBidder: Highest Bidder
+  price: Price
 auctions:
   createAuction: Create Auction
 button:
@@ -13,6 +17,8 @@ button:
   staking: Staking
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+dots:
+  one: One dot
 intro:
   aka: Also known as
   desc: Where does NFT end and DeFi begin?
@@ -25,3 +31,4 @@ rand:
 wallet:
   connect: connect wallet
   connected: '{account}'
+  no-metamask: Please install Metamask

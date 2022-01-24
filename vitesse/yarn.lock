@@ -1403,6 +1403,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@iconify-json/bx@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@iconify-json/bx/-/bx-1.0.3.tgz#777ad87437b67b11ad25d2ed15117984b3e240d2"
+  integrity sha512-nwUxwOwocTp5u+KcBUraqEXiC7VG6niL6RQIdbLsRjZwouxayyVXPIkBPwMEmxpcTk1SA8Jh52MI+Scex1wJSA==
+  dependencies:
+    "@iconify/types" "^1.0.10"
+
 "@iconify-json/carbon@^1.0.13":
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/@iconify-json/carbon/-/carbon-1.0.14.tgz#209c337e17e5faf3cfe6c14ae4cafa516b04d761"
@@ -2843,6 +2850,11 @@ data-urls@^3.0.1:
     abab "^2.0.3"
     whatwg-mimetype "^3.0.0"
     whatwg-url "^10.0.0"
+
+dateformat@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-5.0.2.tgz#0f275609b02e3306ff76d6a2067a6ebb98e6114b"
+  integrity sha512-h9vywpuz+ReixnJTwFx5JLtZpS8eLCbRm8shwwKkCKOZA547N6yoMtD3W91Z6+NFZ8wOaZlcaCcK/w+kELhSVg==
 
 dayjs@^1.10.4:
   version "1.10.7"

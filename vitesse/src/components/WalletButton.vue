@@ -16,14 +16,14 @@ const onClick = () => {
 </script>
 
 <template>
-  <button class="w-34 overflow-hidden btn hover:btn-dark border-white" @click="onClick">
-    <div v-if="!wallet.isMetaMaskInstalled">
-      Please install Metamask
-    </div>
-    <div v-else-if="!wallet.isConnected">
+  <button class="w-48 overflow-hidden btn hover:btn-dark border-white" @click="onClick">
+    <p v-if="!wallet.isMetaMaskInstalled">
+      {{ t("wallet.no-metamask") }}
+    </p>
+    <p v-else-if="!wallet.isConnected">
       {{ t("wallet.connect") }}
-    </div>
-    <p class="truncate overflow-hidden">
+    </p>
+    <p v-else class="truncate overflow-hidden">
       {{ t("wallet.connected", {account: wallet.accountName}) }}
     </p>
   </button>

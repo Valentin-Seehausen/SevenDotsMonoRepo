@@ -3,7 +3,7 @@ import type { BigNumber } from 'ethers'
 export default interface Auction {
   highestBid: BigNumber
   highestBidder: string
-  end: number
+  end: Date
   seed: string
   id: number
 }
