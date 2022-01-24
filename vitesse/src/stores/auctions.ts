@@ -9,7 +9,7 @@ export enum AuctionsFilter {
   All,
   Open,
   Closed,
-  Mine,
+  Users,
 }
 
 export const useAuctionStore = defineStore('auctionStore', () => {
@@ -53,7 +53,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         return auctions.value.filter(auction => auction.highestBidder === constants.zeroAddress || auction.end > contracts.getDateOnChain())
       case AuctionsFilter.Closed:
         return auctions.value.filter(auction => !(auction.highestBidder === constants.zeroAddress || auction.end > contracts.getDateOnChain()))
-      case AuctionsFilter.Mine:
+      case AuctionsFilter.Users:
         return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase())
       default:
         return auctions.value

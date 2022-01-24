@@ -15,10 +15,10 @@ auctionStore.loadAuctions()
       </button>
     </div>
     <div>
-      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.All}" @click="auctionStore.setFilter(AuctionsFilter.All)">All</a>
-      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Open}" @click="auctionStore.setFilter(AuctionsFilter.Open)">Open</a>
-      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">Closed</a>
-      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Mine}" @click="auctionStore.setFilter(AuctionsFilter.Mine)">Mine</a>
+      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.All}" @click="auctionStore.setFilter(AuctionsFilter.All)">{{ t("filter.all") }}</a>
+      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Open}" @click="auctionStore.setFilter(AuctionsFilter.Open)">{{ t("filter.open") }}</a>
+      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">{{ t("filter.all") }}</a>
+      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Users}" @click="auctionStore.setFilter(AuctionsFilter.Users)">{{ t("filter.users") }}</a>
     </div>
   </div>
   <div class="px-10 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">

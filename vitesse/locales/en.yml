@@ -21,6 +21,10 @@ button:
   toggle_langs: Change languages
 dots:
   one: One dot
+filter:
+  all: All
+  open: Open
+  users: Yours
 intro:
   aka: Also known as
   desc: Where does NFT end and DeFi begin?
