@@ -20,6 +20,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const WETH = contracts.WETH()
   const auctions = ref<Auction[]>([])
   const activeFilter = ref<AuctionsFilter>(AuctionsFilter.Open)
+  const openSlots = ref(196)
 
   const loadAuctions = async() => {
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
@@ -36,11 +37,13 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         image: metadata.image,
       } as Auction
     })
+    openSlots.value = await auctionHouse.freeAuctionSlots()
   }
 
   const createAuction = async() => {
     if (!wallet.isConnected) return
-    auctionHouse.connect(wallet.getSigner()).createAuction()
+    await auctionHouse.connect(wallet.getSigner()).createAuction()
+    loadAuctions()
   }
 
   const bidOnAuction = async(auctionId: number, amount: BigNumber) => {
@@ -71,7 +74,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     }
   })
 
-  return { auctions, loadAuctions, createAuction, bidOnAuction, redeemAuction, setFilter, activeFilter, filteredAuctions }
+  return { auctions, openSlots, loadAuctions, createAuction, bidOnAuction, redeemAuction, setFilter, activeFilter, filteredAuctions }
 })
 
 if (import.meta.hot)
