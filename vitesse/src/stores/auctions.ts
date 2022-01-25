@@ -1,6 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Auction from 'types/Auction'
 import type { BigNumber } from 'ethers'
+import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
 import constants from '~/constants'
@@ -22,12 +23,17 @@ export const useAuctionStore = defineStore('auctionStore', () => {
 
   const loadAuctions = async() => {
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
+      const seed = auction[3].toString()
+      // @ts-expect-error-error
+      const metadata = seeds[seed] as any
       return {
         highestBid: auction[0],
         highestBidder: auction[1],
         end: new Date(auction[2] * 1000),
         seed: auction[3],
         id: auction[4],
+        dna: metadata.DNA,
+        image: metadata.image,
       } as Auction
     })
   }

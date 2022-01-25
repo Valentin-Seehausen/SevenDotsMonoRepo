@@ -6,4 +6,6 @@ export default interface Auction {
   end: Date
   seed: string
   id: number
+  dna: string
+  image: string
 }

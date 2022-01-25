@@ -5,6 +5,7 @@ auction:
   highestBid: Highest Bid
   highestBidder: Highest Bidder
   isOpen: Open
+  name: '#{id} / {dna}'
   price: Price
   redeem: Redeem Auction
 auctions:

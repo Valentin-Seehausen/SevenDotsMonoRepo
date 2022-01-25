@@ -7,7 +7,6 @@ declare module 'vue' {
     Auction: typeof import('./components/Auction.vue')['default']
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
-    CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     README: typeof import('./components/README.md')['default']
