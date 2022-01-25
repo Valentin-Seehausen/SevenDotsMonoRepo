@@ -92,6 +92,34 @@ describe("Stresstest", function () {
     }
   });
 
+  xit("[LONG] [UTILITY] Create seed to tokenURI", async function () {
+    this.timeout(300000);
+    // Create 196 Autions
+    let promises = [];
+    for (let i = 0; i < 196; i++) {
+      promises.push(auctionHouse.createAuction());
+    }
+    await Promise.all(promises);
+    // Collect 49 unique seeds
+    let auctions = await auctionHouse.allAuctions();
+    let seeds = <any>{};
+    // save seeds in file
+    for (let auction of auctions) {
+      let seed = auction[3];
+      seeds[seed] = seeds[seed] ? seeds[seed] + 1 : 1;
+    }
+    let promisesToken = [];
+    let i = 0;
+    for (let seed in seeds) {
+      await token.safeMint(deployer.address, seed);
+      let tokenURI = await token.tokenURI(i);
+      i++;
+      console.log(i);
+      seeds[seed] = atob(tokenURI.substring(29));
+    }
+    // console.log(seeds); // Log output and move it to frontend
+  });
+
   xit("Multiple users create stacks", async function () {
     // TokenId 0
     await token.safeMint(deployer.address, constants.seed.f4c1);
