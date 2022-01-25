@@ -9,6 +9,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721Burnab
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "./utils/base64.sol";
 import "./SevenDotsMetadata.sol";
 
@@ -154,7 +155,14 @@ contract SevenDotsToken is
                     Base64.encode(
                         bytes(
                             abi.encodePacked(
-                                '{"image": "',
+                                "{",
+                                '"name":"#',
+                                StringsUpgradeable.toString(tokenId),
+                                '",',
+                                '"description":"Seven Dots Token",',
+                                metadata.calcAttributes(idToSeed[tokenId]),
+                                ",",
+                                '"image":"',
                                 "data:image/svg+xml;base64,",
                                 Base64.encode(
                                     bytes(metadata.calcSvg(idToSeed[tokenId]))

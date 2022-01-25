@@ -18,7 +18,9 @@ describe("Mint AuctionHouse", function () {
   it("First Mint is f1 c1", async function () {
     await auctionHouse.mintNewToken(deployer.address);
     await expect(await token.balanceOf(deployer.address)).to.equal(1);
-    await expect(await token.tokenURI(0)).to.equal(constants.tokenURI[0]);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI[0]
+    );
   });
 
   // Should not run all the time, takes >10s
@@ -28,12 +30,23 @@ describe("Mint AuctionHouse", function () {
       promises.push(auctionHouse.mintNewToken(deployer.address));
     }
     // 2th Mint is f2 c2
-    await expect(await token.tokenURI(1)).to.equal(constants.tokenURI[1]);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI[0]
+    );
     // 29th Mint is f2 c2
-    await expect(await token.tokenURI(28)).to.equal(constants.tokenURI[28]);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI[0]
+    );
+    await expect(atob((await token.tokenURI(28)).substring(29))).to.equal(
+      constants.tokenURI[28]
+    );
     // 196th Mint is f7 c6
-    await expect(await token.tokenURI(195)).to.equal(constants.tokenURI[195]);
+    await expect(atob((await token.tokenURI(195)).substring(29))).to.equal(
+      constants.tokenURI[195]
+    );
     // 197th Mint is f1 c1
-    await expect(await token.tokenURI(196)).to.equal(constants.tokenURI[0]);
+    await expect(atob((await token.tokenURI(196)).substring(29))).to.equal(
+      constants.tokenURI[196]
+    );
   });
 });

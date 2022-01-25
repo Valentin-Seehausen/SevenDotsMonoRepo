@@ -24,6 +24,7 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "OWNER_ROLE()": FunctionFragment;
     "addCols(uint256,uint256)": FunctionFragment;
+    "calcAttributes(bytes32)": FunctionFragment;
     "calcSvg(bytes32)": FunctionFragment;
     "countDots(bytes32)": FunctionFragment;
     "decode(bytes32)": FunctionFragment;
@@ -57,6 +58,10 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "addCols",
     values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "calcAttributes",
+    values: [BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "calcSvg", values: [BytesLike]): string;
   encodeFunctionData(
@@ -133,6 +138,10 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "OWNER_ROLE", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "addCols", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "calcAttributes",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "calcSvg", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "countDots", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decode", data: BytesLike): Result;
@@ -258,6 +267,11 @@ export interface SevenDotsMetadata extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    calcAttributes(
+      seed: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     calcSvg(seed: BytesLike, overrides?: CallOverrides): Promise<[string]>;
 
     countDots(seed: BytesLike, overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -361,6 +375,8 @@ export interface SevenDotsMetadata extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  calcAttributes(seed: BytesLike, overrides?: CallOverrides): Promise<string>;
+
   calcSvg(seed: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   countDots(seed: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
@@ -460,6 +476,8 @@ export interface SevenDotsMetadata extends BaseContract {
       col2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    calcAttributes(seed: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     calcSvg(seed: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -612,6 +630,11 @@ export interface SevenDotsMetadata extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    calcAttributes(
+      seed: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     calcSvg(seed: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     countDots(seed: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
@@ -715,6 +738,11 @@ export interface SevenDotsMetadata extends BaseContract {
     addCols(
       col1: BigNumberish,
       col2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    calcAttributes(
+      seed: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

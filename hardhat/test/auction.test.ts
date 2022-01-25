@@ -163,7 +163,10 @@ describe("Auction", function () {
 
     // NFT should be transfered and have the right seed
     await expect(await token.balanceOf(alice.address)).to.equal(1);
-    await expect(await token.tokenURI(0)).to.equal(constants.tokenURI[0]);
+    console.log(await token.tokenURI(0));
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI[0]
+    );
 
     // DotCount should have been increased
     await expect(await token.totalDotCount()).to.be.equal(1);
@@ -324,7 +327,9 @@ describe("Auction", function () {
 
     // NFT should be transfered and have the right seed
     await expect(await token.balanceOf(alice.address)).to.equal(1);
-    await expect(await token.tokenURI(0)).to.equal(constants.tokenURI[0]);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI[0]
+    );
   });
 
   it("Pruning works correctly", async function () {

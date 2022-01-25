@@ -30,7 +30,9 @@ describe("Mint NFT Token", function () {
 
   it("Returns tokenURI", async function () {
     await token.safeMint(deployer.address, constants.seed.f4c1);
-    await expect(await token.tokenURI(0)).to.equal(constants.tokenURI.f4c1);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI.f4c1
+    );
   });
 
   it("Dot Count works", async function () {

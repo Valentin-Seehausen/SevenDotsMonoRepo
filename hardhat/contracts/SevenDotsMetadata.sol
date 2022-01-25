@@ -154,6 +154,32 @@ contract SevenDotsMetadata is
         return length;
     }
 
+    function calcAttributes(bytes32 seed) public pure returns (string memory) {
+        bytes memory b;
+        b = abi.encodePacked(b, '"attributes":[');
+        uint256[7] memory cols = decode(seed);
+        for (uint256 i = 0; i < BASE; i++) {
+            if (cols[i] > 0) {
+                b = abi.encodePacked(
+                    b,
+                    '{"trait_type":"c',
+                    StringsUpgradeable.toString(i + 1),
+                    '","value":"',
+                    StringsUpgradeable.toString(cols[i]),
+                    '"},'
+                );
+            }
+        }
+        b = abi.encodePacked(
+            b,
+            '{"trait_type":"Dots","display_type":"number","value":"',
+            StringsUpgradeable.toString(countDots(seed)),
+            '"}'
+        );
+        b = abi.encodePacked(b, "]");
+        return string(b);
+    }
+
     /**
      * @notice Takes a seed and calculates a base64 encoded svg.
      * @param seed the seed phrase of the token

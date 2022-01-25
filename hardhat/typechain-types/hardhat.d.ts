@@ -109,10 +109,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MaticWETH__factory>;
     getContractFactory(
-      name: "MaticWETH",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MaticWETH__factory>;
-    getContractFactory(
       name: "SevenDotsAuctionHouse",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SevenDotsAuctionHouse__factory>;
@@ -264,11 +260,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
-    getContractAt(
-      name: "MaticWETH",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MaticWETH>;
     getContractAt(
       name: "MaticWETH",
       address: string,
