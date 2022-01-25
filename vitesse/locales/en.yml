@@ -27,6 +27,7 @@ dots:
   one: One dot
 filter:
   all: All
+  closed: Closed
   open: Open
   users: Yours
 intro:

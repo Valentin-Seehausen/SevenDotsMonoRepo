@@ -18,7 +18,7 @@ auctionStore.loadAuctions()
     <div>
       <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.All}" @click="auctionStore.setFilter(AuctionsFilter.All)">{{ t("filter.all") }}</a>
       <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Open}" @click="auctionStore.setFilter(AuctionsFilter.Open)">{{ t("filter.open") }}</a>
-      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">{{ t("filter.all") }}</a>
+      <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">{{ t("filter.closed") }}</a>
       <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Users}" @click="auctionStore.setFilter(AuctionsFilter.Users)">{{ t("filter.users") }}</a>
     </div>
   </div>
