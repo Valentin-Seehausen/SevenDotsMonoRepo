@@ -156,17 +156,25 @@ contract SevenDotsMetadata is
 
     function calcAttributes(bytes32 seed) public pure returns (string memory) {
         bytes memory b;
+        bytes memory dna;
         b = abi.encodePacked(b, '"attributes":[');
         uint256[7] memory cols = decode(seed);
         for (uint256 i = 0; i < BASE; i++) {
             if (cols[i] > 0) {
                 b = abi.encodePacked(
                     b,
-                    '{"trait_type":"c',
+                    '{"trait_type":"f',
                     StringsUpgradeable.toString(i + 1),
-                    '","value":"',
+                    '","value":"c',
                     StringsUpgradeable.toString(cols[i]),
                     '"},'
+                );
+                dna = abi.encodePacked(
+                    dna,
+                    "f",
+                    StringsUpgradeable.toString(i + 1),
+                    "c",
+                    StringsUpgradeable.toString(cols[i])
                 );
             }
         }
@@ -174,8 +182,9 @@ contract SevenDotsMetadata is
             b,
             '{"trait_type":"Dots","display_type":"number","value":"',
             StringsUpgradeable.toString(countDots(seed)),
-            '"}'
+            '"},'
         );
+        b = abi.encodePacked(b, '{"trait_type":"DNA","value":"', dna, '"}');
         b = abi.encodePacked(b, "]");
         return string(b);
     }
