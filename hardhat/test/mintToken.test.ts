@@ -29,7 +29,6 @@ describe("Mint NFT Token", function () {
 
   it("TokenURI of rare rainbow seven", async function () {
     await token.safeMint(deployer.address, constants.seed.rareRainbowSeven);
-    console.log(await token.tokenURI(0));
     await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
       constants.tokenURI.rareRainbowSeven
     );

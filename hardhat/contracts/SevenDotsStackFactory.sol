@@ -23,7 +23,7 @@ contract SevenDotsStackFactory is
 
     /** Constants */
     bytes32 public constant OWNER_ROLE = keccak256("OWNER_ROLE");
-    uint256 constant STACK_DURATION = 7 days;
+    uint256 constant STACK_DURATION = 2 hours;
     uint256 constant STACK_REWARD = 7 ether;
     uint256 constant MAX_DOTS = 49;
 

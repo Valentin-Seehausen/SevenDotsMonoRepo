@@ -131,7 +131,7 @@ export default {
   },
   time: {
     auctionDuration: 24 * 60 * 60,
-    stackDuration: 7 * 24 * 60 * 60,
+    stackDuration: 2 * 60 * 60,
   },
   seed: {
     /** Field 4 Color 1 */

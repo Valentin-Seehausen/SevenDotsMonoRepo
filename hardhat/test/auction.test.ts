@@ -163,7 +163,6 @@ describe("Auction", function () {
 
     // NFT should be transfered and have the right seed
     await expect(await token.balanceOf(alice.address)).to.equal(1);
-    console.log(await token.tokenURI(0));
     await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
       constants.tokenURI[0]
     );
