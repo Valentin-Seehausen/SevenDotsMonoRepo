@@ -53,4 +53,4 @@ export const useStackingStore = defineStore('stackingStore', () => {
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useWalletStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useStackingStore, import.meta.hot))
