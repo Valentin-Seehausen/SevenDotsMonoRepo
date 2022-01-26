@@ -9,15 +9,18 @@ const { t } = useI18n()
   <router-link
     :to="`/auction/${props.auction.id}`"
   >
-    <div role="link" class="bg-white max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer">
+    <div role="link" class="bg-white max-w-xs rounded-md overflow-hidden shadow-md hover:shadow-lg hover:scale-102 transform-gpu transition duration-500 cursor-pointer">
       <div>
         <img class="w-56 m-4 inline-block" alt="Dots" :src="props.auction.image">
       </div>
       <div class="py-4 px-4 ">
-        <h3 class="text-md font-semibold text-gray-600 overflow-hidden truncate">
+        <h3 class="text-md font-semibold overflow-hidden truncate">
           {{ t("auction.name", {id: props.auction.id, dna: props.auction.dna}) }}
         </h3>
-        <p class="mt-4 text-lg font-thin">
+        <h2>
+          {{ auction.dna }}
+        </h2>
+        <p class="mt-4 font-thin">
           {{ t("auction.price") }} {{ ethers.utils.formatEther(props.auction.highestBid) }}
         </p>
       </div>

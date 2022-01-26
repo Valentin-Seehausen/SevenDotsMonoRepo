@@ -26,12 +26,12 @@ watchEffect(() => {
       <h3 class="text-md font-semibold">
         {{ token.name }}
       </h3>
-      <h4 class="py-4">
+      <h4 class="py-4 font-semibold">
         {{ t("token.attributes") }}
       </h4>
-      <p v-for="attribute in token.attributes" :key="attribute.trait_type" class="">
+      <div v-for="attribute in token.attributes" :key="attribute.trait_type" class="border-1 border-gray-200 bg-gray-50 rounded p-1">
         {{ attribute.trait_type }}: {{ attribute.value }}
-      </p>
+      </div>
     </div>
   </div>
   <div v-else class="flex">
