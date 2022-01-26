@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
+import { useStackingStore } from '~/stores/stacking'
 import { useTokenStore } from '~/stores/token'
-
 const { t } = useI18n()
+const stackingStore = useStackingStore()
+
 const tokens = useTokenStore()
 const token1 = ref()
 const token2 = ref()
 const isVisible1 = ref(false)
 const isVisible2 = ref(false)
-
+const onStack = async() => {
+  stackingStore.stackTokens(token1.value, token2.value)
+}
 </script>
 
 <template>
@@ -28,7 +32,7 @@ const isVisible2 = ref(false)
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible2}">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible2}">
             <div v-for="token in tokens.tokens" :key="token.id" class="flex p-1 hover:bg-gray-100 cursor-pointer" @click="token2 = token; isVisible2 = false">
               <img class="w-12" alt="Dots" :src="token.image">
               <div class="p-1">
@@ -54,7 +58,7 @@ const isVisible2 = ref(false)
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible1}">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible1}">
             <div v-for="token in tokens.tokens" :key="token.id" class="flex p-1 hover:bg-gray-100 cursor-pointer" @click="token1 = token; isVisible1 = false">
               <img class="w-12" alt="Dots" :src="token.image">
               <div class="p-1">
@@ -66,7 +70,7 @@ const isVisible2 = ref(false)
       </div>
     </div>
     <div class="flex-1 self-end">
-      <button class="btn block ml-0 mt-2 w-50">
+      <button class="btn block ml-0 mt-2 w-50" @click="onStack">
         {{ t("stacking.createStack") }}
       </button>
     </div>
