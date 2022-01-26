@@ -18,6 +18,7 @@ button:
   dots: Dots
   go: GO
   home: Home
+  loading: Loading...
   sevenDots: Seven Dots
   stacking: Stacking
   staking: Staking
@@ -39,6 +40,10 @@ intro:
 not-found: Not found
 rand:
   jojojo: Yoyoyo
+token:
+  attributes: Attributes
+tokens:
+  notFound: Token not found
 wallet:
   connect: connect wallet
   connected: '{account}'

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{ token: Object }>()
-const { t } = useI18n()
+import type Token from 'types/Token'
+defineProps<{ token: Token }>()
+
 </script>
 
 <template>
   <router-link
-    :to="`/dot/${props.token}`"
+    :to="`/token/${token.id}`"
   >
     <div role="link" class="bg-white max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer">
       <div>
@@ -13,7 +14,7 @@ const { t } = useI18n()
       </div>
       <div class="py-4 px-4 ">
         <h3 class="text-md font-semibold text-gray-600 overflow-hidden truncate">
-          {{ t("dots.one") }}
+          {{ token.name }}
         </h3>
       </div>
     </div>
