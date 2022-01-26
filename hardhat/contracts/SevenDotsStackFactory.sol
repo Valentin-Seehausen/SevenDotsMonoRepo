@@ -91,6 +91,7 @@ contract SevenDotsStackFactory is
      */
     function stackTokens(uint24 token1, uint24 token2) external {
         // Can only stack own tokens
+        require(token1 != token2, "SD: Cannot stack one token twice.");
         require(token.ownerOf(token1) == msg.sender, "SD: Not owner");
         require(token.ownerOf(token2) == msg.sender, "SD: Not owner");
         require(

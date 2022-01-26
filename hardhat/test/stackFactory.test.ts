@@ -87,6 +87,15 @@ describe("StackFactory", function () {
     await expect(stackFactory.connect(alice).stackTokens(0, 1)).to.be.reverted;
   });
 
+  it("Stack reverts if trying to stack one token twice", async function () {
+    // Deployer mints one NFTs
+    await token.safeMint(deployer.address, constants.seed.f4c1);
+    await token.approve(stackFactory.address, 0);
+
+    // Tries to stack it twice
+    await expect(stackFactory.stackTokens(0, 0)).to.be.reverted;
+  });
+
   it("Stack reverts when not approved", async function () {
     await token.safeMint(deployer.address, constants.seed.f4c1);
     await token.safeMint(deployer.address, constants.seed.f4c1);
