@@ -12,6 +12,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@chenfengyuan/vue-countdown": "^2.0.0-rc",
     "@types/dateformat": "^5.0.0",
     "@vueuse/components": "^7.5.5",
     "@vueuse/core": "^7.5.5",

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
+import constants from '~/constants/constants'
 import { useStackingStore } from '~/stores/stacking'
 import { useTokenStore } from '~/stores/token'
 const { t } = useI18n()
@@ -10,8 +11,17 @@ const token1 = ref()
 const token2 = ref()
 const isVisible1 = ref(false)
 const isVisible2 = ref(false)
+const threshold = ref(Date.now() - constants.stackDuration + 11700 * 60 * 1000)
 const onStack = async() => {
   stackingStore.stackTokens(token1.value, token2.value)
+}
+
+const unstack = async(stackId: number) => {
+  await stackingStore.unstack(stackId)
+}
+
+const onCountdownEnd = () => {
+  threshold.value = Date.now() - constants.stackDuration + 11700 * 60 * 1000
 }
 </script>
 
@@ -73,6 +83,45 @@ const onStack = async() => {
       <button class="btn block ml-0 mt-2 w-50" @click="onStack">
         {{ t("stacking.createStack") }}
       </button>
+    </div>
+  </div>
+  <h2 class="mt-14 font-semibold ">
+    {{ t("stacking.stacks") }}
+  </h2>
+  <div class="mt-8 table w-100 rounded-t-md border-black border-2">
+    <div class="table-header-group bg-gray-200 rounded-t-md">
+      <div class="table-row">
+        <div class="table-cell text-left ">
+          {{ t("stacking.topTokenId") }}
+        </div>
+        <div class="table-cell text-left ">
+          {{ t("stacking.bottomTokenId") }}
+        </div>
+        <div class="table-cell text-left ">
+          {{ t("stacking.ready") }}
+        </div>
+        <div class="table-cell text-left " />
+      </div>
+    </div>
+    <div class="table-row-group divide-y divide-light-100">
+      <div
+        v-for="stack in stackingStore.stacks" :key="stack.id" class="table-row"
+      >
+        <div class="table-cell ">
+          {{ stack.tokenId2 }}
+        </div>
+        <div class="table-cell ">
+          {{ stack.tokenId1 }}
+        </div>
+        <div class="table-cell ">
+          <vue-countdown v-if="stack.stackTime - threshold > 0" v-slot="{hours, minutes, seconds}" :time="stack.stackTime - threshold" @end="onCountdownEnd">
+            {{ hours }}:{{ minutes }}:{{ seconds }}
+          </vue-countdown>
+          <button v-else class="btn" @click="unstack(stack.id)">
+            {{ t("stacking.unstack") }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

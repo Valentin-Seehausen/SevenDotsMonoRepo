@@ -41,8 +41,13 @@ not-found: Not found
 rand:
   jojojo: Yoyoyo
 stacking:
+  bottomTokenId: Bottom Token Id
   createStack: Create Stack
+  ready: Ready
   selectToken: Please select token
+  stacks: Stacks
+  topTokenId: Top Token Id
+  unstack: Unstack
 token:
   attributes: Attributes
 tokens:

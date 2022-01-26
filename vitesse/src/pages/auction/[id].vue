@@ -2,7 +2,7 @@
 import { ethers } from 'ethers'
 import dateFormat from 'dateformat'
 import type Auction from 'types/Auction'
-import constants from '~/constants'
+import constants from '~/constants/constants'
 import { useAuctionStore } from '~/stores/auctions'
 import { useContractStore } from '~/stores/contracts'
 import { useWalletStore } from '~/stores/wallet'

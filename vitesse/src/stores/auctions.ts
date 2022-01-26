@@ -4,7 +4,7 @@ import type { BigNumber } from 'ethers'
 import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
-import constants from '~/constants'
+import constants from '~/constants/constants'
 
 export enum AuctionsFilter {
   All,
