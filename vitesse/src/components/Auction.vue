@@ -10,7 +10,7 @@ const { t } = useI18n()
     :to="`/auction/${props.auction.id}`"
   >
     <div role="link" class="bg-white max-w-xs rounded-md overflow-hidden shadow-md hover:shadow-lg hover:scale-102 transform-gpu transition duration-500 cursor-pointer">
-      <div>
+      <div class="text-center">
         <img class="w-56 m-4 inline-block" alt="Dots" :src="props.auction.image">
       </div>
       <div class="py-4 px-4 ">

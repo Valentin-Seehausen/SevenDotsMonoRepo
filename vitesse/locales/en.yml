@@ -40,6 +40,9 @@ intro:
 not-found: Not found
 rand:
   jojojo: Yoyoyo
+stacking:
+  createStack: Create Stack
+  selectToken: Please select token
 token:
   attributes: Attributes
 tokens:
