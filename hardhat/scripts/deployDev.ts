@@ -10,7 +10,8 @@ import { SevenDotsDistributor } from "../typechain-types/SevenDotsDistributor";
 import { MaticWETH } from "../typechain-types/MaticWETH";
 import fs from "fs";
 import path from "path";
-import { Contract } from "ethers";
+import constants from "../test/helper/constants";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 let token: SevenDotsToken,
   metadata: SevenDotsMetadata,
@@ -21,8 +22,9 @@ let token: SevenDotsToken,
   distributor: SevenDotsDistributor,
   treasury: SevenDotsTreasury;
 let WETH: MaticWETH;
+let deployer: SignerWithAddress, alice: SignerWithAddress;
 
-interface deployContractReturnObject {
+interface contractAddresses {
   SevenDotsToken: string;
   SevenDotsMetadata: string;
   SevenDotsAuctionHouse: string;
@@ -34,8 +36,8 @@ interface deployContractReturnObject {
   MaticWETH: string;
 }
 
-export default async function deployContracts(): Promise<deployContractReturnObject> {
-  let [deployer] = await ethers.getSigners();
+export default async function deployContracts(): Promise<contractAddresses> {
+  [deployer, alice] = await ethers.getSigners();
 
   metadata = (await upgrades.deployProxy(
     await ethers.getContractFactory("SevenDotsMetadata"),
@@ -92,6 +94,10 @@ export default async function deployContracts(): Promise<deployContractReturnObj
     ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
     stackFactory.address
   );
+  await token.grantRole(
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
+    deployer.address
+  );
   await rewardToken.grantRole(
     ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
     auctionHouse.address
@@ -100,6 +106,10 @@ export default async function deployContracts(): Promise<deployContractReturnObj
     ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
     stackFactory.address
   );
+  await rewardToken.grantRole(
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
+    deployer.address
+  );
   await stakingToken.grantRole(
     ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE")),
     treasury.address
@@ -107,6 +117,10 @@ export default async function deployContracts(): Promise<deployContractReturnObj
   await treasury.grantRole(
     ethers.utils.keccak256(ethers.utils.toUtf8Bytes("TRIGGER_ROLE")),
     stackFactory.address
+  );
+  await treasury.grantRole(
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes("TRIGGER_ROLE")),
+    deployer.address
   );
 
   WETH = (await (
@@ -118,7 +132,6 @@ export default async function deployContracts(): Promise<deployContractReturnObj
   await distributor.setWETH(WETH.address);
 
   // Return Addresses:
-
   return {
     SevenDotsToken: token.address,
     SevenDotsMetadata: metadata.address,
@@ -132,10 +145,7 @@ export default async function deployContracts(): Promise<deployContractReturnObj
   };
 }
 
-async function writeAddresses(
-  contracts: deployContractReturnObject,
-  chainId: Number
-) {
+async function writeAddresses(addresses: contractAddresses, chainId: Number) {
   // Constants
   const timestamp = Math.floor(Date.now() / 1000);
   const _dirCurrent = path.join(
@@ -153,7 +163,8 @@ async function writeAddresses(
   const _filename = "addresses.json";
   const _path = path.join(_dir, _filename);
   console.log("creating dir ", path.join(_dir, "abis"));
-  // Create new dir now
+
+  // Create new dir
   await fs.mkdirSync(path.join(_dir, "abis"), { recursive: true });
   await fs.mkdirSync(path.join(_dir, "types"), { recursive: true });
 
@@ -162,7 +173,7 @@ async function writeAddresses(
   let copyJobs = [];
 
   // Each contract
-  for (const [name, address] of Object.entries(contracts)) {
+  for (const [name, address] of Object.entries(addresses)) {
     console.log(name, address);
     addressesJson[name] = address;
     copyJobs.push(
@@ -193,6 +204,27 @@ async function writeAddresses(
   console.log("Saved in file:", _path);
 }
 
+async function seedFixtures() {
+  await auctionHouse.connect(alice).createAuction();
+  await auctionHouse.connect(alice).createAuction();
+  await auctionHouse.connect(alice).createAuction();
+  await auctionHouse.connect(alice).createAuction();
+  await auctionHouse.connect(alice).createAuction();
+  await auctionHouse.connect(alice).createAuction();
+  await token.safeMint(alice.address, constants.seed.commonRainbowOne);
+  await token.safeMint(alice.address, constants.seed.rareRainbowFive);
+  await token.safeMint(alice.address, constants.seed.rareRainbowFive);
+  await token.safeMint(alice.address, constants.seed.rareRainbowSix);
+  await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
+  await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
+  await WETH.transfer(alice.address, constants.amounts.ten);
+  await WETH.transfer(treasury.address, constants.amounts.ten);
+  await rewardToken.mint(alice.address, constants.amounts.ten);
+  await rewardToken.mint(deployer.address, constants.amounts.ten);
+  await stakingToken.mint(alice.address, constants.amounts.ten);
+  await stakingToken.mint(deployer.address, constants.amounts.ten);
+}
+
 async function main() {
   const [deployer] = await ethers.getSigners();
   let networkData = await (deployer as any).provider.getNetwork();
@@ -206,6 +238,10 @@ async function main() {
   await writeAddresses(contracts, networkData.chainId);
 
   console.log("Successfully deployed! ");
+
+  console.log("Seeding fixtures...");
+  await seedFixtures();
+  console.log("Successfully seeded fixtures.");
 }
 
 main()
