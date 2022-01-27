@@ -52,8 +52,8 @@ html.dark {
 
 .filter {
   @apply
-    m-1 p-1 cursor-pointer inline-block bg-gray-200 w-20 text-center;
+    m-1 p-1 cursor-pointer inline-block bg-white w-20 text-center hover:bg-gray-100;
   &.active {
-    @apply bg-black text-white ;
+    @apply bg-gray-200 hover:bg-gray-300;
   }
 }

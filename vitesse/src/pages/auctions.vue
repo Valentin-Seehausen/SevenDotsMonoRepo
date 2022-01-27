@@ -10,7 +10,7 @@ auctionStore.loadAuctions()
 <template>
   <div class="flex">
     <div class="flex-1 text-left">
-      <button class="btn" @click="auctionStore.createAuction">
+      <button class="btn mr-4" @click="auctionStore.createAuction">
         {{ t("auctions.createAuction") }}
       </button>
       {{ 196- auctionStore.openSlots }} / 196
