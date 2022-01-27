@@ -86,8 +86,23 @@ export default {
       image:
         "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyB2aWV3Ym94PScwIDAgMjQgMjQnPjxzdHlsZT4jYmcge2ZpbGw6ICMwMDB9LmMxIHtmaWxsOiAjRkYwMDAwfS5jMiB7ZmlsbDogI0ZGQjMwMH0uYzMge2ZpbGw6ICNEREZGMDB9LmM0IHtmaWxsOiAjMDBGRjVFfS5jNSB7ZmlsbDogIzAwOTFGRn0uYzYge2ZpbGw6ICM0ODAwRkZ9LmM3IHtmaWxsOiAjRkYwMEQ5fTwvc3R5bGU+PHJlY3QgaWQ9J2JnJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnLz48cmVjdCBjbGFzcz0nYzEnIHg9JzExJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjwvc3ZnPg==",
     }),
-    rareRainbowOne:
-      "data:application/json;base64,eyJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MG5hSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY25JSFpsY25OcGIyNDlKekV1TVNjZ2QybGtkR2c5SnpJMEp5Qm9aV2xuYUhROUp6STBKeUIyYVdWM1ltOTRQU2N3SURBZ01qUWdNalFuUGp4emRIbHNaVDRqWW1jZ2UyWnBiR3c2SUNNd01EQjlMbU14SUh0bWFXeHNPaUFqUmtZd01EQXdmUzVqTWlCN1ptbHNiRG9nSTBaR1FqTXdNSDB1WXpNZ2UyWnBiR3c2SUNORVJFWkdNREI5TG1NMElIdG1hV3hzT2lBak1EQkdSalZGZlM1ak5TQjdabWxzYkRvZ0l6QXdPVEZHUm4wdVl6WWdlMlpwYkd3NklDTTBPREF3UmtaOUxtTTNJSHRtYVd4c09pQWpSa1l3TUVRNWZUd3ZjM1I1YkdVK1BISmxZM1FnYVdROUoySm5KeUI0UFNjd0p5QjVQU2N3SnlCM2FXUjBhRDBuTWpRbklHaGxhV2RvZEQwbk1qUW5MejQ4Y21WamRDQmpiR0Z6Y3owbll6RW5JSGc5SnpFeEp5QjVQU2N4TVNjZ2QybGtkR2c5SnpJbklHaGxhV2RvZEQwbk1pY3ZQand2YzNablBnPT0ifQ==",
+    rareRainbowOne: JSON.stringify({
+      name: "#0",
+      description: "Seven Dots Token",
+      attributes: [
+        { trait_type: "f1", value: "c1" },
+        { trait_type: "f2", value: "c2" },
+        { trait_type: "f3", value: "c3" },
+        { trait_type: "f4", value: "c4" },
+        { trait_type: "f5", value: "c5" },
+        { trait_type: "f6", value: "c6" },
+        { trait_type: "f7", value: "c7" },
+        { trait_type: "Dots", display_type: "number", value: "7" },
+        { trait_type: "DNA", value: "f1c1f2c2f3c3f4c4f5c5f6c6f7c7" },
+      ],
+      image:
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyB2aWV3Ym94PScwIDAgMjQgMjQnPjxzdHlsZT4jYmcge2ZpbGw6ICMwMDB9LmMxIHtmaWxsOiAjRkYwMDAwfS5jMiB7ZmlsbDogI0ZGQjMwMH0uYzMge2ZpbGw6ICNEREZGMDB9LmM0IHtmaWxsOiAjMDBGRjVFfS5jNSB7ZmlsbDogIzAwOTFGRn0uYzYge2ZpbGw6ICM0ODAwRkZ9LmM3IHtmaWxsOiAjRkYwMEQ5fTwvc3R5bGU+PHJlY3QgaWQ9J2JnJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnLz48cmVjdCBjbGFzcz0nYzEnIHg9JzInIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2MyJyB4PSc1JyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjMycgeD0nOCcgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzQnIHg9JzExJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjNScgeD0nMTQnIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M2JyB4PScxNycgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzcnIHg9JzIwJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjwvc3ZnPg==",
+    }),
     rareRainbowTwo: JSON.stringify({
       name: "#0",
       description: "Seven Dots Token",
@@ -105,8 +120,23 @@ export default {
       image:
         "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyB2aWV3Ym94PScwIDAgMjQgMjQnPjxzdHlsZT4jYmcge2ZpbGw6ICMwMDB9LmMxIHtmaWxsOiAjRkYwMDAwfS5jMiB7ZmlsbDogI0ZGQjMwMH0uYzMge2ZpbGw6ICNEREZGMDB9LmM0IHtmaWxsOiAjMDBGRjVFfS5jNSB7ZmlsbDogIzAwOTFGRn0uYzYge2ZpbGw6ICM0ODAwRkZ9LmM3IHtmaWxsOiAjRkYwMEQ5fTwvc3R5bGU+PHJlY3QgaWQ9J2JnJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnLz48cmVjdCBjbGFzcz0nYzEnIHg9JzInIHk9JzknIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzEnIHg9JzInIHk9JzEyJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2MyJyB4PSc1JyB5PSc5JyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2MyJyB4PSc1JyB5PScxMicgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjMycgeD0nOCcgeT0nOScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjMycgeD0nOCcgeT0nMTInIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzQnIHg9JzExJyB5PSc5JyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M0JyB4PScxMScgeT0nMTInIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzUnIHg9JzE0JyB5PSc5JyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M1JyB4PScxNCcgeT0nMTInIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzYnIHg9JzE3JyB5PSc5JyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M2JyB4PScxNycgeT0nMTInIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzcnIHg9JzIwJyB5PSc5JyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M3JyB4PScyMCcgeT0nMTInIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48L3N2Zz4=",
     }),
-    commonRainbowOne:
-      "data:application/json;base64,eyJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MG5hSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY25JSFpsY25OcGIyNDlKekV1TVNjZ2QybGtkR2c5SnpJMEp5Qm9aV2xuYUhROUp6STBKeUIyYVdWM1ltOTRQU2N3SURBZ01qUWdNalFuUGp4emRIbHNaVDRqWW1jZ2UyWnBiR3c2SUNNd01EQjlMbU14SUh0bWFXeHNPaUFqUmtZd01EQXdmUzVqTWlCN1ptbHNiRG9nSTBaR1FqTXdNSDB1WXpNZ2UyWnBiR3c2SUNORVJFWkdNREI5TG1NMElIdG1hV3hzT2lBak1EQkdSalZGZlM1ak5TQjdabWxzYkRvZ0l6QXdPVEZHUm4wdVl6WWdlMlpwYkd3NklDTTBPREF3UmtaOUxtTTNJSHRtYVd4c09pQWpSa1l3TUVRNWZUd3ZjM1I1YkdVK1BISmxZM1FnYVdROUoySm5KeUI0UFNjd0p5QjVQU2N3SnlCM2FXUjBhRDBuTWpRbklHaGxhV2RvZEQwbk1qUW5MejQ4Y21WamRDQmpiR0Z6Y3owbll6RW5JSGc5SnpFeEp5QjVQU2N4TVNjZ2QybGtkR2c5SnpJbklHaGxhV2RvZEQwbk1pY3ZQand2YzNablBnPT0ifQ==",
+    commonRainbowOne: JSON.stringify({
+      name: "#0",
+      description: "Seven Dots Token",
+      attributes: [
+        { trait_type: "f1", value: "c7" },
+        { trait_type: "f2", value: "c6" },
+        { trait_type: "f3", value: "c5" },
+        { trait_type: "f4", value: "c4" },
+        { trait_type: "f5", value: "c3" },
+        { trait_type: "f6", value: "c2" },
+        { trait_type: "f7", value: "c1" },
+        { trait_type: "Dots", display_type: "number", value: "7" },
+        { trait_type: "DNA", value: "f1c7f2c6f3c5f4c4f5c3f6c2f7c1" },
+      ],
+      image:
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyB2aWV3Ym94PScwIDAgMjQgMjQnPjxzdHlsZT4jYmcge2ZpbGw6ICMwMDB9LmMxIHtmaWxsOiAjRkYwMDAwfS5jMiB7ZmlsbDogI0ZGQjMwMH0uYzMge2ZpbGw6ICNEREZGMDB9LmM0IHtmaWxsOiAjMDBGRjVFfS5jNSB7ZmlsbDogIzAwOTFGRn0uYzYge2ZpbGw6ICM0ODAwRkZ9LmM3IHtmaWxsOiAjRkYwMEQ5fTwvc3R5bGU+PHJlY3QgaWQ9J2JnJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnLz48cmVjdCBjbGFzcz0nYzcnIHg9JzInIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M2JyB4PSc1JyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjNScgeD0nOCcgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzQnIHg9JzExJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjMycgeD0nMTQnIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2MyJyB4PScxNycgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzEnIHg9JzIwJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjwvc3ZnPg==",
+    }),
     rareRainbowSeven: JSON.stringify({
       name: "#0",
       description: "Seven Dots Token",
