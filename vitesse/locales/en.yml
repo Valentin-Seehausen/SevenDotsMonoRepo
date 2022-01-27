@@ -49,6 +49,7 @@ rand:
 stacking:
   bottomTokenId: Bottom Token Id
   createStack: Create Stack
+  empty: No stacks. Get some token!
   ready: Ready
   selectToken: Please select token
   stacks: Stacks

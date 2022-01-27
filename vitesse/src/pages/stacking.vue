@@ -26,14 +26,14 @@ const onCountdownEnd = () => {
 </script>
 
 <template>
-  <div class="md:flex">
+  <div v-if="stackingStore.stacks.length > 0" class="md:flex">
     <div class="flex-1">
       <div>
         Top:
       </div>
       <div class="relative">
         <OnClickOutside @trigger="isVisible2 = false">
-          <div class="border-black border-2 bg-gray-100 hover:bg-gray-200 w-50 h-15 cursor-pointer flex p-1" @click="isVisible2 = !isVisible2">
+          <div class="btn secondary w-50 h-15 cursor-pointer flex p-1" @click="isVisible2 = !isVisible2">
             <img v-if="token2" class="w-12 h-12" alt="Dots" :src="token2.image">
             <div v-if="token2" class="p-1">
               {{ token2.name }}
@@ -59,7 +59,7 @@ const onCountdownEnd = () => {
       </div>
       <div class="relative">
         <OnClickOutside @trigger="isVisible1 = false">
-          <div class="border-black border-2 bg-gray-100 hover:bg-gray-200 w-50 h-15 cursor-pointer flex p-1" @click="isVisible1 = !isVisible1">
+          <div class="btn secondary w-50 h-15 cursor-pointer flex p-1" @click="isVisible1 = !isVisible1">
             <img v-if="token1" class="w-12 h-12" alt="Dots" :src="token1.image">
             <div v-if="token1" class="p-1">
               {{ token1.name }}
@@ -88,8 +88,8 @@ const onCountdownEnd = () => {
   <h2 class="mt-14 font-semibold ">
     {{ t("stacking.stacks") }}
   </h2>
-  <div class="mt-8 table w-100 rounded-t-md border-black border-2">
-    <div class="table-header-group bg-gray-200 rounded-t-md">
+  <div v-if="stackingStore.stacks.length > 0" class="mt-8 table w-100 p-1 rounded-t-md border-black border-2">
+    <div class="table-header-group">
       <div class="table-row">
         <div class="table-cell text-left ">
           {{ t("stacking.topTokenId") }}
@@ -123,5 +123,8 @@ const onCountdownEnd = () => {
         </div>
       </div>
     </div>
+  </div>
+  <div v-if="stackingStore.stacks.length == 0" class="table-cell table">
+    {{ t("stacking.empty") }}
   </div>
 </template>
