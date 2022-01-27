@@ -66,6 +66,7 @@ staking:
   unstake: Unstake
 token:
   attributes: Attributes
+  empty: No Tokens. Go and get some!
 tokens:
   notFound: Token not found
 treasury:

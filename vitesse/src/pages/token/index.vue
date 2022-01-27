@@ -7,11 +7,13 @@ const tokens = useTokenStore()
 </script>
 
 <template>
+  <div v-if="tokens.isLoading">
+    {{ t("button.loading") }}
+  </div>
+  <div v-if="tokens.tokens?.length == 0">
+    {{ t("token.empty") }}
+  </div>
   <div class="px-10 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
-    <div v-if="tokens.isLoading">
-      {{ t("button.loading") }}
-    </div>
-
     <div v-for="token in tokens.tokens" :key="token.id">
       <Token1 :key="token.id" :token="token" />
     </div>

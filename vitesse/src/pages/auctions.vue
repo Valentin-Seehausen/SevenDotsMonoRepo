@@ -14,6 +14,7 @@ auctionStore.loadAuctions()
         {{ t("auctions.createAuction") }}
       </button>
       {{ 196- auctionStore.openSlots }} / 196
+      <span v-if="auctionStore.isLoading">{{ t("button.loading") }}</span>
     </div>
     <div>
       <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.All}" @click="auctionStore.setFilter(AuctionsFilter.All)">{{ t("filter.all") }}</a>

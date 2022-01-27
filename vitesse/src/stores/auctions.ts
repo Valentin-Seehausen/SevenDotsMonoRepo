@@ -23,8 +23,10 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const auctions = ref<Auction[]>([])
   const activeFilter = ref<AuctionsFilter>(AuctionsFilter.Open)
   const openSlots = ref(196)
+  const isLoading = ref(false)
 
   const loadAuctions = async() => {
+    isLoading.value = true
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
       const seed = auction[3].toString()
       // @ts-expect-error-error
@@ -40,6 +42,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       } as Auction
     })
     openSlots.value = await auctionHouse.freeAuctionSlots()
+    isLoading.value = false
   }
 
   const createAuction = async() => {
@@ -78,7 +81,18 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     }
   })
 
-  return { auctions, openSlots, loadAuctions, createAuction, bidOnAuction, redeemAuction, setFilter, activeFilter, filteredAuctions }
+  return {
+    auctions,
+    openSlots,
+    isLoading,
+    loadAuctions,
+    createAuction,
+    bidOnAuction,
+    redeemAuction,
+    setFilter,
+    activeFilter,
+    filteredAuctions,
+  }
 })
 
 if (import.meta.hot)
