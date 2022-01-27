@@ -24,6 +24,7 @@ button:
   staking: Staking
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+  token: Token
 dots:
   one: One dot
 filter:
@@ -48,6 +49,16 @@ stacking:
   stacks: Stacks
   topTokenId: Top Token Id
   unstack: Unstack
+staking:
+  currentStakingFaktor: Current staking faktor
+  max: max
+  rewardToken: 7DOTS
+  rewardTokenBalance: 7DOTS Balance
+  stacks: Staking
+  stake: Stake
+  stakingToken: s7DOTS
+  stakingTokenBalance: s7DOTS Balance
+  unstake: Unstake
 token:
   attributes: Attributes
 tokens:

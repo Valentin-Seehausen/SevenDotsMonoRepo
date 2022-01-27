@@ -24,7 +24,7 @@ contract SevenDotsStakingToken is
     constructor() initializer {}
 
     function initialize() public initializer {
-        __ERC20_init("Seven Dots Staked Reward Token", "sr7DOTS");
+        __ERC20_init("Seven Dots Staked Reward Token", "s7DOTS");
         __ERC20Burnable_init();
         __Pausable_init();
         __AccessControl_init();

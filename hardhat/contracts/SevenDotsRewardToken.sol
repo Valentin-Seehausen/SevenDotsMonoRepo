@@ -24,7 +24,7 @@ contract SevenDotsRewardToken is
     constructor() initializer {}
 
     function initialize() public initializer {
-        __ERC20_init("Seven Dots Reward Token", "r7DOTS");
+        __ERC20_init("Seven Dots Reward Token", "7DOTS");
         __ERC20Burnable_init();
         __Pausable_init();
         __AccessControl_init();

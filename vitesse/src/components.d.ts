@@ -8,6 +8,7 @@ declare module 'vue' {
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     Counter: typeof import('./components/Counter.vue')['default']
+    'Gg:arrowsExchangeV': typeof import('~icons/gg/arrows-exchange-v')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     README: typeof import('./components/README.md')['default']
     Token: typeof import('./components/Token.vue')['default']

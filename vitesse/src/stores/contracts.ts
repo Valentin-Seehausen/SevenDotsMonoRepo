@@ -6,6 +6,12 @@ import SevenDotsTokenInfo from '../../../deployments/1337/current/abis/SevenDots
 import type { SevenDotsToken } from '../../../deployments/1337/current/types/SevenDotsToken'
 import SevenDotsStackFactoryInfo from '../../../deployments/1337/current/abis/SevenDotsStackFactory.json'
 import type { SevenDotsStackFactory } from '../../../deployments/1337/current/types/SevenDotsStackFactory'
+import SevenDotsTreasuryInfo from '../../../deployments/1337/current/abis/SevenDotsTreasury.json'
+import type { SevenDotsTreasury } from '../../../deployments/1337/current/types/SevenDotsTreasury'
+import SevenDotsRewardTokenInfo from '../../../deployments/1337/current/abis/SevenDotsRewardToken.json'
+import type { SevenDotsRewardToken } from '../../../deployments/1337/current/types/SevenDotsRewardToken'
+import SevenDotsStakingTokenInfo from '../../../deployments/1337/current/abis/SevenDotsStakingToken.json'
+import type { SevenDotsStakingToken } from '../../../deployments/1337/current/types/SevenDotsStakingToken'
 import MaticWETHInfo from '../../../deployments/1337/current/abis/MaticWETH.json'
 import type { MaticWETH } from '../../../deployments/1337/current/types/MaticWETH'
 import addresses1337 from '../../../deployments/1337/current/addresses.json'
@@ -27,11 +33,29 @@ export const useContractStore = defineStore('chain', () => {
     provider,
   ) as unknown as SevenDotsStackFactory
 
+  const treasury = () => new ethers.Contract(
+    addresses.SevenDotsTreasury,
+    SevenDotsTreasuryInfo.abi,
+    provider,
+  ) as unknown as SevenDotsTreasury
+
   const token = () => new ethers.Contract(
     addresses.SevenDotsToken,
     SevenDotsTokenInfo.abi,
     provider,
   ) as unknown as SevenDotsToken
+
+  const rewardToken = () => new ethers.Contract(
+    addresses.SevenDotsRewardToken,
+    SevenDotsRewardTokenInfo.abi,
+    provider,
+  ) as unknown as SevenDotsRewardToken
+
+  const stakingToken = () => new ethers.Contract(
+    addresses.SevenDotsStakingToken,
+    SevenDotsStakingTokenInfo.abi,
+    provider,
+  ) as unknown as SevenDotsStakingToken
 
   const WETH = () => new ethers.Contract(
     addresses.MaticWETH,
@@ -50,7 +74,10 @@ export const useContractStore = defineStore('chain', () => {
   return {
     auctionHouse,
     stackFactory,
+    treasury,
     token,
+    rewardToken,
+    stakingToken,
     WETH,
     addresses,
     getDateOnChain,
