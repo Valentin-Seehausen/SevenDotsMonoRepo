@@ -16,7 +16,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <button class="w-48 overflow-hidden btn hover:btn-dark border-white" @click="onClick">
+  <button class="w-48 overflow-hidden btn" @click="onClick">
     <p v-if="!wallet.isMetaMaskInstalled">
       {{ t("wallet.no-metamask") }}
     </p>
