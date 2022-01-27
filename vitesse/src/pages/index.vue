@@ -14,9 +14,9 @@ const { t } = useI18n()
       <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
     </p>
     <p class="mt-12">
-      <router-link to="/about">
+      <router-link to="/whitepaper">
         <button role="link" class="btn secondary">
-          {{ t("intro.readAbout") }}
+          {{ t("button.whitepaper") }}
         </button>
       </router-link>
     </p>
