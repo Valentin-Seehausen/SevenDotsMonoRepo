@@ -1,24 +1,24 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ethers } from 'ethers'
-import SevenDotsAuctionHouseInfo from '../../../deployments/1337/current/abis/SevenDotsAuctionHouse.json'
-import type { SevenDotsAuctionHouse } from '../../../deployments/1337/current/types/SevenDotsAuctionHouse'
-import SevenDotsTokenInfo from '../../../deployments/1337/current/abis/SevenDotsToken.json'
-import type { SevenDotsToken } from '../../../deployments/1337/current/types/SevenDotsToken'
-import SevenDotsStackFactoryInfo from '../../../deployments/1337/current/abis/SevenDotsStackFactory.json'
-import type { SevenDotsStackFactory } from '../../../deployments/1337/current/types/SevenDotsStackFactory'
-import SevenDotsTreasuryInfo from '../../../deployments/1337/current/abis/SevenDotsTreasury.json'
-import type { SevenDotsTreasury } from '../../../deployments/1337/current/types/SevenDotsTreasury'
-import SevenDotsRewardTokenInfo from '../../../deployments/1337/current/abis/SevenDotsRewardToken.json'
-import type { SevenDotsRewardToken } from '../../../deployments/1337/current/types/SevenDotsRewardToken'
-import SevenDotsStakingTokenInfo from '../../../deployments/1337/current/abis/SevenDotsStakingToken.json'
-import type { SevenDotsStakingToken } from '../../../deployments/1337/current/types/SevenDotsStakingToken'
-import MaticWETHInfo from '../../../deployments/1337/current/abis/MaticWETH.json'
-import type { MaticWETH } from '../../../deployments/1337/current/types/MaticWETH'
-import addresses1337 from '../../../deployments/1337/current/addresses.json'
+import SevenDotsAuctionHouseInfo from '../../../deployments/80001/current/abis/SevenDotsAuctionHouse.json'
+import type { SevenDotsAuctionHouse } from '../../../deployments/80001/current/types/SevenDotsAuctionHouse'
+import SevenDotsTokenInfo from '../../../deployments/80001/current/abis/SevenDotsToken.json'
+import type { SevenDotsToken } from '../../../deployments/80001/current/types/SevenDotsToken'
+import SevenDotsStackFactoryInfo from '../../../deployments/80001/current/abis/SevenDotsStackFactory.json'
+import type { SevenDotsStackFactory } from '../../../deployments/80001/current/types/SevenDotsStackFactory'
+import SevenDotsTreasuryInfo from '../../../deployments/80001/current/abis/SevenDotsTreasury.json'
+import type { SevenDotsTreasury } from '../../../deployments/80001/current/types/SevenDotsTreasury'
+import SevenDotsRewardTokenInfo from '../../../deployments/80001/current/abis/SevenDotsRewardToken.json'
+import type { SevenDotsRewardToken } from '../../../deployments/80001/current/types/SevenDotsRewardToken'
+import SevenDotsStakingTokenInfo from '../../../deployments/80001/current/abis/SevenDotsStakingToken.json'
+import type { SevenDotsStakingToken } from '../../../deployments/80001/current/types/SevenDotsStakingToken'
+import MaticWETHInfo from '../../../deployments/80001/current/abis/MaticWETH.json'
+import type { MaticWETH } from '../../../deployments/80001/current/types/MaticWETH'
+import addresses80001 from '../../../deployments/80001/current/addresses.json'
 
 export const useContractStore = defineStore('chain', () => {
-  const addresses = addresses1337
-  const provider = ethers.getDefaultProvider('http://localhost:8545')
+  const addresses = addresses80001
+  const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/5pFH_HJM6v9W2Vsx1eNF6tVEPViyvKPz') // Polygon Mumbai
   const timeDifference = ref(0)
 
   const auctionHouse = () => new ethers.Contract(
