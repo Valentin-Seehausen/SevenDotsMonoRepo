@@ -39,7 +39,6 @@ watchEffect(() => {
   try {
     tooMuch.value = ethers.utils.parseEther(bid.value).gt(treasury.WETHBalance)
     tooLittle.value = unref(minBid).gt(ethers.utils.parseEther(bid.value))
-    console.log(tooLittle.value)
   }
   catch (e) {
     tooMuch.value = false

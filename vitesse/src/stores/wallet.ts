@@ -16,7 +16,7 @@ export const useWalletStore = defineStore('wallet', () => {
 
   const changeNetwork = async() => {
     try {
-      window.ethereum.request({
+      await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x89' }],
       })
