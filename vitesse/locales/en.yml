@@ -28,6 +28,7 @@ button:
   toggle_langs: Change languages
   token: Token
   treasury: Treasury
+  whitepaper: Whitepaper
 dots:
   one: One dot
 filter:

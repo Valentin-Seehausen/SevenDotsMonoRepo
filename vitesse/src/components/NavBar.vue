@@ -75,11 +75,11 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
             {{ t("button.treasury") }}
           </router-link>
           <router-link
-            to="/about"
-            :title="t('button.about')"
+            to="/whitepaper"
+            :title="t('button.whitepaper')"
             class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200"
           >
-            {{ t("button.about") }}
+            {{ t("button.whitepaper") }}
           </router-link>
         </div>
         <div>

@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center">
     <div class="max-w-140">
       <h3 class="text-lg bold">
-        Seven Dots
+        Seven Dots Whitepaper
       </h3>
       <p class="my-4">
         Where does DeFi end and NFT begin? At Seven Dots the community creates unique NFTs by combining dots in seven colors on seven fields. For this creative work, the community will get 80% of all profits and early users will benefit from increased staking rewards. Seven Dots is very inclusive and offers a great opportunity for people that want to join a NFT/DeFi project in the early days (start of the project was January 27th 2022).
@@ -10,6 +10,10 @@
 
       <p class="my-4">
         If you are interested, here is a 5 minute introduction:
+      </p>
+
+      <p class="my-4 border-black border-2 p-2">
+        Before we start: You need Matic (the native token of Polygon) and wETH (wrapped ETH on Polygon) to interact with Seven Dots. Seven Dots uses a lot of gas, and Polygon offers cheap and efficient transaction costs. <a href="https://wallet.polygon.technology/bridge/" target="_blank" class="underline">Bridge wETH here</a>.
       </p>
 
       <h3 class="text-lg bold mt-8">
