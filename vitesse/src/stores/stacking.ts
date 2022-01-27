@@ -1,4 +1,3 @@
-import nProgress from 'nprogress'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Stack from 'types/Stack'
 import type Token from 'types/Token'
@@ -14,7 +13,6 @@ export const useStackingStore = defineStore('stackingStore', () => {
   const stacks = ref<Stack[]>([])
 
   const loadStacks = async() => {
-    nProgress.inc()
     stacks.value = await stackFactory.stacksOfOwner(wallet.account).then(stacks => stacks.map((stack) => {
       return {
         id: stack[0],
@@ -24,7 +22,6 @@ export const useStackingStore = defineStore('stackingStore', () => {
         stackTime: stack[4] * 1000,
       } as Stack
     }))
-    nProgress.done()
   }
 
   const stackTokens = async(token1: Token, token2: Token) => {

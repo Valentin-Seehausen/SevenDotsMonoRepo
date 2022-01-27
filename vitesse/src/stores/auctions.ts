@@ -1,7 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Auction from 'types/Auction'
 import type { BigNumber } from 'ethers'
-import nProgress from 'nprogress'
 import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
@@ -26,7 +25,6 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const openSlots = ref(196)
 
   const loadAuctions = async() => {
-    nProgress.start()
     auctions.value = (await auctionHouse.allAuctions())?.map((auction: any) => {
       const seed = auction[3].toString()
       // @ts-expect-error-error
@@ -42,14 +40,11 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       } as Auction
     })
     openSlots.value = await auctionHouse.freeAuctionSlots()
-    nProgress.done()
   }
 
   const createAuction = async() => {
     if (!wallet.isConnected) return
-    nProgress.inc()
     await auctionHouse.connect(wallet.getSigner()).createAuction()
-    nProgress.done()
     loadAuctions()
   }
 

@@ -9,11 +9,12 @@ export const useWalletStore = defineStore('wallet', () => {
   const account = ref('')
 
   const checkMetaMask = async() => {
-    const { ethereum } = window
-    isMetaMaskInstalled.value = Boolean(ethereum && ethereum.isMetaMask)
+    if (typeof window == 'undefined') return
+    isMetaMaskInstalled.value = Boolean(window && window.ethereum && window.ethereum.isMetaMask)
   }
 
   const checkConnection = async() => {
+    if (typeof window == 'undefined') return
     const _accounts = await window.ethereum.request({
       method: 'eth_accounts',
     })

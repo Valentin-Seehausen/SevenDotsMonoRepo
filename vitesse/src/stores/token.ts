@@ -1,4 +1,3 @@
-import nProgress from 'nprogress'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Token from 'types/Token'
 import { useContractStore } from './contracts'
@@ -13,7 +12,6 @@ export const useTokenStore = defineStore('tokenStore', () => {
 
   const loadUserTokens = async() => {
     if (!wallet.isConnected) return
-    nProgress.inc()
     isLoading.value = true
     const _tokens = <Token[]>[]
     const promises = []
@@ -33,7 +31,6 @@ export const useTokenStore = defineStore('tokenStore', () => {
     await Promise.all(promises)
     tokens.value = _tokens
     isLoading.value = false
-    nProgress.done()
   }
 
   watch(() => wallet.account, () => loadUserTokens())
