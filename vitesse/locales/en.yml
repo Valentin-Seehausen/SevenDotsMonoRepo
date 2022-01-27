@@ -5,10 +5,13 @@ auction:
   highestBid: Highest Bid
   highestBidder: Highest Bidder
   isOpen: Open
+  minBid: Minimum Bid
   name: 'Mint #{id}'
   notEnough: Not enough wETH
   price: Price
   redeem: Redeem Auction
+  tooLittle: Lower than minimum bid
+  wethBalance: Your WETH Balance
 auctions:
   createAuction: Create Auction
   notFound: Auction not found. It got likey redeemed.

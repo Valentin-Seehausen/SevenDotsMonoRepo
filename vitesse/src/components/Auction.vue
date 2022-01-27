@@ -21,7 +21,7 @@ const { t } = useI18n()
           {{ auction.dna }} ({{ (auction.commonness ) }}/28)
         </h2>
         <p class="mt-4 font-thin">
-          {{ t("auction.price") }} {{ ethers.utils.formatEther(props.auction.highestBid) }}
+          <logos:ethereum class="inline" /> {{ ethers.utils.formatEther(props.auction.highestBid) }}
         </p>
       </div>
     </div>

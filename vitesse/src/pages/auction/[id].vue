@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ethers } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 import dateFormat from 'dateformat'
 import type Auction from 'types/Auction'
 import constants from '~/constants/constants'
@@ -19,7 +19,9 @@ const isOpen = ref<boolean>()
 const remainingTime = ref(0)
 const isUsers = ref<boolean>()
 const bid = ref('')
+const minBid = ref<BigNumber>(BigNumber.from('0'))
 const tooMuch = ref(false)
+const tooLittle = ref(false)
 
 auctionStore.loadAuctions()
 
@@ -29,15 +31,19 @@ watchEffect(() => {
   remainingTime.value = auction.value.end.getTime() - contracts.getDateOnChain().getTime()
   isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
   isUsers.value = auction.value.highestBidder.toLowerCase() === wallet.account
+  minBid.value = auction.value.highestBid.add(constants.minBidIncrease)
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
 })
 
 watchEffect(() => {
   try {
     tooMuch.value = ethers.utils.parseEther(bid.value).gt(treasury.WETHBalance)
+    tooLittle.value = unref(minBid).gt(ethers.utils.parseEther(bid.value))
+    console.log(tooLittle.value)
   }
   catch (e) {
     tooMuch.value = false
+    tooLittle.value = false
   }
 })
 
@@ -87,6 +93,12 @@ const onRedeem = async() => {
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBid") }}: {{ ethers.utils.formatEther(auction.highestBid) }}
       </p>
+      <p class="mt-4 text-lg font-thin">
+        {{ t("auction.minBid") }}: {{ ethers.utils.formatEther(minBid) }}
+      </p>
+      <p class="mt-4 text-lg font-thin">
+        {{ t("auction.wethBalance") }}: {{ ethers.utils.formatEther(treasury.WETHBalance) }}
+      </p>
       <div class="flex mt-4">
         <div v-if="isOpen">
           <div class="input flex items-center">
@@ -94,13 +106,13 @@ const onRedeem = async() => {
               <logos:ethereum class="" />
             </div>
             <div class="basis-1/3">
-              <input v-model="bid" type="text" class="outline-none text-center " :class="{'line-through': tooMuch}" placeholder="0.0">
+              <input v-model="bid" type="text" class="outline-none text-center " placeholder="0.0">
             </div>
           </div>
         </div>
         <div class="ml-4">
-          <button v-if="isOpen" class="btn" :disabled="tooMuch" @click="onBid">
-            {{ tooMuch ? t("auction.notEnough") :t("auction.bid") }}
+          <button v-if="isOpen" class="btn" :disabled="tooMuch || tooLittle" @click="onBid">
+            {{ tooMuch ? t("auction.notEnough") : tooLittle ? t("auction.tooLittle") : t("auction.bid") }}
           </button>
           <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
             {{ t("auction.redeem") }}
@@ -116,9 +128,6 @@ const onRedeem = async() => {
         </p>
         <p class="my-2">
           2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bride ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.
-        </p>
-        <p class="my-2">
-          You should get Matic and wETH, as Layer 2 solutions are the future of Ethereum! Seven Dots needs many transactions, so you better safe gas with Polygon.
         </p>
       </div>
     </div>
