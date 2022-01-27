@@ -39,8 +39,9 @@ const config: HardhatUserConfig = {
     local: {
       url: "http://localhost:8545",
     },
-    polygon_mainnet: {
+    matic: {
       url: process.env.ALCHEMYAPI_POLYGON_MAINNET,
+      accounts: [`${process.env.DEPLOYER}`],
     },
     mumbai: {
       url: process.env.ALCHEMYAPI_MUMBAI,
