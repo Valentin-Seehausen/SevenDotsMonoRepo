@@ -5,8 +5,10 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Auction: typeof import('./components/Auction.vue')['default']
+    CarbonDicomOverlay: typeof import('~icons/carbon/dicom-overlay')['default']
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
+    CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     'Gg:arrowsExchangeV': typeof import('~icons/gg/arrows-exchange-v')['default']
     'Logos:ethereum': typeof import('~icons/logos/ethereum')['default']

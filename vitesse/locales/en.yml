@@ -18,6 +18,7 @@ button:
   dots: Dots
   go: GO
   home: Home
+  imprint: Imprint
   loading: Loading...
   sevenDots: Seven Dots
   stacking: Stacking
@@ -34,10 +35,12 @@ filter:
   open: Open
   users: Yours
 intro:
+  about: about
   aka: Also known as
   desc: Where does NFT end and DeFi begin?
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
+  readAbout: Read About
   whats-your-name: What's your name?
 not-found: Not found
 rand:
