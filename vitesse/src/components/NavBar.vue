@@ -63,9 +63,16 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
           <router-link
             to="/staking"
             :title="t('button.staking')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white"
+            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
           >
             {{ t("button.staking") }}
+          </router-link>
+          <router-link
+            to="/treasury"
+            :title="t('button.staking')"
+            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white"
+          >
+            {{ t("button.treasury") }}
           </router-link>
         </div>
         <div>

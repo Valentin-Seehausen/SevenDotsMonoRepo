@@ -39,6 +39,12 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     loadBalances()
   }
 
+  const withdraw = async(amount: BigNumber) => {
+    await rewardToken.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, amount)
+    await treasury.connect(wallet.getSigner()).withdraw(amount)
+    loadBalances()
+  }
+
   return {
     treasuryAmount,
     rewardTokenBalance,
@@ -47,6 +53,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     shareOfTreasury,
     stake,
     unstake,
+    withdraw,
   }
 })
 

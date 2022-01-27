@@ -25,6 +25,7 @@ button:
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
   token: Token
+  treasury: Treasury
 dots:
   one: One dot
 filter:
@@ -63,6 +64,12 @@ token:
   attributes: Attributes
 tokens:
   notFound: Token not found
+treasury:
+  redeem: Redeem
+  share: Share of Treasury
+  treasury: Treasury
+  treasuryAmount: Treasury Amount
+  withdraw: Withdraw
 wallet:
   connect: connect wallet
   connected: '{account}'
