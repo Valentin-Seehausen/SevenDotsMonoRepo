@@ -9,7 +9,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
 
 <template>
   <div class="overflow-visible h-20 z-50 fixed inset-x-0 top-0">
-    <nav class="flex items-center justify-between flex-wrap bg-gray-500 p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-black p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <router-link
           to="/"
@@ -42,42 +42,42 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
           <router-link
             to="/auctions"
             :title="t('button.auctions')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
           >
             {{ t("button.auctions") }}
           </router-link>
           <router-link
             to="/token"
             :title="t('button.token')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
           >
             {{ t("button.token") }}
           </router-link>
           <router-link
             to="/stacking"
             :title="t('button.stacking')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
           >
             {{ t("button.stacking") }}
           </router-link>
           <router-link
             to="/staking"
             :title="t('button.staking')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
           >
             {{ t("button.staking") }}
           </router-link>
           <router-link
             to="/treasury"
             :title="t('button.staking')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-4"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
           >
             {{ t("button.treasury") }}
           </router-link>
           <router-link
             to="/about"
             :title="t('button.about')"
-            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white"
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200"
           >
             {{ t("button.about") }}
           </router-link>
