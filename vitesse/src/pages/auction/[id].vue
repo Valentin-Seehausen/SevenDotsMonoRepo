@@ -14,6 +14,7 @@ const auctions = useAuctionStore()
 const wallet = useWalletStore()
 const auction = ref<Auction>()
 const isOpen = ref<boolean>()
+const remainingTime = ref(0)
 const isUsers = ref<boolean>()
 const bid = ref()
 
@@ -22,6 +23,7 @@ auctions.loadAuctions()
 watchEffect(() => {
   auction.value = auctions.auctions.find(auction => auction.id === parseInt(props.id))
   if (!auction.value) return
+  remainingTime.value = auction.value.end.getTime() - contracts.getDateOnChain().getTime()
   isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
   isUsers.value = auction.value.highestBidder.toLowerCase() === wallet.account
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
@@ -38,6 +40,7 @@ const onRedeem = async() => {
   await auctions.redeemAuction(auction.value.id)
   await auctions.loadAuctions()
 }
+
 </script>
 
 <template>
@@ -56,7 +59,11 @@ const onRedeem = async() => {
         <span v-if="isOpen">{{ t("auction.isOpen") }}</span><span v-else>{{ t("auction.ended") }}</span>
       </p>
       <p class="mt-4 text-lg font-thin">
-        {{ t("auction.ends") }}: {{ dateFormat(auction.end, "HH:MM:ss TT, mmmm dS") }}
+        {{ t("auction.ends") }}:
+        <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
+          in {{ hours }}:{{ minutes }}:{{ seconds }}
+        </vue-countdown>
+        ({{ dateFormat(auction.end, "HH:MM:ss TT, mmmm dS") }})
       </p>
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBidder") }}: {{ auction.highestBidder }}
@@ -64,15 +71,19 @@ const onRedeem = async() => {
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBid") }}: {{ ethers.utils.formatEther(auction.highestBid) }}
       </p>
-      <div v-if="isOpen" class="py-4 px-4">
-        <input v-model="bid" type="text" class="border-black border-2 p-2">
-      </div>
-      <button v-if="isOpen" class="w-56  border-black bg-black text-white border-2 p-2 items-center justify-center " @click="onBid">
-        {{ t("auction.bid") }}
-      </button>
-      <button v-if="isUsers && !isOpen" class="w-56  border-black bg-black text-white border-2 p-2 items-center justify-center " @click="onRedeem">
-        {{ t("auction.redeem") }}
-      </button>
+      <diiv class="flex mt-4">
+        <div v-if="isOpen">
+          <input v-model="bid" type="text" class="input">
+        </div>
+        <div class="ml-4">
+          <button v-if="isOpen" class="btn" @click="onBid">
+            {{ t("auction.bid") }}
+          </button>
+          <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
+            {{ t("auction.redeem") }}
+          </button>
+        </div>
+      </diiv>
     </div>
   </div>
   <div v-else class="flex">

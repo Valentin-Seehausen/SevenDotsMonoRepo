@@ -9,9 +9,9 @@ const { t } = useI18n()
   <router-link
     :to="`/auction/${props.auction.id}`"
   >
-    <div role="link" class="bg-white max-w-xs rounded-md overflow-hidden shadow-md hover:shadow-lg hover:scale-102 transform-gpu transition duration-500 cursor-pointer">
+    <div role="link" class="bg-white border-black border-4 cursor-pointer hover:bg-black hover:text-white">
       <div class="text-center">
-        <img class="w-56 m-4 inline-block" alt="Dots" :src="props.auction.image">
+        <img class="w-56 m-4 inline-block border-white border-4" alt="Dots" :src="props.auction.image">
       </div>
       <div class="py-4 px-4 ">
         <h3 class="text-md font-semibold overflow-hidden truncate">
