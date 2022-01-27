@@ -70,7 +70,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
         </div>
         <div>
           <button
-            class="icon-btn mx-2 !outline-none rounded-full bg-light-50 p-1.5 align-top"
+            class="icon-btn mx-2 !outline-none rounded-full bg-light-50 p-1.5 align-top hidden"
             :title="t('button.toggle_dark')"
             @click="toggleDark()"
           >

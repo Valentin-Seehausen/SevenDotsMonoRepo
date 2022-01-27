@@ -5,6 +5,7 @@ import nProgress from 'nprogress'
 import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
+import { useTokenStore } from './token'
 import constants from '~/constants/constants'
 
 export enum AuctionsFilter {
@@ -17,6 +18,7 @@ export enum AuctionsFilter {
 export const useAuctionStore = defineStore('auctionStore', () => {
   const wallet = useWalletStore()
   const contracts = useContractStore()
+  const router = useRouter()
   const auctionHouse = contracts.auctionHouse()
   const WETH = contracts.WETH()
   const auctions = ref<Auction[]>([])
@@ -60,6 +62,8 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const redeemAuction = async(auctionId: number) => {
     if (!wallet.isConnected) return
     await auctionHouse.connect(wallet.getSigner()).redeemAuction(auctionId)
+    useTokenStore().loadUserTokens()
+    router.replace('/auctions')
   }
 
   const setFilter = (_filter: AuctionsFilter) => {
