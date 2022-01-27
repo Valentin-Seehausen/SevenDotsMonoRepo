@@ -9,10 +9,12 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const treasury = contracts.treasury()
   const rewardToken = contracts.rewardToken()
   const stakingToken = contracts.stakingToken()
+  const WETH = contracts.WETH()
 
   const treasuryAmount = ref(0)
   const rewardTokenBalance = ref(0)
   const stakingTokenBalance = ref(0)
+  const WETHBalance = ref(0)
   const currentStakingFaktor = ref(0)
   const shareOfTreasury = ref(0)
 
@@ -21,6 +23,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     treasury.treasuryAmount().then(b => treasuryAmount.value = b)
     if (!wallet.isConnected) return
     rewardToken.balanceOf(wallet.account).then(b => rewardTokenBalance.value = b)
+    WETH.balanceOf(wallet.account).then(b => WETHBalance.value = b)
     stakingToken.balanceOf(wallet.account).then(b => stakingTokenBalance.value = b)
     treasury.shareOfTreasury(wallet.account).then(s => shareOfTreasury.value = s)
   }
@@ -49,6 +52,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     treasuryAmount,
     rewardTokenBalance,
     stakingTokenBalance,
+    WETHBalance,
     currentStakingFaktor,
     shareOfTreasury,
     stake,

@@ -38,7 +38,7 @@ const toggleNav = () => (showMenu.value = !showMenu.value)
         class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
         :class="{ '<lg:hidden': !showMenu }"
       >
-        <div class="text-sm lg:flex-grow">
+        <div class="lg:flex-grow">
           <router-link
             to="/auctions"
             :title="t('button.auctions')"

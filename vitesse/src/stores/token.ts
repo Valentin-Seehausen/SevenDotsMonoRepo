@@ -7,7 +7,7 @@ export const useTokenStore = defineStore('tokenStore', () => {
   const wallet = useWalletStore()
   const contracts = useContractStore()
   const token = contracts.token()
-  const tokens = ref<Token[]>()
+  const tokens = ref<Token[]>([])
   const isLoading = ref(false)
 
   const loadUserTokens = async() => {

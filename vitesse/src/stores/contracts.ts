@@ -62,7 +62,7 @@ export const useContractStore = defineStore('chain', () => {
   const WETH = () => new ethers.Contract(
     addresses.MaticWETH,
     MaticWETHInfo.abi,
-    ethers.getDefaultProvider('http://localhost:8545'),
+    provider,
   ) as unknown as MaticWETH
 
   provider.getBlockNumber().then(n => provider.getBlock(n)).then((b) => {

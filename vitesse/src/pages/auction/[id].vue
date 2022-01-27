@@ -6,22 +6,25 @@ import constants from '~/constants/constants'
 import { useAuctionStore } from '~/stores/auctions'
 import { useContractStore } from '~/stores/contracts'
 import { useWalletStore } from '~/stores/wallet'
+import { useTreasuryStore } from '~/stores/treasury'
 const { t } = useI18n()
 
 const props = defineProps<{ id: string }>()
 const contracts = useContractStore()
-const auctions = useAuctionStore()
+const auctionStore = useAuctionStore()
 const wallet = useWalletStore()
+const treasury = useTreasuryStore()
 const auction = ref<Auction>()
 const isOpen = ref<boolean>()
 const remainingTime = ref(0)
 const isUsers = ref<boolean>()
-const bid = ref()
+const bid = ref('')
+const tooMuch = ref(false)
 
-auctions.loadAuctions()
+auctionStore.loadAuctions()
 
 watchEffect(() => {
-  auction.value = auctions.auctions.find(auction => auction.id === parseInt(props.id))
+  auction.value = auctionStore.auctions.find(auction => auction.id === parseInt(props.id))
   if (!auction.value) return
   remainingTime.value = auction.value.end.getTime() - contracts.getDateOnChain().getTime()
   isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
@@ -29,21 +32,31 @@ watchEffect(() => {
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
 })
 
+watchEffect(() => {
+  try {
+    tooMuch.value = ethers.utils.parseEther(bid.value).gt(treasury.WETHBalance)
+  }
+  catch (e) {
+    tooMuch.value = false
+  }
+})
+
 const onBid = async() => {
   if (!auction.value) return
-  await auctions.bidOnAuction(auction.value.id, ethers.utils.parseEther(bid.value))
-  auctions.loadAuctions()
+  await auctionStore.bidOnAuction(auction.value.id, ethers.utils.parseEther(bid.value))
+  auctionStore.loadAuctions()
 }
 
 const onRedeem = async() => {
   if (!auction.value) return
-  await auctions.redeemAuction(auction.value.id)
-  await auctions.loadAuctions()
+  await auctionStore.redeemAuction(auction.value.id)
+  await auctionStore.loadAuctions()
 }
 
 </script>
 
 <template>
+  <span v-if="auctionStore.isLoading">{{ t("button.loading") }}</span>
   <div
     v-if="auction"
     class="flex"
@@ -71,22 +84,29 @@ const onRedeem = async() => {
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBid") }}: {{ ethers.utils.formatEther(auction.highestBid) }}
       </p>
-      <diiv class="flex mt-4">
+      <div class="flex mt-4">
         <div v-if="isOpen">
-          <input v-model="bid" type="text" class="input">
+          <div class="input flex items-center">
+            <div class="basis-1/3">
+              <logos:ethereum class="" />
+            </div>
+            <div class="basis-1/3">
+              <input v-model="bid" type="text" class="outline-none text-center " :class="{'line-through': tooMuch}" placeholder="0.0">
+            </div>
+          </div>
         </div>
         <div class="ml-4">
-          <button v-if="isOpen" class="btn" @click="onBid">
+          <button v-if="isOpen" class="btn" :disabled="tooMuch" @click="onBid">
             {{ t("auction.bid") }}
           </button>
           <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
             {{ t("auction.redeem") }}
           </button>
         </div>
-      </diiv>
+      </div>
     </div>
   </div>
-  <div v-else class="flex">
+  <div v-else-if="!auctionStore.isLoading" class="flex">
     <h3>{{ t("auctions.notFound") }}</h3>
   </div>
 </template>
