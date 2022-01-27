@@ -6,6 +6,7 @@ auction:
   highestBidder: Highest Bidder
   isOpen: Open
   name: 'Mint #{id}'
+  notEnough: Not enough wETH
   price: Price
   redeem: Redeem Auction
 auctions:

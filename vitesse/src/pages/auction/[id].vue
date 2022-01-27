@@ -100,12 +100,26 @@ const onRedeem = async() => {
         </div>
         <div class="ml-4">
           <button v-if="isOpen" class="btn" :disabled="tooMuch" @click="onBid">
-            {{ t("auction.bid") }}
+            {{ tooMuch ? t("auction.notEnough") :t("auction.bid") }}
           </button>
           <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
             {{ t("auction.redeem") }}
           </button>
         </div>
+      </div>
+      <div v-if="tooMuch" class="mt-2">
+        <p class="my-2 font-bold">
+          You need more wETH to bid on this auction.
+        </p>
+        <p class="my-2">
+          1. The best and cheapest solution is to get $MATIC at your exchange (Binance), withdraw it to the Polygon Mainnet (Matic) and exchange it against wETH at a DEX (Uniswap). Do it now, it takes a few minutes and you will level up.
+        </p>
+        <p class="my-2">
+          2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bride ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.
+        </p>
+        <p class="my-2">
+          You should get Matic and wETH, as Layer 2 solutions are the future of Ethereum! Seven Dots needs many transactions, so you better safe gas with Polygon.
+        </p>
       </div>
     </div>
   </div>

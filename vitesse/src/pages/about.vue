@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <div class="w-140">
+    <div class="max-w-140">
       <h3 class="text-lg bold">
         Seven Dots
       </h3>
