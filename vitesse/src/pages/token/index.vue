@@ -14,7 +14,7 @@ const tokens = useTokenStore()
     {{ t("token.empty") }}
   </div>
   <div class="px-10 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
-    <div v-for="token in tokens.tokens" :key="token.id">
+    <div v-for="token in tokens.tokens" :key="token.id" class="text-center">
       <Token1 :key="token.id" :token="token" />
     </div>
   </div>

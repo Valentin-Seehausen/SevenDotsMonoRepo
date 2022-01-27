@@ -68,6 +68,8 @@ staking:
 token:
   attributes: Attributes
   empty: No Tokens. Go and get some!
+  trait: Trait
+  value: Value
 tokens:
   notFound: Token not found
 treasury:

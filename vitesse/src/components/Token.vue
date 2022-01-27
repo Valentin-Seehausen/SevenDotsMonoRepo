@@ -8,13 +8,13 @@ defineProps<{ token: Token }>()
   <router-link
     :to="`/token/${token.id}`"
   >
-    <div role="link">
-      <img class="w-56 m-2 inline-block hover:scale-102 hover:shadow-lg transform-gpu transition duration-300" alt="Dots" :src="token.image">
-    </div>
-    <div class="px-4 ">
-      <h3 class="text-md font-semibold text-gray-600 overflow-hidden truncate">
-        {{ token.name }}
-      </h3>
+    <div role="link" class="hover:bg-black border-black border-4 hover:text-white">
+      <img class="w-56 m-4 inline-block border-2 border-white" alt="Dots" :src="token.image">
+      <div class="px-4 py-8">
+        <h3 class="">
+          {{ token.name }}
+        </h3>
+      </div>
     </div>
   </router-link>
 </template>
