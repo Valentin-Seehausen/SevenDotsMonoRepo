@@ -42,6 +42,10 @@ const config: HardhatUserConfig = {
     polygon_mainnet: {
       url: process.env.ALCHEMYAPI_POLYGON_MAINNET,
     },
+    mumbai: {
+      url: process.env.ALCHEMYAPI_MUMBAI,
+      accounts: [`${process.env.FRFREM_PK}`],
+    },
     mainnet: {
       url: process.env.ALCHEMYAPI_MAINNET,
     },
