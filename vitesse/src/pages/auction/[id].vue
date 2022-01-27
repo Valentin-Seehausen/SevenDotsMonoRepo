@@ -68,6 +68,9 @@ const onRedeem = async() => {
       <h3 class="text-md font-semibold">
         {{ t("auction.name", {id: auction.id, dna: auction.dna}) }}
       </h3>
+      <h3 class="text-md font-semibold">
+        {{ auction.dna }} ({{ (auction.commonness ) }}/28)
+      </h3>
       <p class="mt-4 text-lg font-thin">
         <span v-if="isOpen">{{ t("auction.isOpen") }}</span><span v-else>{{ t("auction.ended") }}</span>
       </p>

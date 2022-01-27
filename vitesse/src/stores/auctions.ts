@@ -38,6 +38,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         seed: auction[3],
         id: auction[4],
         dna: metadata.DNA,
+        commonness: metadata.commonness,
         image: metadata.image,
       } as Auction
     })

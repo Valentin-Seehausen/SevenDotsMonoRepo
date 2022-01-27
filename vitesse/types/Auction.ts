@@ -7,5 +7,6 @@ export default interface Auction {
   seed: string
   id: number
   dna: string
+  commonness: number
   image: string
 }
