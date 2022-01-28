@@ -7,11 +7,12 @@ auction:
   isOpen: Open
   minBid: Minimum Bid
   name: 'Mint #{id}'
+  needsAllowance: Approve WETH
   notEnough: Not enough wETH
   price: Price
   rarity: Rarity
   redeem: Claim NFT
-  tooLittle: Lower 
+  tooLittle: Lower
   wethBalance: Your WETH Balance
 auctions:
   createAuction: Create Auction

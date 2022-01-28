@@ -22,6 +22,7 @@ const bid = ref('')
 const minBid = ref<BigNumber>(BigNumber.from('0'))
 const tooMuch = ref(false)
 const tooLittle = ref(false)
+const needsAllowance = ref(false)
 
 auctionStore.loadAuctions()
 
@@ -37,10 +38,12 @@ watchEffect(() => {
 
 watchEffect(() => {
   try {
+    needsAllowance.value = ethers.utils.parseEther(bid.value).gt(treasury.WETHAllowance)
     tooMuch.value = ethers.utils.parseEther(bid.value).gt(treasury.WETHBalance)
     tooLittle.value = unref(minBid).gt(ethers.utils.parseEther(bid.value))
   }
   catch (e) {
+    needsAllowance.value = false
     tooMuch.value = false
     tooLittle.value = false
   }
@@ -74,8 +77,11 @@ const onRedeem = async() => {
         {{ t("auction.name", {id: auction.id, dna: auction.dna}) }}
       </h3>
       <h3 class="text-md font-semibold">
-        {{ auction.dna }} ({{ (auction.commonness ) }}/28)
+        {{ auction.dna }}
       </h3>
+      <p class="mt-4 font-thin">
+        {{ t("auction.rarity") }}: {{ (auction.commonness/28*100 ).toString().substring(0,4) }}%
+      </p>
       <p class="mt-4 text-lg font-thin">
         <span v-if="isOpen">{{ t("auction.isOpen") }}</span><span v-else>{{ t("auction.ended") }}</span>
       </p>
@@ -111,7 +117,7 @@ const onRedeem = async() => {
         </div>
         <div class="ml-4">
           <button v-if="isOpen" class="btn" :disabled="tooMuch || tooLittle" @click="onBid">
-            {{ tooMuch ? t("auction.notEnough") : tooLittle ? t("auction.tooLittle") : t("auction.bid") }}
+            {{ tooMuch ? t("auction.notEnough") : tooLittle ? t("auction.tooLittle") : needsAllowance ? t("auction.needsAllowance") : t("auction.bid") }}
           </button>
           <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
             {{ t("auction.redeem") }}
@@ -127,6 +133,14 @@ const onRedeem = async() => {
         </p>
         <p class="my-2">
           2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bride ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.
+        </p>
+      </div>
+      <div v-if="needsAllowance && isOpen" class="mt-2">
+        <p class="my-2 font-bold">
+          First step is to approve Seven Dots to access your WETH.
+        </p>
+        <p class="my-2 ">
+          Please wait for the transaction to suceed. You can choose a high priority for shorter waiting time.
         </p>
       </div>
     </div>

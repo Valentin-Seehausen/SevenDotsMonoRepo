@@ -5,6 +5,7 @@ import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
 import { useTokenStore } from './token'
+import { useTreasuryStore } from './treasury'
 import constants from '~/constants/constants'
 
 export enum AuctionsFilter {
@@ -18,6 +19,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const wallet = useWalletStore()
   const contracts = useContractStore()
   const router = useRouter()
+  const treasury = useTreasuryStore()
   const auctionHouse = contracts.auctionHouse()
   const WETH = contracts.WETH()
   const auctions = ref<Auction[]>([])
@@ -56,7 +58,14 @@ export const useAuctionStore = defineStore('auctionStore', () => {
 
   const bidOnAuction = async(auctionId: number, amount: BigNumber) => {
     if (!wallet.isConnected) return
-    await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
+    if (amount.gt(treasury.WETHAllowance)) {
+      await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount.mul(1000))
+      setTimeout(() => {
+        treasury.loadBalances()
+      }, 10000)
+      return
+    }
+
     await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
   }
 

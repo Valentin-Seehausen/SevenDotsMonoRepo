@@ -67,7 +67,7 @@ const onClick = async() => {
             <input v-model="amountIn" type="text" class="outline-none text-center text-lg " :class="{'line-through': tooMuch}" placeholder="0.0">
           </div>
           <div class="basis-1/3 text-right">
-            <button v-if="isStaking ? treasury.rewardTokenBalance > 0 : treasury.stakingTokenBalance > 0" class="btn text-center secondary" @click="setMax">
+            <button v-if="isStaking ? treasury.rewardTokenBalance.gt(0) : treasury.stakingTokenBalance.gt(0)" class="btn text-center secondary" @click="setMax">
               {{ t("staking.max") }}
             </button>
           </div>
