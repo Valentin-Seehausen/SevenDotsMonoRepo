@@ -56,7 +56,7 @@ stacking:
   bottomTokenId: Bottom Token Id
   createStack: Merge
   empty: No Merges. Get some token and merge them
-  ready: Ready
+  ready: Ready in
   selectToken: Please select token
   stacks: Merges
   topTokenId: Top Token Id
