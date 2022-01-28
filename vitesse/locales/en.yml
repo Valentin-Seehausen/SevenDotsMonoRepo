@@ -9,8 +9,9 @@ auction:
   name: 'Mint #{id}'
   notEnough: Not enough wETH
   price: Price
-  redeem: Redeem Auction
-  tooLittle: Lower than minimum bid
+  rarity: Rarity
+  redeem: Claim NFT
+  tooLittle: Lower 
   wethBalance: Your WETH Balance
 auctions:
   createAuction: Create Auction
@@ -25,7 +26,7 @@ button:
   imprint: Imprint
   loading: Loading...
   sevenDots: Seven Dots
-  stacking: Stacking
+  stacking: Merging
   staking: Staking
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
@@ -53,20 +54,21 @@ rand:
   jojojo: Yoyoyo
 stacking:
   bottomTokenId: Bottom Token Id
-  createStack: Create Stack
-  empty: No stacks. Get some token!
+  createStack: Merge
+  empty: No Merges. Get some token and merge them
   ready: Ready
   selectToken: Please select token
-  stacks: Stacks
+  stacks: Merges
   topTokenId: Top Token Id
-  unstack: Unstack
+  unstack: Claim NFT
 staking:
   currentStakingFaktor: Current staking faktor
   max: max
   rewardToken: 7DOTS
-  rewardTokenBalance: 7DOTS Balance
+  rewardTokenBalance: Your 7DOTS
   stacks: Staking
   stake: Stake
+  stakedRewardTokenBalance: Your staked 7DOTS
   stakingToken: s7DOTS
   stakingTokenBalance: s7DOTS Balance
   unstake: Unstake
@@ -78,8 +80,10 @@ token:
 tokens:
   notFound: Token not found
 treasury:
+  circulatingSupply: Circulating 7DOTS Supply
   redeem: Redeem
-  share: Share of Treasury
+  share: Your share of the Treasury
+  staked: Total 7DOTS Staked
   treasury: Treasury
   treasuryAmount: Treasury Amount
   withdraw: Withdraw

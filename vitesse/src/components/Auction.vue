@@ -18,8 +18,11 @@ const { t } = useI18n()
           {{ t("auction.name", {id: props.auction.id, dna: props.auction.dna}) }}
         </h3>
         <h2>
-          {{ auction.dna }} ({{ (auction.commonness ) }}/28)
+          {{ auction.dna }}
         </h2>
+        <p class="mt-4 font-thin">
+          {{ t("auction.rarity") }}: {{ (auction.commonness/28*100 ).toString().substring(0,4) }}%
+        </p>
         <p class="mt-4 font-thin">
           <logos:ethereum class="inline" /> {{ ethers.utils.formatEther(props.auction.highestBid) }}
         </p>

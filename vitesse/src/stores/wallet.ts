@@ -56,6 +56,19 @@ export const useWalletStore = defineStore('wallet', () => {
     }
   }
 
+  const setWalletListeners = () => {
+    if (typeof window == 'undefined') return
+    // Reload on account and network change
+    window.ethereum.on('accountsChanged', () => {
+      window.location.reload()
+    })
+    new ethers.providers.Web3Provider(window.ethereum, 'any')
+      .on('network', (newNetwork, oldNetwork) => {
+        if (oldNetwork)
+          window.location.reload()
+      })
+  }
+
   const getSigner = () => {
     if (!isConnected.value) return
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -75,12 +88,8 @@ export const useWalletStore = defineStore('wallet', () => {
 
   async function initWallet() {
     if (typeof window == 'undefined') return
-    // Set listener for reload on network change
-    new ethers.providers.Web3Provider(window.ethereum, 'any')
-      .on('network', (newNetwork, oldNetwork) => {
-        if (oldNetwork)
-          window.location.reload()
-      })
+    setWalletListeners()
+
     await checkMetaMask()
     await checkConnection()
   }

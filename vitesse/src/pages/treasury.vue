@@ -47,7 +47,7 @@ const onClick = async() => {
             <input v-model="amountIn" type="text" class="outline-none text-center text-lg " :class="{'line-through': tooMuch}" placeholder="0.0">
           </div>
           <div class="basis-1/3 text-right">
-            <button v-if=" treasury.rewardTokenBalance > 0" class="btn text-center secondary" @click="setMax">
+            <button v-if=" treasury.rewardTokenBalance.gt(0)" class="btn text-center secondary" @click="setMax">
               {{ t("staking.max") }}
             </button>
           </div>
@@ -67,27 +67,59 @@ const onClick = async() => {
           </button>
         </div>
       </div>
-      <div class="basis-1/3">
-        <p>
-          {{ t("treasury.treasuryAmount") }}
-        </p>
-        <p class="text-lg py-2">
-          <logos:ethereum class="inline text-base" />
-          {{ ethers.utils.formatEther(treasury.treasuryAmount) }}
-        </p>
-        <p class="mt-4">
-          {{ t("treasury.share") }}
-        </p>
-        <p class="text-lg py-2">
-          <logos:ethereum class="inline text-base" />
-          {{ ethers.utils.formatEther(treasury.shareOfTreasury) }}
-        </p>
-        <p class="mt-4">
-          {{ t("staking.rewardTokenBalance") }}
-        </p>
-        <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.rewardTokenBalance) }}
-        </p>
+      <div class="basis-1/3 text-sm">
+        <table>
+          <tr>
+            <td class="p1">
+              {{ t("treasury.treasuryAmount") }}
+            </td>
+            <td class="pl-4 p-1">
+              <logos:ethereum class="inline text-base" />
+              {{ ethers.utils.formatEther(treasury.treasuryAmount) }}
+            </td>
+          </tr>
+          <tr class="pt-4">
+            <td class="p1">
+              {{ t("treasury.circulatingSupply") }}
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.totalSupplyRewardToken) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("treasury.staked") }}
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.treasuryRewardTokenBalance) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("treasury.share") }}
+            </td>
+            <td class="pl-4 p-1">
+              <logos:ethereum class="inline text-base" />
+              {{ ethers.utils.formatEther(treasury.shareOfTreasury) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("staking.rewardTokenBalance") }}
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.rewardTokenBalance) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("staking.stakedRewardTokenBalance") }}
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance) }}
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

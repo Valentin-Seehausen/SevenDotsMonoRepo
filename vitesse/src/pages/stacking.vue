@@ -11,7 +11,7 @@ const token1 = ref()
 const token2 = ref()
 const isVisible1 = ref(false)
 const isVisible2 = ref(false)
-const threshold = ref(Date.now() - constants.stackDuration + 11700 * 60 * 1000)
+const threshold = ref(Date.now() - constants.stackDuration)
 const onStack = async() => {
   stackingStore.stackTokens(token1.value, token2.value)
 }
@@ -21,12 +21,12 @@ const unstack = async(stackId: number) => {
 }
 
 const onCountdownEnd = () => {
-  threshold.value = Date.now() - constants.stackDuration + 11700 * 60 * 1000
+  threshold.value = Date.now() - constants.stackDuration
 }
 </script>
 
 <template>
-  <div v-if="stackingStore.stacks.length > 0" class="md:flex">
+  <div class="md:flex">
     <div class="flex-1">
       <div>
         Top:
