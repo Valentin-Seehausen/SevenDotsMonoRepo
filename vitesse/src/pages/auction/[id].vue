@@ -118,12 +118,12 @@ const onRedeem = async() => {
           </button>
         </div>
       </div>
-      <div v-if="tooMuch" class="mt-2">
+      <div v-if="tooMuch && isOpen" class="mt-2">
         <p class="my-2 font-bold">
           You need more wETH to bid on this auction.
         </p>
         <p class="my-2">
-          1. The best and cheapest solution is to get $MATIC at your exchange (Binance), withdraw it to the Polygon Mainnet (Matic) and exchange it against wETH at a DEX (Uniswap). Do it now, it takes a few minutes and you will level up.
+          1. The best and cheapest solution is to get $MATIC at an exchange (i.e. Binance), withdraw it to the Polygon Mainnet (Matic) and exchange it against wETH at a DEX (i.e. Uniswap).
         </p>
         <p class="my-2">
           2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bride ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.

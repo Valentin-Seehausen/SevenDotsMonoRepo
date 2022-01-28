@@ -24,6 +24,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const activeFilter = ref<AuctionsFilter>(AuctionsFilter.Open)
   const openSlots = ref(196)
   const isLoading = ref(false)
+  const hasRedeemableAuctions = ref(false)
 
   const loadAuctions = async() => {
     isLoading.value = true
@@ -42,6 +43,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         image: metadata.image,
       } as Auction
     })
+    hasRedeemableAuctions.value = auctions.value.findIndex(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()) !== -1
     openSlots.value = await auctionHouse.freeAuctionSlots()
     isLoading.value = false
   }
@@ -86,6 +88,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     auctions,
     openSlots,
     isLoading,
+    hasRedeemableAuctions,
     loadAuctions,
     createAuction,
     bidOnAuction,

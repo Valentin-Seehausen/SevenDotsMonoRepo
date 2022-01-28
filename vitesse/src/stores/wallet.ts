@@ -74,6 +74,7 @@ export const useWalletStore = defineStore('wallet', () => {
   )
 
   async function initWallet() {
+    if (typeof window == 'undefined') return
     // Set listener for reload on network change
     new ethers.providers.Web3Provider(window.ethereum, 'any')
       .on('network', (newNetwork, oldNetwork) => {
