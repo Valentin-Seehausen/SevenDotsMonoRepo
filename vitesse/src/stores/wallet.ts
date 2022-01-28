@@ -74,6 +74,12 @@ export const useWalletStore = defineStore('wallet', () => {
   )
 
   async function initWallet() {
+    // Set listener for reload on network change
+    new ethers.providers.Web3Provider(window.ethereum, 'any')
+      .on('network', (newNetwork, oldNetwork) => {
+        if (oldNetwork)
+          window.location.reload()
+      })
     await checkMetaMask()
     await checkConnection()
   }
@@ -81,9 +87,11 @@ export const useWalletStore = defineStore('wallet', () => {
   return {
     isConnected,
     isMetaMaskInstalled,
+    chainId,
     signer,
     account,
     accountName,
+    changeNetwork,
     requestConnection,
     initWallet,
     getSigner,
