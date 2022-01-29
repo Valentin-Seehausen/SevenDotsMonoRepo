@@ -12,10 +12,13 @@ auctionStore.loadAuctions()
     🎉 Congratulations! You have won some auctions. Click here to see you won auctions them and receive the NFT!
   </div>
   <div class="flex">
-    <div class="flex-1 text-left">
-      <button class="btn mr-4" @click="auctionStore.createAuction">
-        {{ t("auctions.createAuction") }}
+    <div class=" text-left">
+      <button class="btn" @click="auctionStore.createAuction">
+        <span>{{ t("auctions.createAuction") }}</span>
       </button>
+      <span class="block text-center text-xs">receive 0.1 7DOTS</span>
+    </div>
+    <div class="flex-1 pl-4 pt-2">
       {{ 196- auctionStore.openSlots }} / 196
       <span v-if="auctionStore.isLoading">{{ t("button.loading") }}</span>
     </div>
