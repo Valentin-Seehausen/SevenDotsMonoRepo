@@ -16,7 +16,7 @@ auctionStore.loadAuctions()
       <button class="btn" @click="auctionStore.createAuction">
         <span>{{ t("auctions.createAuction") }}</span>
       </button>
-      <span class="block text-center text-xs">receive 0.1 7DOTS</span>
+      <span class="block text-center text-xs">receive 0.1 $7DOTS</span>
     </div>
     <div class="flex-1 pl-4 pt-2">
       {{ 196- auctionStore.openSlots }} / 196

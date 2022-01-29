@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { BigNumber, ethers } from 'ethers'
-import dateFormat from 'dateformat'
 import type Auction from 'types/Auction'
 import constants from '~/constants/constants'
 import { useAuctionStore } from '~/stores/auctions'
@@ -67,7 +66,7 @@ const onRedeem = async() => {
   <span v-if="auctionStore.isLoading">{{ t("button.loading") }}</span>
   <div
     v-if="auction"
-    class="flex"
+    class="md:flex"
   >
     <div class="flex-none">
       <img class="w-56 m-4 inline-block" alt="Dots" :src="auction.image">

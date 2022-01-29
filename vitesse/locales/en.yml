@@ -65,13 +65,13 @@ stacking:
 staking:
   currentStakingFaktor: Current staking faktor
   max: max
-  rewardToken: 7DOTS
-  rewardTokenBalance: Your 7DOTS
+  rewardToken: $7DOTS
+  rewardTokenBalance: Your $7DOTS
   stacks: Staking
   stake: Stake
-  stakedRewardTokenBalance: Your staked 7DOTS
-  stakingToken: s7DOTS
-  stakingTokenBalance: s7DOTS Balance
+  stakedRewardTokenBalance: Your staked $7DOTS
+  stakingToken: $s7DOTS
+  stakingTokenBalance: $s7DOTS Balance
   unstake: Unstake
 token:
   attributes: Attributes
@@ -84,7 +84,7 @@ treasury:
   circulatingSupply: Circulating 7DOTS Supply
   redeem: Redeem
   share: Your share of the Treasury
-  staked: Total 7DOTS Staked
+  staked: Total $7DOTS Staked
   treasury: Treasury
   treasuryAmount: Treasury Amount
   withdraw: Withdraw
