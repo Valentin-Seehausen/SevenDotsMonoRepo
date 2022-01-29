@@ -73,25 +73,29 @@ const onRedeem = async() => {
       <img class="w-56 m-4 inline-block" alt="Dots" :src="auction.image">
     </div>
     <div class="py-4 px-4 ">
-      <h3 class="text-md font-semibold">
-        {{ t("auction.name", {id: auction.id, dna: auction.dna}) }}
-      </h3>
-      <h3 class="text-md font-semibold">
-        {{ auction.dna }}
-      </h3>
-      <p class="mt-4 font-thin">
-        {{ t("auction.rarity") }}: {{ (auction.commonness/28*100 ).toString().substring(0,4) }}%
-      </p>
-      <p class="mt-4 text-lg font-thin">
-        <span v-if="isOpen">{{ t("auction.isOpen") }}</span><span v-else>{{ t("auction.ended") }}</span>
-      </p>
-      <p class="mt-4 text-lg font-thin">
-        {{ t("auction.ends") }}:
-        <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
-          in {{ hours }}:{{ minutes }}:{{ seconds }}
-        </vue-countdown>
-        ({{ dateFormat(auction.end, "HH:MM:ss TT, mmmm dS") }})
-      </p>
+      <div class="flex">
+        <div class="flex-1">
+          <h3 class="text-md font-semibold">
+            {{ t("auction.name", {id: auction.id, dna: auction.dna}) }}
+          </h3>
+          <h3 class="text-md font-semibold">
+            {{ auction.dna }}
+          </h3>
+          <p class="mt-4 font-thin">
+            {{ t("auction.rarity") }}: {{ (auction.commonness/28*100 ).toString().substring(0,4) }}%
+          </p>
+        </div>
+        <div>
+          <div class="bg-black text-white inline p-2">
+            <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
+              in {{ hours }}:{{ minutes }}:{{ seconds }}
+            </vue-countdown>
+            <span v-else>
+              Buy now
+            </span>
+          </div>
+        </div>
+      </div>
       <p class="mt-4 text-lg font-thin">
         {{ t("auction.highestBidder") }}: {{ auction.highestBidder }}
       </p>
