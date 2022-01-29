@@ -31,7 +31,7 @@ button:
   staking: Staking
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
-  token: Token
+  token: NFTs
   treasury: Treasury
   whitepaper: Whitepaper
 dots:
@@ -54,13 +54,13 @@ not-found: Not found
 rand:
   jojojo: Yoyoyo
 stacking:
-  bottomTokenId: Bottom Token Id
+  bottomTokenId: Bottom NFT Id
   createStack: Merge
-  empty: No Merges. Get some token and merge them
+  empty: No Merges. Get some NFTs and merge them
   ready: Ready in
-  selectToken: Please select token
+  selectToken: Please select NFT
   stacks: Merges
-  topTokenId: Top Token Id
+  topTokenId: Top NFT Id
   unstack: Claim NFT
 staking:
   currentStakingFaktor: Current staking faktor
@@ -75,11 +75,11 @@ staking:
   unstake: Unstake
 token:
   attributes: Attributes
-  empty: No Tokens. Go and get some!
+  empty: No NFTs. Go and get some!
   trait: Trait
   value: Value
 tokens:
-  notFound: Token not found
+  notFound: NFT not found. Did you merge it already?
 treasury:
   circulatingSupply: Circulating 7DOTS Supply
   redeem: Redeem
