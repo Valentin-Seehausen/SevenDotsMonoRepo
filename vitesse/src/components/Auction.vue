@@ -12,7 +12,7 @@ const remainingTime = ref(props.auction.end.getTime() - contracts.getDateOnChain
   <router-link
     :to="`/auction/${props.auction.id}`"
   >
-    <div role="link" class="bg-white border-black border-4 cursor-pointer hover:bg-black hover:text-white">
+    <div role="link" class="m-auto max-w-76 bg-white border-black border-4 cursor-pointer hover:bg-black hover:text-white">
       <div class="text-center">
         <img class="w-56 m-4 inline-block border-white border-4" alt="Dots" :src="props.auction.image">
       </div>

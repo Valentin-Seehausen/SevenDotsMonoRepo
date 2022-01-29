@@ -29,7 +29,7 @@ auctionStore.loadAuctions()
       <a class="filter" :class="{active: auctionStore.activeFilter === AuctionsFilter.Users}" @click="auctionStore.setFilter(AuctionsFilter.Users)">{{ t("filter.users") }}</a>
     </div>
   </div>
-  <div class="px-10 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
+  <div class="lg:px-10 px-1 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
     <div v-for="auction in auctionStore.filteredAuctions" :key="auction.id">
       <Auction :key="auction.id" :auction="auction" />
     </div>
