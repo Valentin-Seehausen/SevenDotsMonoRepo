@@ -43,7 +43,10 @@ export const useStackingStore = defineStore('stackingStore', () => {
     useTokenStore().loadUserTokens()
   }
 
-  watch(() => wallet.account, () => loadStacks())
+  watchEffect(() => {
+    if (wallet.isConnected)
+      loadStacks()
+  })
 
   return {
     stacks,
