@@ -37,9 +37,9 @@ const onClick = async() => {
     <h2 class="font-semibold ">
       {{ t("treasury.treasury") }}
     </h2>
-    <div class="flex">
-      <div class="basis-2/3">
-        <div class="border-black border-2 p-2 flex h-14 items-center w-140">
+    <div class="md:flex">
+      <div class="basis-2/3 mb-8">
+        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140">
           <div class="basis-1/3">
             {{ t("staking.rewardToken") }}
           </div>
@@ -52,7 +52,7 @@ const onClick = async() => {
             </button>
           </div>
         </div>
-        <div class="mt-14 border-black border-2 p-2 flex h-14 items-center w-140">
+        <div class="mt-14 border-black border-2 p-2 flex h-14 items-center max-w-140">
           <div class="basis-1/3">
             <logos:ethereum class="inline text-base" />
           </div>
@@ -61,13 +61,13 @@ const onClick = async() => {
           </div>
           <div class="basis-1/3 text-right" />
         </div>
-        <div class="mt-4 text-right w-140">
+        <div class="mt-4 text-right max-w-140">
           <button class="btn text-lg" :disabled="tooMuch" @click="onClick">
             {{ t("treasury.withdraw") }}
           </button>
         </div>
       </div>
-      <div class="basis-1/3 text-sm">
+      <div class="basis-1/3 text-sm md:pl-4">
         <table>
           <tr>
             <td class="p1">

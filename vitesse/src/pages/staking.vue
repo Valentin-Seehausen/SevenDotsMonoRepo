@@ -66,9 +66,9 @@ const onClick = async() => {
     <h2 class="font-semibold ">
       {{ t("staking.stacks") }}
     </h2>
-    <div class="flex">
-      <div class="basis-2/3">
-        <div class="border-black border-2 p-2 flex h-14 items-center w-140">
+    <div class="md:flex">
+      <div class="basis-2/3 mb-8">
+        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140">
           <div class="basis-1/3">
             {{ isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
           </div>
@@ -81,12 +81,12 @@ const onClick = async() => {
             </button>
           </div>
         </div>
-        <div class="my-4 h-14 w-140 flex items-center justify-center">
+        <div class="my-4 h-14 max-w-140 flex items-center justify-center">
           <button class="icon-btn cursor-pointer p-1 rounded-full secondary" @click="isStaking = !isStaking; amountIn = ''">
             <gg:arrows-exchange-v class="text-3xl" />
           </button>
         </div>
-        <div class="border-black border-2 p-2 flex h-14 items-center w-140">
+        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140">
           <div class="basis-1/3">
             {{ !isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
           </div>
@@ -95,13 +95,13 @@ const onClick = async() => {
           </div>
           <div class="basis-1/3 text-right" />
         </div>
-        <div class="mt-4 text-right w-140">
+        <div class="mt-4 text-right max-w-140">
           <button class="btn text-lg" :disabled="tooMuch" @click="onClick">
             {{ isStaking ? t("staking.stake") : t("staking.unstake") }}
           </button>
         </div>
       </div>
-      <div class="basis-1/3">
+      <div class="basis-1/3 md:pl-4">
         <table>
           <tr>
             <td class="p1">
