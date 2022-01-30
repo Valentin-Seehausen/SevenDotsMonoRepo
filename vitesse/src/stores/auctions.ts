@@ -62,7 +62,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount.mul(1000))
       setTimeout(() => {
         treasury.loadBalances()
-      }, 10000)
+      }, 15000)
       return
     }
 

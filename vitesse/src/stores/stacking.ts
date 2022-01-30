@@ -24,10 +24,14 @@ export const useStackingStore = defineStore('stackingStore', () => {
     }))
   }
 
+  const checkApproval = async() => {
+    if (await token.isApprovedForAll(wallet.account, contracts.addresses.SevenDotsStackFactory)) return
+    return token.connect(wallet.getSigner()).setApprovalForAll(contracts.addresses.SevenDotsStackFactory, true)
+  }
+
   const stackTokens = async(token1: Token, token2: Token) => {
     if (!wallet.isConnected) return
-    await token.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsStackFactory, token1.id)
-    await token.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsStackFactory, token2.id)
+    await checkApproval()
     await stackFactory.connect(wallet.getSigner()).stackTokens(token1.id, token2.id)
     await loadStacks()
   }

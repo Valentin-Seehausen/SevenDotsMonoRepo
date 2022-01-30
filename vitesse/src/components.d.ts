@@ -4,7 +4,9 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ApprovalWarner: typeof import('./components/ApprovalWarner.vue')['default']
     Auction: typeof import('./components/Auction.vue')['default']
+    CarbonClose: typeof import('~icons/carbon/close')['default']
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     ChainWarner: typeof import('./components/ChainWarner.vue')['default']
