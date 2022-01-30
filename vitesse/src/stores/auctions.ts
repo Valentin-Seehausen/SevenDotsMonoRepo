@@ -59,7 +59,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const bidOnAuction = async(auctionId: number, amount: BigNumber) => {
     if (!wallet.isConnected) return
     if (amount.gt(treasury.WETHAllowance)) {
-      await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount.mul(1000))
+      await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
       setTimeout(() => {
         treasury.loadBalances()
       }, 15000)

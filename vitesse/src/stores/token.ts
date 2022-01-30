@@ -33,7 +33,10 @@ export const useTokenStore = defineStore('tokenStore', () => {
     isLoading.value = false
   }
 
-  watch(() => wallet.account, () => loadUserTokens())
+  watchEffect(() => {
+    if (wallet.isConnected)
+      loadUserTokens()
+  })
 
   return { tokens, isLoading, loadUserTokens }
 })
