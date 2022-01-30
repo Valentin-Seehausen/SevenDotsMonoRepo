@@ -9,6 +9,7 @@ const isStaking = ref(true)
 const amountIn = ref('')
 const amountOut = ref('')
 const tooMuch = ref(false)
+const mor = ref()
 
 watchEffect(() => {
   try {
@@ -32,6 +33,14 @@ watchEffect(() => {
   catch (e) {
     amountOut.value = ''
     tooMuch.value = false
+  }
+})
+
+watchEffect(() => {
+  try {
+    mor.value = ethers.utils.formatUnits(ethers.utils.parseUnits('7', 22).div(treasury.currentStakingFaktor), 4)
+  }
+  catch (e) {
   }
 })
 
@@ -94,22 +103,22 @@ const onClick = async() => {
       </div>
       <div class="basis-1/3">
         <p>
-          {{ t("staking.currentStakingFaktor") }}
+          {{ t("staking.earlyUserMultipler") }}
         </p>
         <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.currentStakingFaktor) }}
+          {{ mor }}
         </p>
         <p class="mt-4">
           {{ t("staking.rewardTokenBalance") }}:
         </p>
         <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.rewardTokenBalance) }}
+          {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
         </p>
         <p class="mt-4">
           {{ t("staking.stakingTokenBalance") }}:
         </p>
         <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.stakingTokenBalance) }}
+          {{ ethers.utils.formatEther(treasury.stakingTokenBalance).substring(0,5) }}
         </p>
       </div>
     </div>

@@ -64,6 +64,7 @@ stacking:
   unstack: Claim NFT
 staking:
   currentStakingFaktor: Current staking faktor
+  earlyUserMultipler: Early User Multiplier
   max: max
   rewardToken: $7DOTS
   rewardTokenBalance: Your $7DOTS
@@ -71,7 +72,7 @@ staking:
   stake: Stake
   stakedRewardTokenBalance: Your staked $7DOTS
   stakingToken: $s7DOTS
-  stakingTokenBalance: $s7DOTS Balance
+  stakingTokenBalance: Your $s7DOTS
   unstake: Unstake
 token:
   attributes: Attributes
