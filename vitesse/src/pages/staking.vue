@@ -102,24 +102,32 @@ const onClick = async() => {
         </div>
       </div>
       <div class="basis-1/3">
-        <p>
-          {{ t("staking.earlyUserMultipler") }}
-        </p>
-        <p class="text-lg py-2">
-          {{ mor }}
-        </p>
-        <p class="mt-4">
-          {{ t("staking.rewardTokenBalance") }}:
-        </p>
-        <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
-        </p>
-        <p class="mt-4">
-          {{ t("staking.stakingTokenBalance") }}:
-        </p>
-        <p class="text-lg py-2">
-          {{ ethers.utils.formatEther(treasury.stakingTokenBalance).substring(0,5) }}
-        </p>
+        <table>
+          <tr>
+            <td class="p1">
+              {{ t("staking.earlyUserMultipler") }}:
+            </td>
+            <td class="pl-4 p-1">
+              {{ mor }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("staking.rewardTokenBalance") }}:
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              {{ t("staking.stakedRewardTokenBalance") }}:
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

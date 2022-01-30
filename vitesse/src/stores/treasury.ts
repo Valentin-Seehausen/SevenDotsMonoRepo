@@ -1,4 +1,4 @@
-import { BigNumber } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { useContractStore } from './contracts'
 import { useWalletStore } from './wallet'
@@ -41,12 +41,16 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
 
   watchEffect(() => {
     try {
-      stakedRewardTokenBalance.value = stakingTokenBalance.value.mul(currentStakingFaktor.value).div(BigNumber.from(10 ** 18))
+      stakedRewardTokenBalance.value = stakingTokenBalance.value.mul(currentStakingFaktor.value).div(ethers.utils.parseUnits('10', 17))
     }
-    catch (e) {}
+    catch (e) {
+    }
   })
 
-  watch(() => wallet.account, () => loadBalances())
+  watchEffect(() => {
+    if (wallet.isConnected)
+      loadBalances()
+  })
 
   const stake = async(amount: BigNumber) => {
     if (amount.gt(unref(rewardTokenAllowance)))
