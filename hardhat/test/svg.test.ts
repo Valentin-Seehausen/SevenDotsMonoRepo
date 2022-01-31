@@ -36,8 +36,8 @@ describe("SevenDotsMetadata", function () {
       ethers.BigNumber.from("0000000"),
     ]);
     expect(await metadata.getDots(bytes)).to.equal(
-      "<rect class='c1' x='2' y='11' width='2' height='2'/>" +
-        "<rect class='c1' x='11' y='11' width='2' height='2'/>"
+      "<rect class='c1' x='60' y='330' width='60' height='60'/>" +
+        "<rect class='c1' x='330' y='330' width='60' height='60'/>"
     );
   });
 
@@ -47,7 +47,7 @@ describe("SevenDotsMetadata", function () {
     ).deploy();
 
     expect(await metadata.getRect(1, 2, 3)).to.equal(
-      "<rect class='c3' x='1' y='2' width='2' height='2'/>"
+      "<rect class='c3' x='1' y='2' width='60' height='60'/>"
     );
   });
 
@@ -67,34 +67,34 @@ describe("SevenDotsMetadata", function () {
     ).deploy();
 
     expect(await metadata.getColDots(1, 0)).to.equal(
-      "<rect class='c1' x='2' y='11' width='2' height='2'/>"
+      "<rect class='c1' x='60' y='330' width='60' height='60'/>"
     );
 
     expect(await metadata.getColDots(12, 1)).to.equal(
-      "<rect class='c1' x='5' y='9' width='2' height='2'/>" +
-        "<rect class='c2' x='5' y='12' width='2' height='2'/>"
+      "<rect class='c1' x='150' y='270' width='60' height='60'/>" +
+        "<rect class='c2' x='150' y='360' width='60' height='60'/>"
     );
     expect(await metadata.getColDots(123, 2)).to.equal(
-      "<rect class='c1' x='8' y='8' width='2' height='2'/>" +
-        "<rect class='c2' x='8' y='11' width='2' height='2'/>" +
-        "<rect class='c3' x='8' y='14' width='2' height='2'/>"
+      "<rect class='c1' x='240' y='240' width='60' height='60'/>" +
+        "<rect class='c2' x='240' y='330' width='60' height='60'/>" +
+        "<rect class='c3' x='240' y='420' width='60' height='60'/>"
     );
     expect(await metadata.getColDots(123456, 2)).to.equal(
-      "<rect class='c1' x='8' y='3' width='2' height='2'/>" +
-        "<rect class='c2' x='8' y='6' width='2' height='2'/>" +
-        "<rect class='c3' x='8' y='9' width='2' height='2'/>" +
-        "<rect class='c4' x='8' y='12' width='2' height='2'/>" +
-        "<rect class='c5' x='8' y='15' width='2' height='2'/>" +
-        "<rect class='c6' x='8' y='18' width='2' height='2'/>"
+      "<rect class='c1' x='240' y='90' width='60' height='60'/>" +
+        "<rect class='c2' x='240' y='180' width='60' height='60'/>" +
+        "<rect class='c3' x='240' y='270' width='60' height='60'/>" +
+        "<rect class='c4' x='240' y='360' width='60' height='60'/>" +
+        "<rect class='c5' x='240' y='450' width='60' height='60'/>" +
+        "<rect class='c6' x='240' y='540' width='60' height='60'/>"
     );
     expect(await metadata.getColDots(1234567, 6)).to.equal(
-      "<rect class='c1' x='20' y='2' width='2' height='2'/>" +
-        "<rect class='c2' x='20' y='5' width='2' height='2'/>" +
-        "<rect class='c3' x='20' y='8' width='2' height='2'/>" +
-        "<rect class='c4' x='20' y='11' width='2' height='2'/>" +
-        "<rect class='c5' x='20' y='14' width='2' height='2'/>" +
-        "<rect class='c6' x='20' y='17' width='2' height='2'/>" +
-        "<rect class='c7' x='20' y='20' width='2' height='2'/>"
+      "<rect class='c1' x='600' y='60' width='60' height='60'/>" +
+        "<rect class='c2' x='600' y='150' width='60' height='60'/>" +
+        "<rect class='c3' x='600' y='240' width='60' height='60'/>" +
+        "<rect class='c4' x='600' y='330' width='60' height='60'/>" +
+        "<rect class='c5' x='600' y='420' width='60' height='60'/>" +
+        "<rect class='c6' x='600' y='510' width='60' height='60'/>" +
+        "<rect class='c7' x='600' y='600' width='60' height='60'/>"
     );
   });
 });

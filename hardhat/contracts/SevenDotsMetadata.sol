@@ -197,7 +197,7 @@ contract SevenDotsMetadata is
         bytes memory b;
         b = abi.encodePacked(
             b,
-            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='24' height='24' viewbox='0 0 24 24'>"
+            "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='720' height='720' viewbox='0 0 720 720'>"
         );
         b = abi.encodePacked(b, "<style>");
         b = abi.encodePacked(b, "#bg {fill: #000}");
@@ -211,7 +211,7 @@ contract SevenDotsMetadata is
         b = abi.encodePacked(b, "</style>");
         b = abi.encodePacked(
             b,
-            "<rect id='bg' x='0' y='0' width='24' height='24'/>"
+            "<rect id='bg' x='0' y='0' width='720' height='720'/>"
         );
         b = abi.encodePacked(b, getDots(seed));
         b = abi.encodePacked(b, "</svg>");
@@ -243,10 +243,10 @@ contract SevenDotsMetadata is
         returns (string memory)
     {
         bytes memory b;
-        uint256 x = 2 + 3 * col_i;
+        uint256 x = (2 + 3 * col_i) * 30;
         uint256 l = getLength(col);
         for (uint256 i = 0; i < l; i++) {
-            uint256 y = 12 - (15 * l) / 10 + 3 * i;
+            uint256 y = (12 - (15 * l) / 10 + 3 * i) * 30;
             uint256 c = getColor(col, i);
             b = abi.encodePacked(b, getRect(x, y, c));
         }
@@ -282,7 +282,7 @@ contract SevenDotsMetadata is
                     StringsUpgradeable.toString(x),
                     "' y='",
                     StringsUpgradeable.toString(y),
-                    "' width='2' height='2'/>"
+                    "' width='60' height='60'/>"
                 )
             );
     }
