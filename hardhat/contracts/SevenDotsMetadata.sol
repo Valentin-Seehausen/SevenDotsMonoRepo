@@ -180,9 +180,9 @@ contract SevenDotsMetadata is
         }
         b = abi.encodePacked(
             b,
-            '{"trait_type":"Dots","display_type":"number","value":"',
+            '{"trait_type":"Dots","display_type":"number","value":',
             StringsUpgradeable.toString(countDots(seed)),
-            '"},'
+            "},"
         );
         b = abi.encodePacked(b, '{"trait_type":"DNA","value":"', dna, '"}');
         b = abi.encodePacked(b, "]");

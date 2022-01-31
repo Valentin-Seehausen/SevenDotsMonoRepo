@@ -35,7 +35,7 @@ export default {
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f1", value: "c1" },
-        { trait_type: "Dots", display_type: "number", value: "1" },
+        { trait_type: "Dots", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f1c1" },
       ],
       image:
@@ -47,7 +47,7 @@ export default {
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f2", value: "c2" },
-        { trait_type: "Dots", display_type: "number", value: "1" },
+        { trait_type: "Dots", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f2c2" },
       ],
       image:
@@ -58,7 +58,7 @@ export default {
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f7", value: "c6" },
-        { trait_type: "Dots", display_type: "number", value: "1" },
+        { trait_type: "Dots", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f7c5" },
       ],
       image:
@@ -69,7 +69,7 @@ export default {
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f1", value: "c1" },
-        { trait_type: "Dots", display_type: "number", value: "1" },
+        { trait_type: "Dots", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f1c1" },
       ],
       image:
@@ -80,7 +80,7 @@ export default {
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f4", value: "c1" },
-        { trait_type: "Dots", display_type: "number", value: "1" },
+        { trait_type: "Dots", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f4c1" },
       ],
       image:
@@ -97,7 +97,7 @@ export default {
         { trait_type: "f5", value: "c5" },
         { trait_type: "f6", value: "c6" },
         { trait_type: "f7", value: "c7" },
-        { trait_type: "Dots", display_type: "number", value: "7" },
+        { trait_type: "Dots", display_type: "number", value: 7 },
         { trait_type: "DNA", value: "f1c1f2c2f3c3f4c4f5c5f6c6f7c7" },
       ],
       image:
@@ -114,7 +114,7 @@ export default {
         { trait_type: "f5", value: "c55" },
         { trait_type: "f6", value: "c66" },
         { trait_type: "f7", value: "c77" },
-        { trait_type: "Dots", display_type: "number", value: "14" },
+        { trait_type: "Dots", display_type: "number", value: 14 },
         { trait_type: "DNA", value: "f1c11f2c22f3c33f4c44f5c55f6c66f7c77" },
       ],
       image:
@@ -131,7 +131,7 @@ export default {
         { trait_type: "f5", value: "c3" },
         { trait_type: "f6", value: "c2" },
         { trait_type: "f7", value: "c1" },
-        { trait_type: "Dots", display_type: "number", value: "7" },
+        { trait_type: "Dots", display_type: "number", value: 7 },
         { trait_type: "DNA", value: "f1c7f2c6f3c5f4c4f5c3f6c2f7c1" },
       ],
       image:
@@ -148,7 +148,7 @@ export default {
         { trait_type: "f5", value: "c5555555" },
         { trait_type: "f6", value: "c6666666" },
         { trait_type: "f7", value: "c7777777" },
-        { trait_type: "Dots", display_type: "number", value: "49" },
+        { trait_type: "Dots", display_type: "number", value: 49 },
         {
           trait_type: "DNA",
           value:
