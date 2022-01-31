@@ -49,7 +49,7 @@ tokens.loadUserTokens()
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible2}">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible2}">
             <div v-if="tokens.isLoading" class="flex p-1 hover:bg-gray-100 cursor-pointer">
               {{ t("button.loading") }}
             </div>
@@ -84,7 +84,7 @@ tokens.loadUserTokens()
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll h-60" :class="{hidden: !isVisible1}">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible1}">
             <div v-if="tokens.isLoading" class="p-1 hover:bg-gray-100 cursor-pointer">
               {{ t("button.loading") }}
             </div>

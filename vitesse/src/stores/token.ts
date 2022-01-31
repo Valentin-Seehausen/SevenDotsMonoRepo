@@ -28,6 +28,7 @@ export const useTokenStore = defineStore('tokenStore', () => {
           }),
       )
     }
+    await _tokens.reverse()
     await Promise.all(promises)
     tokens.value = _tokens
     isLoading.value = false
