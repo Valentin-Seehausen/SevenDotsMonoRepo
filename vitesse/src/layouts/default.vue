@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ApprovalWarner from '~/components/ApprovalWarner.vue'
-const { t } = useI18n()
 </script>
 
 <template>
@@ -13,9 +12,7 @@ const { t } = useI18n()
       Copyright 2022 Seven Dots
     </div>
     <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-      <router-link to="/imprint">
-        {{ t("button.imprint") }}
-      </router-link>
+      This is a DAO in the making. Stay tuned.
     </div>
   </main>
 </template>
