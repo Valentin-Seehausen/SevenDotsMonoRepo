@@ -184,9 +184,44 @@ contract SevenDotsMetadata is
             StringsUpgradeable.toString(countDots(seed)),
             "},"
         );
+        b = abi.encodePacked(
+            b,
+            '{"trait_type":"Rarity Points","display_type":"number","value":',
+            StringsUpgradeable.toString(_getRarity(seed)),
+            "},"
+        );
         b = abi.encodePacked(b, '{"trait_type":"DNA","value":"', dna, '"}');
         b = abi.encodePacked(b, "]");
         return string(b);
+    }
+
+    function _getRarity(bytes32 seed)
+        internal
+        pure
+        returns (uint256 rarityPoints)
+    {
+        uint256 _rarityPoints;
+        uint256[7] memory cols = decode(seed);
+        for (uint256 i = 0; i < BASE; i++) {
+            _rarityPoints += _getColRarityPoints(cols[i], i);
+        }
+        return _rarityPoints;
+    }
+
+    function _getColRarityPoints(uint256 col, uint256 col_i)
+        internal
+        pure
+        returns (uint256 rarityPoints)
+    {
+        uint256 _colRarityPoints;
+        uint256 l = getLength(col);
+        for (uint256 i = 0; i < l; i++) {
+            uint256 c = getColor(col, i);
+            uint256 _rp = (7 + col_i + 1 - c);
+            _rp = _rp > 7 ? _rp - 7 : _rp;
+            _colRarityPoints += _rp;
+        }
+        return _colRarityPoints;
     }
 
     /**

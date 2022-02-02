@@ -34,6 +34,13 @@ describe("Mint NFT Token", function () {
     );
   });
 
+  it("TokenURI of common rainbow one", async function () {
+    await token.safeMint(deployer.address, constants.seed.commonRainbowOne);
+    await expect(atob((await token.tokenURI(0)).substring(29))).to.equal(
+      constants.tokenURI.commonRainbowOne
+    );
+  });
+
   it("Reverts unauthorized minting", async function () {
     await expect(
       token.connect(alice).safeMint(alice.address, constants.seed.f4c1)

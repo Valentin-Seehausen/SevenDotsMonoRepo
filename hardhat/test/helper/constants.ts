@@ -36,18 +36,19 @@ export default {
       attributes: [
         { trait_type: "f1", value: "c1" },
         { trait_type: "Dots", display_type: "number", value: 1 },
+        { trait_type: "Rarity Points", display_type: "number", value: 7 },
         { trait_type: "DNA", value: "f1c1" },
       ],
       image:
         "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzcyMCcgaGVpZ2h0PSc3MjAnIHZpZXdib3g9JzAgMCA3MjAgNzIwJz48c3R5bGU+I2JnIHtmaWxsOiAjMDAwfS5jMSB7ZmlsbDogI0ZGMDAwMH0uYzIge2ZpbGw6ICNGRkIzMDB9LmMzIHtmaWxsOiAjRERGRjAwfS5jNCB7ZmlsbDogIzAwRkY1RX0uYzUge2ZpbGw6ICMwMDkxRkZ9LmM2IHtmaWxsOiAjNDgwMEZGfS5jNyB7ZmlsbDogI0ZGMDBEOX08L3N0eWxlPjxyZWN0IGlkPSdiZycgeD0nMCcgeT0nMCcgd2lkdGg9JzcyMCcgaGVpZ2h0PSc3MjAnLz48cmVjdCBjbGFzcz0nYzEnIHg9JzYwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjwvc3ZnPg==",
     }),
-    "1": "data:application/json;base64,eyJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MG5hSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY25JSFpsY25OcGIyNDlKekV1TVNjZ2QybGtkR2c5SnpJMEp5Qm9aV2xuYUhROUp6STBKeUIyYVdWM1ltOTRQU2N3SURBZ01qUWdNalFuUGp4emRIbHNaVDRqWW1jZ2UyWnBiR3c2SUNNd01EQjlMbU14SUh0bWFXeHNPaUFqUmtZd01EQXdmUzVqTWlCN1ptbHNiRG9nSTBaR1FqTXdNSDB1WXpNZ2UyWnBiR3c2SUNORVJFWkdNREI5TG1NMElIdG1hV3hzT2lBak1EQkdSalZGZlM1ak5TQjdabWxzYkRvZ0l6QXdPVEZHUm4wdVl6WWdlMlpwYkd3NklDTTBPREF3UmtaOUxtTTNJSHRtYVd4c09pQWpSa1l3TUVRNWZUd3ZjM1I1YkdVK1BISmxZM1FnYVdROUoySm5KeUI0UFNjd0p5QjVQU2N3SnlCM2FXUjBhRDBuTWpRbklHaGxhV2RvZEQwbk1qUW5MejQ4Y21WamRDQmpiR0Z6Y3owbll6SW5JSGc5SnpJbklIazlKekV4SnlCM2FXUjBhRDBuTWljZ2FHVnBaMmgwUFNjeUp5OCtQQzl6ZG1jKyJ9",
     "28": JSON.stringify({
       name: "#28",
       description: "Seven Dots Token",
       attributes: [
         { trait_type: "f2", value: "c2" },
         { trait_type: "Dots", display_type: "number", value: 1 },
+        { trait_type: "Rarity Points", display_type: "number", value: 7 },
         { trait_type: "DNA", value: "f2c2" },
       ],
       image:
@@ -59,6 +60,7 @@ export default {
       attributes: [
         { trait_type: "f7", value: "c6" },
         { trait_type: "Dots", display_type: "number", value: 1 },
+        { trait_type: "Rarity Points", display_type: "number", value: 1 },
         { trait_type: "DNA", value: "f7c5" },
       ],
       image:
@@ -70,6 +72,7 @@ export default {
       attributes: [
         { trait_type: "f1", value: "c1" },
         { trait_type: "Dots", display_type: "number", value: 1 },
+        { trait_type: "Rarity Points", display_type: "number", value: 7 },
         { trait_type: "DNA", value: "f1c1" },
       ],
       image:
@@ -81,6 +84,7 @@ export default {
       attributes: [
         { trait_type: "f4", value: "c1" },
         { trait_type: "Dots", display_type: "number", value: 1 },
+        { trait_type: "Rarity Points", display_type: "number", value: 3 },
         { trait_type: "DNA", value: "f4c1" },
       ],
       image:
@@ -98,6 +102,7 @@ export default {
         { trait_type: "f6", value: "c6" },
         { trait_type: "f7", value: "c7" },
         { trait_type: "Dots", display_type: "number", value: 7 },
+        { trait_type: "Rarity Points", display_type: "number", value: 49 },
         { trait_type: "DNA", value: "f1c1f2c2f3c3f4c4f5c5f6c6f7c7" },
       ],
       image:
@@ -115,6 +120,7 @@ export default {
         { trait_type: "f6", value: "c66" },
         { trait_type: "f7", value: "c77" },
         { trait_type: "Dots", display_type: "number", value: 14 },
+        { trait_type: "Rarity Points", display_type: "number", value: 98 },
         { trait_type: "DNA", value: "f1c11f2c22f3c33f4c44f5c55f6c66f7c77" },
       ],
       image:
@@ -132,10 +138,11 @@ export default {
         { trait_type: "f6", value: "c2" },
         { trait_type: "f7", value: "c1" },
         { trait_type: "Dots", display_type: "number", value: 7 },
+        { trait_type: "Rarity Points", display_type: "number", value: 28 },
         { trait_type: "DNA", value: "f1c7f2c6f3c5f4c4f5c3f6c2f7c1" },
       ],
       image:
-        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyB2aWV3Ym94PScwIDAgMjQgMjQnPjxzdHlsZT4jYmcge2ZpbGw6ICMwMDB9LmMxIHtmaWxsOiAjRkYwMDAwfS5jMiB7ZmlsbDogI0ZGQjMwMH0uYzMge2ZpbGw6ICNEREZGMDB9LmM0IHtmaWxsOiAjMDBGRjVFfS5jNSB7ZmlsbDogIzAwOTFGRn0uYzYge2ZpbGw6ICM0ODAwRkZ9LmM3IHtmaWxsOiAjRkYwMEQ5fTwvc3R5bGU+PHJlY3QgaWQ9J2JnJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnLz48cmVjdCBjbGFzcz0nYzcnIHg9JzInIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2M2JyB4PSc1JyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjNScgeD0nOCcgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzQnIHg9JzExJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjxyZWN0IGNsYXNzPSdjMycgeD0nMTQnIHk9JzExJyB3aWR0aD0nMicgaGVpZ2h0PScyJy8+PHJlY3QgY2xhc3M9J2MyJyB4PScxNycgeT0nMTEnIHdpZHRoPScyJyBoZWlnaHQ9JzInLz48cmVjdCBjbGFzcz0nYzEnIHg9JzIwJyB5PScxMScgd2lkdGg9JzInIGhlaWdodD0nMicvPjwvc3ZnPg==",
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lkdGg9JzcyMCcgaGVpZ2h0PSc3MjAnIHZpZXdib3g9JzAgMCA3MjAgNzIwJz48c3R5bGU+I2JnIHtmaWxsOiAjMDAwfS5jMSB7ZmlsbDogI0ZGMDAwMH0uYzIge2ZpbGw6ICNGRkIzMDB9LmMzIHtmaWxsOiAjRERGRjAwfS5jNCB7ZmlsbDogIzAwRkY1RX0uYzUge2ZpbGw6ICMwMDkxRkZ9LmM2IHtmaWxsOiAjNDgwMEZGfS5jNyB7ZmlsbDogI0ZGMDBEOX08L3N0eWxlPjxyZWN0IGlkPSdiZycgeD0nMCcgeT0nMCcgd2lkdGg9JzcyMCcgaGVpZ2h0PSc3MjAnLz48cmVjdCBjbGFzcz0nYzcnIHg9JzYwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjNicgeD0nMTUwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjNScgeD0nMjQwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjNCcgeD0nMzMwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjMycgeD0nNDIwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjMicgeD0nNTEwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjxyZWN0IGNsYXNzPSdjMScgeD0nNjAwJyB5PSczMzAnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCcvPjwvc3ZnPg==",
     }),
     rareRainbowSeven: JSON.stringify({
       name: "#0",
@@ -149,6 +156,7 @@ export default {
         { trait_type: "f6", value: "c6666666" },
         { trait_type: "f7", value: "c7777777" },
         { trait_type: "Dots", display_type: "number", value: 49 },
+        { trait_type: "Rarity Points", display_type: "number", value: 343 },
         {
           trait_type: "DNA",
           value:
