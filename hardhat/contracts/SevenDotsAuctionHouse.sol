@@ -58,6 +58,39 @@ contract SevenDotsAuctionHouse is
         uint24 id;
     }
 
+    /** Events */
+
+    event Create(uint256 _id, bytes32 seed, address creator);
+
+    event Bid(
+        uint256 indexed _id,
+        address indexed _oldHighestBidder,
+        uint256 id,
+        address oldHighestBidder,
+        address highestBidder,
+        uint256 highestBid,
+        uint256 time
+    );
+
+    event Redeem(
+        uint256 indexed _id,
+        uint256 id,
+        address highestBidder,
+        uint256 highestBid,
+        uint256 time
+    );
+
+    event End(
+        uint256 indexed _id,
+        bytes32 indexed _seed,
+        address indexed _highestBidder,
+        uint256 id,
+        bytes32 seed,
+        address highestBidder,
+        uint256 highestBid,
+        uint256 time
+    );
+
     /** Methods */
 
     /**
@@ -105,15 +138,17 @@ contract SevenDotsAuctionHouse is
         _pruneAuctions();
         require(0 < freeAuctionSlots(), "SD: No free auction slot.");
         uint24 id = _popNewAuctionId();
+        bytes32 seed = _popNewSeed();
         openAuctionIds.push(id);
         auctionsById[id] = Auction(
             START_BID,
             address(0),
             uint40(block.timestamp + AUCTION_DURATION),
-            _popNewSeed(),
+            seed,
             id
         );
         rewardToken.mint(msg.sender, AUCTION_CREATOR_REWARD);
+        emit Create(id, seed, msg.sender);
     }
 
     /**
@@ -136,13 +171,23 @@ contract SevenDotsAuctionHouse is
                 remaindingTailLength = openAuctionIds.length - i;
                 break;
             } else if (_auction.highestBidder == address(0)) {
-                // Auction did end, but is not closes because nobody bid.
+                // Auction did end, but is not closed because nobody bid.
                 _tempOpenAuctionIds[openCount] = _auction.id;
                 openCount++;
             } else {
                 // Auction is closed.
                 closedAuctionIds.push(_auction.id);
                 closedCount++;
+                emit End(
+                    _auction.id,
+                    _auction.seed,
+                    _auction.highestBidder,
+                    _auction.id,
+                    _auction.seed,
+                    _auction.highestBidder,
+                    _auction.highestBid,
+                    block.timestamp
+                );
             }
         }
         // When all auctions are in remainding tail, nothing has to be done.
@@ -188,6 +233,7 @@ contract SevenDotsAuctionHouse is
 
     function bidOnAuction(uint24 auctionId, uint256 amount) public {
         Auction memory _auction = auctionsById[auctionId];
+        address oldHighestBidder = _auction.highestBidder;
         require(
             block.timestamp < _auction.end ||
                 _auction.highestBidder == address(0),
@@ -212,6 +258,15 @@ contract SevenDotsAuctionHouse is
         // Update Auction
         auctionsById[auctionId].highestBidder = msg.sender;
         auctionsById[auctionId].highestBid = amount;
+        emit Bid(
+            auctionId,
+            oldHighestBidder,
+            auctionId,
+            oldHighestBidder,
+            msg.sender,
+            amount,
+            block.timestamp
+        );
     }
 
     /**
@@ -256,6 +311,13 @@ contract SevenDotsAuctionHouse is
 
         // Mind NFT to highestBidder
         token.safeMint(highestBidder, seed);
+        emit Redeem(
+            auctionId,
+            auctionId,
+            _auction.highestBidder,
+            _auction.highestBid,
+            block.timestamp
+        );
     }
 
     /**

@@ -277,6 +277,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
+    "Bid(uint256,address,uint256,address,address,uint256,uint256)": EventFragment;
+    "Create(uint256,bytes32,address)": EventFragment;
+    "End(uint256,bytes32,address,uint256,bytes32,address,uint256,uint256)": EventFragment;
+    "Redeem(uint256,uint256,address,uint256,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -285,6 +289,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BeaconUpgraded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Bid"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Create"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "End"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Redeem"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
@@ -301,6 +309,57 @@ export type AdminChangedEventFilter = TypedEventFilter<AdminChangedEvent>;
 export type BeaconUpgradedEvent = TypedEvent<[string], { beacon: string }>;
 
 export type BeaconUpgradedEventFilter = TypedEventFilter<BeaconUpgradedEvent>;
+
+export type BidEvent = TypedEvent<
+  [BigNumber, string, BigNumber, string, string, BigNumber, BigNumber],
+  {
+    _id: BigNumber;
+    _oldHighestBidder: string;
+    id: BigNumber;
+    oldHighestBidder: string;
+    highestBidder: string;
+    highestBid: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type BidEventFilter = TypedEventFilter<BidEvent>;
+
+export type CreateEvent = TypedEvent<
+  [BigNumber, string, string],
+  { _id: BigNumber; seed: string; creator: string }
+>;
+
+export type CreateEventFilter = TypedEventFilter<CreateEvent>;
+
+export type EndEvent = TypedEvent<
+  [BigNumber, string, string, BigNumber, string, string, BigNumber, BigNumber],
+  {
+    _id: BigNumber;
+    _seed: string;
+    _highestBidder: string;
+    id: BigNumber;
+    seed: string;
+    highestBidder: string;
+    highestBid: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type EndEventFilter = TypedEventFilter<EndEvent>;
+
+export type RedeemEvent = TypedEvent<
+  [BigNumber, BigNumber, string, BigNumber, BigNumber],
+  {
+    _id: BigNumber;
+    id: BigNumber;
+    highestBidder: string;
+    highestBid: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type RedeemEventFilter = TypedEventFilter<RedeemEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -746,6 +805,68 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       beacon?: string | null
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
+
+    "Bid(uint256,address,uint256,address,address,uint256,uint256)"(
+      _id?: BigNumberish | null,
+      _oldHighestBidder?: string | null,
+      id?: null,
+      oldHighestBidder?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): BidEventFilter;
+    Bid(
+      _id?: BigNumberish | null,
+      _oldHighestBidder?: string | null,
+      id?: null,
+      oldHighestBidder?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): BidEventFilter;
+
+    "Create(uint256,bytes32,address)"(
+      _id?: null,
+      seed?: null,
+      creator?: null
+    ): CreateEventFilter;
+    Create(_id?: null, seed?: null, creator?: null): CreateEventFilter;
+
+    "End(uint256,bytes32,address,uint256,bytes32,address,uint256,uint256)"(
+      _id?: BigNumberish | null,
+      _seed?: BytesLike | null,
+      _highestBidder?: string | null,
+      id?: null,
+      seed?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): EndEventFilter;
+    End(
+      _id?: BigNumberish | null,
+      _seed?: BytesLike | null,
+      _highestBidder?: string | null,
+      id?: null,
+      seed?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): EndEventFilter;
+
+    "Redeem(uint256,uint256,address,uint256,uint256)"(
+      _id?: BigNumberish | null,
+      id?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): RedeemEventFilter;
+    Redeem(
+      _id?: BigNumberish | null,
+      id?: null,
+      highestBidder?: null,
+      highestBid?: null,
+      time?: null
+    ): RedeemEventFilter;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
