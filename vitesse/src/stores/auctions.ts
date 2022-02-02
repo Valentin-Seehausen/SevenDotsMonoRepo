@@ -66,7 +66,9 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       return
     }
 
-    await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
+    const tx = await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
+    await tx.wait()
+    console.log('Bid on Auction')
   }
 
   const redeemAuction = async(auctionId: number) => {
@@ -91,6 +93,14 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       default:
         return auctions.value
     }
+  })
+
+  watchEffect(() => {
+    if (!wallet.isConnected) return
+    auctionHouse.on(
+      auctionHouse.filters.End(null, null, wallet.account),
+      (event: any) => console.log(event),
+    )
   })
 
   return {

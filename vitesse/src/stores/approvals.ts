@@ -1,3 +1,4 @@
+import type { ContractTransaction } from 'ethers'
 import { ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { useContractStore } from './contracts'
@@ -14,12 +15,14 @@ export const useApprovalStore = defineStore('approvalStore', () => {
   const contracts = useContractStore()
   const wallet = useWalletStore()
   const loading = ref(false)
+  const waiting = ref(false)
   const token = ref(false)
   const rewardToken = ref(false)
   const stakingToken = ref(false)
   const weth = ref(false)
   const all = ref(false)
   const ignore = ref(false)
+  const showSuccess = ref(false)
 
   watchEffect(() => {
     all.value = token.value && rewardToken.value && stakingToken.value && weth.value
@@ -39,14 +42,22 @@ export const useApprovalStore = defineStore('approvalStore', () => {
 
   const getApprovals = async() => {
     if (!wallet.isConnected) return
-    if (!token.value)
-      await contracts.token().connect(wallet.getSigner()).setApprovalForAll(contracts.addresses.SevenDotsAuctionHouse, true)
-    if (!rewardToken.value)
-      await contracts.rewardToken().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, SET_REWARDTOKEN_ALLOWANCE)
-    if (!stakingToken.value)
-      await contracts.stakingToken().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, SET_STAKING_ALLOWANCE)
-    if (!weth.value)
-      await contracts.WETH().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, SET_WETH_ALLOWANCE)
+    waiting.value = true
+    try {
+      const txs = <ContractTransaction[]>[]
+      if (!token.value)
+        txs.push(await contracts.token().connect(wallet.getSigner()).setApprovalForAll(contracts.addresses.SevenDotsStackFactory, true))
+      if (!rewardToken.value)
+        txs.push(await contracts.rewardToken().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, SET_REWARDTOKEN_ALLOWANCE))
+      if (!stakingToken.value)
+        txs.push(await contracts.stakingToken().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, SET_STAKING_ALLOWANCE))
+      if (!weth.value)
+        txs.push(await contracts.WETH().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, SET_WETH_ALLOWANCE))
+      await Promise.all(txs.map(tx => tx.wait()))
+    }
+    catch (e) {}
+    waiting.value = false
+    showSuccess.value = true
     await loadApprovals()
   }
 
@@ -62,6 +73,8 @@ export const useApprovalStore = defineStore('approvalStore', () => {
     weth,
     all,
     ignore,
+    waiting,
+    showSuccess,
     loading,
     loadApprovals,
     getApprovals,

@@ -21,7 +21,8 @@ export const useWalletStore = defineStore('wallet', () => {
         params: [{ chainId: '0x89' }],
       })
     }
-    catch (e) {
+    catch (e: any) {
+      if (e.code === 4001) return // User rejected the request
       await window.ethereum.request({
         method: 'wallet_addEthereumChain',
         params: [{
