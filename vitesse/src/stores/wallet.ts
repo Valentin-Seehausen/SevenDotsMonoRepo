@@ -52,7 +52,7 @@ export const useWalletStore = defineStore('wallet', () => {
       chainId.value = await _signer.getChainId()
       isConnected.value = true
       account.value = _accounts[0]
-      if (chainId.value !== 137)
+      if (chainId.value !== 137 && chainId.value !== 1337)
         changeNetwork()
     }
   }
