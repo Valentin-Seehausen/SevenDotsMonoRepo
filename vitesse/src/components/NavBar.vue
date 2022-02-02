@@ -2,9 +2,12 @@
 import { ref } from 'vue'
 import { isDark, toggleDark } from '~/composables'
 const { t } = useI18n()
+const router = useRouter()
 
 const showMenu = ref(false)
 const toggleNav = () => (showMenu.value = !showMenu.value)
+
+router.beforeEach(() => { showMenu.value = false })
 </script>
 
 <template>
