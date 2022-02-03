@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ethers } from 'ethers'
 import type Auction from 'types/Auction'
+import constants from '~/constants/constants'
 import { useContractStore } from '~/stores/contracts'
 import { useWalletStore } from '~/stores/wallet'
 const props = defineProps<{ auction: Auction }>()
@@ -41,7 +42,7 @@ const remainingTime = ref(props.auction.end.getTime() - contracts.getDateOnChain
             <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
               Claim now
             </span>
-            <span v-else-if="auction.highestBidder === '0x0000000000000000000000000000000000000000'">
+            <span v-else-if="auction.highestBidder === constants.nullAddress">
               Buy now
             </span>
             <span v-else>Closed</span>

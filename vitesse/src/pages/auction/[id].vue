@@ -92,7 +92,7 @@ const onRedeem = async() => {
             <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
               Claim now
             </span>
-            <span v-else-if="auction.highestBidder === '0x0000000000000000000000000000000000000000'">
+            <span v-else-if="auction.highestBidder === constants.nullAddress">
               Buy now
             </span>
             <span v-else>Closed</span>

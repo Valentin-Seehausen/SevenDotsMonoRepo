@@ -10,6 +10,7 @@ import { useTreasuryStore } from './treasury'
 import constants from '~/constants/constants'
 
 export enum AuctionsFilter {
+  Search,
   All,
   Open,
   Closed,
@@ -30,6 +31,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const openSlots = ref(196)
   const isLoading = ref(false)
   const hasRedeemableAuctions = ref(false)
+  const search = ref('')
 
   const loadAuctions = async() => {
     isLoading.value = true
@@ -92,6 +94,10 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     activeFilter.value = _filter
   }
 
+  const setSearch = (_search: string) => {
+    search.value = _search
+  }
+
   const filteredAuctions = computed(() => {
     switch (activeFilter.value) {
       case AuctionsFilter.Open:
@@ -102,6 +108,8 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase())
       case AuctionsFilter.Claimable:
         return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase() && auction.end < contracts.getDateOnChain())
+      case AuctionsFilter.Search:
+        return auctions.value.filter(auction => (auction.highestBidder.toLowerCase() === constants.nullAddress || auction.end > contracts.getDateOnChain()) && auction.dna.includes(search.value))
       default:
         return auctions.value
     }
@@ -112,6 +120,8 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     openSlots,
     isLoading,
     hasRedeemableAuctions,
+    search,
+    setSearch,
     loadAuctions,
     createAuction,
     bidOnAuction,

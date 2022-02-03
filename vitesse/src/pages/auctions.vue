@@ -12,20 +12,26 @@ auctionStore.loadAuctions()
     🎉 Congratulations! You have won some auctions. Click here to see you won auctions them and receive the NFT!
   </div>
   <div class="flex">
-    <div class=" text-left">
+    <div class="shrink-0 text-left">
       <button class="btn" @click="auctionStore.createAuction">
         <span>{{ t("auctions.createAuction") }}</span>
       </button>
       <span class="block text-center text-xs">receive 0.1 $7DOTS</span>
     </div>
-    <div class="flex-1 pl-4 pt-2">
+    <div class="pl-4 pt-3 test-left shrink-0">
       {{ 196- auctionStore.openSlots }} / 196
       <span v-if="auctionStore.isLoading">{{ t("button.loading") }}</span>
     </div>
-    <div>
-      <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.All}" @click="auctionStore.setFilter(AuctionsFilter.All)">{{ t("filter.all") }}</a>
+
+    <div class="flex-1 min-h-12 flex items-center flex-wrap justify-end">
+      <div v-if="auctionStore.activeFilter === AuctionsFilter.Search" class="input h-8 w-22 flex items-center">
+        <div class="">
+          <carbon-search class="" />
+        </div>
+        <input v-model="auctionStore.search" type="text" class="outline-none text-center w-12" placeholder="f1c1">
+      </div>
+      <a v-else class="filter block sm:inline" @click="auctionStore.setFilter(AuctionsFilter.Search)">{{ t("filter.search") }}</a>
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Open}" @click="auctionStore.setFilter(AuctionsFilter.Open)">{{ t("filter.open") }}</a>
-      <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">{{ t("filter.closed") }}</a>
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Users}" @click="auctionStore.setFilter(AuctionsFilter.Users)">{{ t("filter.users") }}</a>
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Claimable}" @click="auctionStore.setFilter(AuctionsFilter.Claimable)">{{ t("filter.claimable") }}</a>
     </div>

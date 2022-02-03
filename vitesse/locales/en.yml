@@ -41,6 +41,7 @@ filter:
   claimable: Claimable
   closed: Closed
   open: Open
+  search: Search
   users: Yours
 intro:
   about: about
