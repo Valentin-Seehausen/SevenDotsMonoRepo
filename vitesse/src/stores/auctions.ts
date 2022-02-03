@@ -1,6 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Auction from 'types/Auction'
 import type { BigNumber } from 'ethers'
+import { TYPE, useToast } from 'vue-toastification'
 import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
@@ -20,6 +21,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const contracts = useContractStore()
   const router = useRouter()
   const treasury = useTreasuryStore()
+  const toast = useToast()
   const auctionHouse = contracts.auctionHouse()
   const WETH = contracts.WETH()
   const auctions = ref<Auction[]>([])
@@ -52,26 +54,37 @@ export const useAuctionStore = defineStore('auctionStore', () => {
 
   const createAuction = async() => {
     if (!wallet.isConnected) return
-    await auctionHouse.connect(wallet.getSigner()).createAuction()
+    const tx = await auctionHouse.connect(wallet.getSigner()).createAuction()
+    const toastId = await toast.info('Creating auction.')
+    await tx.wait()
+    await toast.update(toastId, { content: '💰 Done. Clever you, creating an auction to earn some token.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadAuctions()
   }
 
   const bidOnAuction = async(auctionId: number, amount: BigNumber) => {
     if (!wallet.isConnected) return
     if (amount.gt(treasury.WETHAllowance)) {
-      const tx = await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
-      await tx.wait()
+      const txw = await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
+      const toastId = await toast.info('Waiting for Weth approval')
+      await txw.wait()
+      await toast.update(toastId, { content: '👍🏻 Nice one, approved your WETH!', options: { timeout: 4000, type: TYPE.SUCCESS } })
+      treasury.loadBalances()
     }
-
     const tx = await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
+    const toastId = await toast.info(`Bidding on Auction #${auctionId}.`)
     await tx.wait()
+    await toast.update(toastId, { content: '👍🏻 Successfully bid on auction. Hey, you will earn this dot soon!', options: { timeout: 4000, type: TYPE.SUCCESS } })
   }
 
   const redeemAuction = async(auctionId: number) => {
     if (!wallet.isConnected) return
-    await auctionHouse.connect(wallet.getSigner()).redeemAuction(auctionId)
+    const tx = await auctionHouse.connect(wallet.getSigner()).redeemAuction(auctionId)
+    const toastId = await toast.info(`Redeeming Auction #${auctionId}`)
+    await tx.wait()
     useTokenStore().loadUserTokens()
+    loadAuctions()
     router.replace('/auctions')
+    await toast.update(toastId, { content: '👍🏻 Success! This dot is yours now.', options: { timeout: 4000, type: TYPE.SUCCESS } })
   }
 
   const setFilter = (_filter: AuctionsFilter) => {

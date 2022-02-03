@@ -1,0 +1,30 @@
+.Vue-Toastification__toast {
+  border-radius: 0;
+}
+
+.Vue-Toastification__toast--info {
+  background-color: black;
+  .Vue-Toastification__toast-body:after {
+    content: '.';
+    animation: toastLoading 3s steps(1, end) infinite;
+  }
+}
+
+@keyframes toastLoading {
+  0% {
+    color: white;
+    text-shadow:
+      0.6em 0 0 black,
+      1.2em 0 0 black;
+  }
+  33%, 66% {
+    color: white;
+    text-shadow:
+      0.6em 0 0 white,
+      1.2em 0 0 black;
+  }
+  66%, 100% {
+    text-shadow:
+      0.6em 0 0 white,
+      1.2em 0 0 white;
+  }

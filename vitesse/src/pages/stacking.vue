@@ -15,7 +15,9 @@ const isVisible2 = ref(false)
 const threshold = ref(Date.now() - constants.stackDuration)
 const onStack = async() => {
   if (token1.value && token2.value)
-    stackingStore.stackTokens(token1.value, token2.value)
+    await stackingStore.stackTokens(token1.value, token2.value)
+  token1.value = undefined
+  token2.value = undefined
 }
 
 const unstack = async(stackId: number) => {
@@ -39,7 +41,7 @@ tokens.loadUserTokens()
         <OnClickOutside @trigger="isVisible2 = false">
           <div class="btn secondary w-50 h-15 cursor-pointer flex p-0" @click="isVisible2 = !isVisible2">
             <img v-if="token2" class="w-14 h-14 border-4 border-white" alt="Dots" :src="token2.image">
-            <div v-if="token2" class="pl-1 pt-1 font-semibold">
+            <div v-if="token2" class="pl-1 pt-1 font-semibold overflow-hidden">
               {{ token2.name }}
               <p v-if="token2" class="font-thin">
                 {{ token2.attributes.find(a => a.trait_type == 'DNA')?.value }}
@@ -74,7 +76,7 @@ tokens.loadUserTokens()
         <OnClickOutside @trigger="isVisible1 = false">
           <div class="btn secondary w-50 h-15 cursor-pointer flex p-0" @click="isVisible1 = !isVisible1">
             <img v-if="token1" class="w-14 h-14 border-4 border-white" alt="Dots" :src="token1.image">
-            <div v-if="token1" class="pl-1 pt-1 font-semibold">
+            <div v-if="token1" class="pl-1 pt-1 font-semibold overflow-hidden">
               {{ token1.name }}
               <p v-if="token1" class="font-thin">
                 {{ token1.attributes.find(a => a.trait_type == 'DNA')?.value }}
