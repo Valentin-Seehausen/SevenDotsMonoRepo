@@ -2,6 +2,7 @@ import type { ContractTransaction } from 'ethers'
 import { ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { useContractStore } from './contracts'
+import { useTreasuryStore } from './treasury'
 import { useWalletStore } from './wallet'
 
 export const useApprovalStore = defineStore('approvalStore', () => {
@@ -54,10 +55,11 @@ export const useApprovalStore = defineStore('approvalStore', () => {
       if (!weth.value)
         txs.push(await contracts.WETH().connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, SET_WETH_ALLOWANCE))
       await Promise.all(txs.map(tx => tx.wait()))
+      useTreasuryStore().loadBalances()
+      showSuccess.value = true
     }
     catch (e) {}
     waiting.value = false
-    showSuccess.value = true
     await loadApprovals()
   }
 
