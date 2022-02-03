@@ -223,6 +223,17 @@ async function seedFixtures() {
   await rewardToken.mint(deployer.address, constants.amounts.ten);
   await stakingToken.mint(alice.address, constants.amounts.ten);
   await stakingToken.mint(deployer.address, constants.amounts.ten);
+  await token.connect(alice).setApprovalForAll(stackFactory.address, true);
+  await WETH.connect(alice).approve(
+    auctionHouse.address,
+    ethers.utils.parseEther("10000000000")
+  );
+  await rewardToken
+    .connect(alice)
+    .approve(treasury.address, ethers.utils.parseEther("10000000000"));
+  await stakingToken
+    .connect(alice)
+    .approve(treasury.address, ethers.utils.parseEther("10000000000"));
 }
 
 async function main() {

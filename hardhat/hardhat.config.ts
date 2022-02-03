@@ -35,6 +35,10 @@ const config: HardhatUserConfig = {
         blockNumber: 23917420,
         enabled: false,
       },
+      mining: {
+        auto: false,
+        interval: [10000, 12000],
+      },
     },
     local: {
       url: "http://localhost:8545",
