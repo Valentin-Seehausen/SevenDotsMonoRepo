@@ -35,8 +35,11 @@ const remainingTime = ref(props.auction.end.getTime() - contracts.getDateOnChain
           </p>
         </div>
         <div class="basis-1/2 text-right">
-          <div class="bg-black text-white inline p-2">
+          <div class="bg-black text-white inline-block p-2 text-center">
             <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
+              <span v-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
+                You win
+              </span>
               in {{ hours }}:{{ minutes }}:{{ seconds }}
             </vue-countdown>
             <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
