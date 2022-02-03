@@ -38,6 +38,7 @@ dots:
   one: One dot
 filter:
   all: All
+  claimable: Claimable
   closed: Closed
   open: Open
   users: Yours

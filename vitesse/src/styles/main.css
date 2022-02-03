@@ -43,7 +43,7 @@ html.dark {
 .icon-btn {
   @apply inline-block cursor-pointer select-none
      transition duration-200 ease-in-out
-    hover:opacity-100 hover:opacity-80 text-xl;
+    hover:opacity-100 hover:opacity-80 text-lg;
 }
 
 .input {

@@ -14,6 +14,7 @@ export enum AuctionsFilter {
   Open,
   Closed,
   Users,
+  Claimable,
 }
 
 export const useAuctionStore = defineStore('auctionStore', () => {
@@ -99,6 +100,8 @@ export const useAuctionStore = defineStore('auctionStore', () => {
         return auctions.value.filter(auction => !(auction.highestBidder === constants.zeroAddress || auction.end > contracts.getDateOnChain()))
       case AuctionsFilter.Users:
         return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase())
+      case AuctionsFilter.Claimable:
+        return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase() && auction.end < contracts.getDateOnChain())
       default:
         return auctions.value
     }

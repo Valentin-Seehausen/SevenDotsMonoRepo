@@ -27,6 +27,7 @@ auctionStore.loadAuctions()
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Open}" @click="auctionStore.setFilter(AuctionsFilter.Open)">{{ t("filter.open") }}</a>
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Closed}" @click="auctionStore.setFilter(AuctionsFilter.Closed)">{{ t("filter.closed") }}</a>
       <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Users}" @click="auctionStore.setFilter(AuctionsFilter.Users)">{{ t("filter.users") }}</a>
+      <a class="filter block sm:inline" :class="{active: auctionStore.activeFilter === AuctionsFilter.Claimable}" @click="auctionStore.setFilter(AuctionsFilter.Claimable)">{{ t("filter.claimable") }}</a>
     </div>
   </div>
   <div class="lg:px-10 px-1 py-20 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
