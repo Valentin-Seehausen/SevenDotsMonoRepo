@@ -148,7 +148,14 @@ const onRedeem = async() => {
       </div>
     </div>
   </div>
-  <div v-else-if="!auctionStore.isLoading" class="flex">
-    <h3>{{ t("auctions.notFound") }}</h3>
+  <div v-else-if="!auctionStore.isLoading">
+    <h3 class="font-semibold">
+      🚀 Well done!
+    </h3>
+    <p>
+      This NFT belongs to you now. You can find it unter your <router-link to="/token">
+        NFTs
+      </router-link>
+    </p>
   </div>
 </template>

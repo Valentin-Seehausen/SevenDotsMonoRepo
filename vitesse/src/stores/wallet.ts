@@ -1,5 +1,7 @@
 import { ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import { useAuctionStore } from './auctions'
+import { useTokenStore } from './token'
 declare let window: any
 
 export const useWalletStore = defineStore('wallet', () => {
@@ -93,6 +95,8 @@ export const useWalletStore = defineStore('wallet', () => {
 
     await checkMetaMask()
     await checkConnection()
+    useTokenStore()
+    useAuctionStore()
   }
 
   return {

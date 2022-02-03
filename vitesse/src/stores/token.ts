@@ -43,4 +43,4 @@ export const useTokenStore = defineStore('tokenStore', () => {
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useWalletStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useTokenStore, import.meta.hot))
