@@ -2,9 +2,11 @@
 import { ethers } from 'ethers'
 import type Auction from 'types/Auction'
 import { useContractStore } from '~/stores/contracts'
+import { useWalletStore } from '~/stores/wallet'
 const props = defineProps<{ auction: Auction }>()
-const { t } = useI18n()
 const contracts = useContractStore()
+const wallet = useWalletStore()
+const { t } = useI18n()
 const remainingTime = ref(props.auction.end.getTime() - contracts.getDateOnChain().getTime())
 </script>
 
@@ -36,9 +38,13 @@ const remainingTime = ref(props.auction.end.getTime() - contracts.getDateOnChain
             <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
               in {{ hours }}:{{ minutes }}:{{ seconds }}
             </vue-countdown>
-            <span v-else>
+            <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
+              Claim now
+            </span>
+            <span v-else-if="auction.highestBidder === '0x0000000000000000000000000000000000000000'">
               Buy now
             </span>
+            <span v-else>Closed</span>
           </div>
         </div>
       </div>

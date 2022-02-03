@@ -89,9 +89,13 @@ const onRedeem = async() => {
             <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
               in {{ hours }}:{{ minutes }}:{{ seconds }}
             </vue-countdown>
-            <span v-else>
+            <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
+              Claim now
+            </span>
+            <span v-else-if="auction.highestBidder === '0x0000000000000000000000000000000000000000'">
               Buy now
             </span>
+            <span v-else>Closed</span>
           </div>
         </div>
       </div>
