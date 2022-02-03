@@ -24,7 +24,8 @@ router.beforeEach(() => { showMenu.value = false })
             {{ t("button.sevenDots") }}
           </router-link>
         </div>
-        <div class="block lg:hidden">
+        <div class="flex lg:hidden">
+          <WalletButton />
           <button
             class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white"
             @click="toggleNav"
@@ -96,7 +97,9 @@ router.beforeEach(() => { showMenu.value = false })
               <carbon-moon v-if="isDark" />
               <carbon-sun v-else />
             </button>
-            <WalletButton />
+            <div class="hidden lg:block">
+              <WalletButton />
+            </div>
           </div>
         </div>
       </nav>
