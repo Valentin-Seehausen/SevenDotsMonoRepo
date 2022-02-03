@@ -135,7 +135,7 @@ const onRedeem = async() => {
           1. The best and cheapest solution is to get $MATIC at an exchange (i.e. Binance), withdraw it to the Polygon Mainnet (Matic) and exchange it against wETH at a DEX (i.e. Uniswap).
         </p>
         <p class="my-2">
-          2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bride ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.
+          2. Another option is to <a href="https://wallet.polygon.technology/bridge" target="_blank" class="underline">bridge ETH</a> to Polygon, as explained <a target="_blank" class="underline" href="https://support.opensea.io/hc/en-us/articles/1500012881642-How-do-I-transfer-ETH-from-Ethereum-to-Polygon-">here</a>.
         </p>
       </div>
       <div v-if="needsAllowance && isOpen" class="mt-2">
