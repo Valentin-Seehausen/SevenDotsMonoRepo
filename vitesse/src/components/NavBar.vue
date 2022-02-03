@@ -97,7 +97,22 @@ router.beforeEach(() => { showMenu.value = false })
               <carbon-moon v-if="isDark" />
               <carbon-sun v-else />
             </button>
-            <div class="hidden lg:block">
+            <div class="hidden !outline-none lg:block">
+              <a href="https://opensea.io/collection/sevendots/" target="_blank">
+                <button class="icon-btn m-1" to="/">
+                  <simple-icons:opensea class="text-white" />
+                </button>
+              </a>
+              <a href="https://twitter.com/0xsevendots/" target="_blank">
+                <button class="icon-btn m-1" to="/">
+                  <simple-icons:twitter class="text-white" />
+                </button>
+              </a>
+              <a href="https://discord.gg/Wh3wtcq9" target="_blank">
+                <button class="icon-btn m-1" to="/">
+                  <simple-icons:discord class="text-white" />
+                </button>
+              </a>
               <WalletButton />
             </div>
           </div>
