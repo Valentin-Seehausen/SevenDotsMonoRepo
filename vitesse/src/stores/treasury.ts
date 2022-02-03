@@ -56,12 +56,12 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const stake = async(amount: BigNumber) => {
     if (amount.gt(unref(rewardTokenAllowance))) {
       const txw = await rewardToken.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, amount)
-      const toastIdw = await toast.info('Waiting for approval.')
+      const toastIdw = await toast('Waiting for approval.')
       await txw.wait()
       await toast.update(toastIdw, { content: '👍🏻 Approval granted.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     }
     const tx = await treasury.connect(wallet.getSigner()).stake(amount)
-    const toastId = await toast.info('Staking in progress.')
+    const toastId = await toast('Staking in progress.')
     await tx.wait()
     await toast.update(toastId, { content: '💎🐿 Staking succeeded. You will be rich soon.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadBalances()
@@ -70,13 +70,13 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const unstake = async(amount: BigNumber) => {
     if (amount.gt(unref(stakingTokenAllowance))) {
       const txw = await stakingToken.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, amount)
-      const toastIdw = await toast.info('Waiting for approval.')
+      const toastIdw = await toast('Waiting for approval.')
       await txw.wait()
       await toast.update(toastIdw, { content: '👍🏻 Approval granted.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     }
 
     const tx = await treasury.connect(wallet.getSigner()).unstake(amount)
-    const toastId = await toast.info('Unstaking in progress.')
+    const toastId = await toast('Unstaking in progress.')
     await tx.wait()
     await toast.update(toastId, { content: '💎 Unstaking succeeded. Do you feel rich already?', options: { timeout: 4000, type: TYPE.SUCCESS } })
 
@@ -86,12 +86,12 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const withdraw = async(amount: BigNumber) => {
     if (amount.gt(unref(rewardTokenAllowance))) {
       const txw = await rewardToken.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsTreasury, amount)
-      const toastIdw = await toast.info('Waiting for approval.')
+      const toastIdw = await toast('Waiting for approval.')
       await txw.wait()
       await toast.update(toastIdw, { content: '👍🏻 Approval succeeded', options: { timeout: 4000, type: TYPE.SUCCESS } })
     }
     const tx = await treasury.connect(wallet.getSigner()).withdraw(amount)
-    const toastId = await toast.info('Withdraw in progress.')
+    const toastId = await toast('Withdraw in progress.')
     await tx.wait()
     await toast.update(toastId, { content: '💸 Withdraw succeeded. Will you spend everything at once?', options: { timeout: 4000, type: TYPE.SUCCESS } })
 

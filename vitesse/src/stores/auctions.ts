@@ -55,7 +55,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const createAuction = async() => {
     if (!wallet.isConnected) return
     const tx = await auctionHouse.connect(wallet.getSigner()).createAuction()
-    const toastId = await toast.info('Creating auction.')
+    const toastId = await toast('Creating auction.')
     await tx.wait()
     await toast.update(toastId, { content: '💰 Done. Clever you, creating an auction to earn some token.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadAuctions()
@@ -65,13 +65,13 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     if (!wallet.isConnected) return
     if (amount.gt(treasury.WETHAllowance)) {
       const txw = await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, amount)
-      const toastId = await toast.info('Waiting for Weth approval')
+      const toastId = await toast('Waiting for Weth approval')
       await txw.wait()
       await toast.update(toastId, { content: '👍🏻 Nice one, approved your WETH!', options: { timeout: 4000, type: TYPE.SUCCESS } })
       treasury.loadBalances()
     }
     const tx = await auctionHouse.connect(wallet.getSigner()).bidOnAuction(auctionId, amount)
-    const toastId = await toast.info(`Bidding on Auction #${auctionId}.`)
+    const toastId = await toast(`Bidding on Auction #${auctionId}.`)
     await tx.wait()
     await toast.update(toastId, { content: '👍🏻 Successfully bid on auction. Hey, you will earn this dot soon!', options: { timeout: 4000, type: TYPE.SUCCESS } })
   }
@@ -79,7 +79,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const redeemAuction = async(auctionId: number) => {
     if (!wallet.isConnected) return
     const tx = await auctionHouse.connect(wallet.getSigner()).redeemAuction(auctionId)
-    const toastId = await toast.info(`Redeeming Auction #${auctionId}`)
+    const toastId = await toast(`Redeeming Auction #${auctionId}`)
     await tx.wait()
     useTokenStore().loadUserTokens()
     loadAuctions()

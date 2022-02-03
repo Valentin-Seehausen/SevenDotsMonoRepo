@@ -31,7 +31,7 @@ export const useStackingStore = defineStore('stackingStore', () => {
   const checkApproval = async() => {
     if (approvalStore.token) return
     const tx = await token.connect(wallet.getSigner()).setApprovalForAll(contracts.addresses.SevenDotsStackFactory, true)
-    const toastId = await toast.info('Waiting for approval to make you proud.')
+    const toastId = await toast('Waiting for approval to make you proud.')
     await tx.wait()
     await toast.update(toastId, { content: '🥁 Well done! Successfully approved! You can be proud.', options: { timeout: 4000, type: TYPE.SUCCESS } })
   }
@@ -40,7 +40,7 @@ export const useStackingStore = defineStore('stackingStore', () => {
     if (!wallet.isConnected) return
     await checkApproval()
     const tx = await stackFactory.connect(wallet.getSigner()).stackTokens(token1.id, token2.id)
-    const toastId = await toast.info('Creating a nice merge for you.')
+    const toastId = await toast('Creating a nice merge for you.')
     await tx.wait()
     await toast.update(toastId, { content: '🥁 Merge created. Whats gonna come out?!', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadStacks()
@@ -50,7 +50,7 @@ export const useStackingStore = defineStore('stackingStore', () => {
   const unstack = async(stackId: number) => {
     if (!wallet.isConnected) return
     const tx = await stackFactory.connect(wallet.getSigner()).unstack(stackId)
-    const toastId = await toast.info('Claiming your one and only NFT from Merge.')
+    const toastId = await toast('Claiming your one and only NFT from Merge.')
     await tx.wait()
     await toast.update(toastId, { content: '🎉 Successfully claimed NFT! It is yours now.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadStacks()
