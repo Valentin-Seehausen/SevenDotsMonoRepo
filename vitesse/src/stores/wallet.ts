@@ -1,6 +1,7 @@
 import { ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { useAuctionStore } from './auctions'
+import { useStackingStore } from './stacking'
 import { useTokenStore } from './token'
 declare let window: any
 
@@ -97,6 +98,7 @@ export const useWalletStore = defineStore('wallet', () => {
     await checkConnection()
     useTokenStore()
     useAuctionStore()
+    useStackingStore()
   }
 
   return {

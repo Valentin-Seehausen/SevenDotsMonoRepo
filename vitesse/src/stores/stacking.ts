@@ -50,9 +50,9 @@ export const useStackingStore = defineStore('stackingStore', () => {
   const unstack = async(stackId: number) => {
     if (!wallet.isConnected) return
     const tx = await stackFactory.connect(wallet.getSigner()).unstack(stackId)
-    const toastId = await toast('Claiming your one and only NFT from Merge.')
+    const toastId = await toast('Claiming your freshly merged NFT from Merge.')
     await tx.wait()
-    await toast.update(toastId, { content: '🎉 Successfully claimed NFT! It is yours now.', options: { timeout: 4000, type: TYPE.SUCCESS } })
+    await toast.update(toastId, { content: '🎉 Successfully claimed NFT! It looks great.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadStacks()
     useTokenStore().loadUserTokens()
   }
