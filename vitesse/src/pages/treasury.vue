@@ -74,8 +74,8 @@ const onClick = async() => {
               {{ t("treasury.treasuryAmount") }}
             </td>
             <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.treasuryAmount).substring(0,5) }}
               <logos:ethereum class="inline text-base" />
-              {{ ethers.utils.formatEther(treasury.treasuryAmount) }}
             </td>
           </tr>
           <tr class="pt-4">
@@ -83,7 +83,7 @@ const onClick = async() => {
               {{ t("treasury.circulatingSupply") }}
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.totalSupplyRewardToken) }}
+              {{ ethers.utils.formatEther(treasury.totalSupplyRewardToken).substring(0,5) }}
             </td>
           </tr>
           <tr>
@@ -91,7 +91,7 @@ const onClick = async() => {
               {{ t("treasury.staked") }}
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.treasuryRewardTokenBalance) }}
+              {{ ethers.utils.formatEther(treasury.treasuryRewardTokenBalance).substring(0,5) }}
             </td>
           </tr>
           <tr>
@@ -99,24 +99,35 @@ const onClick = async() => {
               {{ t("treasury.share") }}
             </td>
             <td class="pl-4 p-1">
-              <logos:ethereum class="inline text-base" />
-              {{ ethers.utils.formatEther(treasury.shareOfTreasury) }}
+              {{ ethers.utils.formatEther(treasury.treasuryAmount.mul(treasury.rewardTokenBalance.add(treasury.stakedRewardTokenBalance)).div(treasury.totalSupplyRewardToken)).substring(0,5) }}
+              <logos:ethereum class="inline text-base text-sm" />
             </td>
           </tr>
           <tr>
             <td class="p1">
-              {{ t("staking.rewardTokenBalance") }}
+              Claimable / Staked
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.rewardTokenBalance) }}
+              {{ ethers.utils.formatEther(treasury.shareOfTreasury).substring(0,5) }}
+              / {{ ethers.utils.formatEther(treasury.treasuryAmount.mul(treasury.stakedRewardTokenBalance).div(treasury.totalSupplyRewardToken)).substring(0,5) }}
+              <logos:ethereum class="inline text-base text-sm" />
             </td>
           </tr>
           <tr>
             <td class="p1">
-              {{ t("staking.stakedRewardTokenBalance") }}
+              Your $7Dots
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance) }}
+              {{ ethers.utils.formatEther(treasury.rewardTokenBalance.add(treasury.stakedRewardTokenBalance)).substring(0,5) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="p1">
+              Wallet / Staked
+            </td>
+            <td class="pl-4 p-1">
+              {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
+              / {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
             </td>
           </tr>
         </table>
