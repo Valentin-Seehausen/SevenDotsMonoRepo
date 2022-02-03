@@ -6,6 +6,9 @@
     animation: toastLoading 3s steps(1, end) infinite;
   }
 }
+.Vue-Toastification__toast--success {
+  background-color: #4caf50
+}
 
 @keyframes toastLoading {
   0% {
