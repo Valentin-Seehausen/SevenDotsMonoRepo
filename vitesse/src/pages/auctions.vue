@@ -9,7 +9,7 @@ auctionStore.loadAuctions()
 
 <template>
   <div v-if="auctionStore.hasRedeemableAuctions" class="mb-8 p-2 border-2 border-green-800 bg-green-400 hover:bg-green-200 cursor-pointer" @click="auctionStore.setFilter(AuctionsFilter.Claimable)">
-    🎉 Congratulations! You have won some auctions. Click here to claim them.
+    🎉 Congratulations! You won some auctions. Click here to claim them.
   </div>
   <div class="flex">
     <div class="shrink-0 text-left">
