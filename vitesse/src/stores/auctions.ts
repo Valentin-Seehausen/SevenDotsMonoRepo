@@ -94,10 +94,6 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     activeFilter.value = _filter
   }
 
-  const setSearch = (_search: string) => {
-    search.value = _search.toLowerCase()
-  }
-
   const filteredAuctions = computed(() => {
     switch (activeFilter.value) {
       case AuctionsFilter.Open:
@@ -109,7 +105,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       case AuctionsFilter.Claimable:
         return auctions.value.filter(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase() && auction.end < contracts.getDateOnChain())
       case AuctionsFilter.Search:
-        return auctions.value.filter(auction => (auction.highestBidder.toLowerCase() === constants.nullAddress || auction.end > contracts.getDateOnChain()) && auction.dna.includes(search.value))
+        return auctions.value.filter(auction => (auction.highestBidder.toLowerCase() === constants.nullAddress || auction.end > contracts.getDateOnChain()) && auction.dna.includes(search.value.toLowerCase()))
       default:
         return auctions.value
     }
@@ -121,7 +117,6 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     isLoading,
     hasRedeemableAuctions,
     search,
-    setSearch,
     loadAuctions,
     createAuction,
     bidOnAuction,
