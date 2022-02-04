@@ -106,15 +106,15 @@ router.beforeEach(() => { showMenu.value = false })
             </div>
           </div>
           <div>
-            <button
-              class="icon-btn mx-2 !outline-none rounded-full bg-light-50 p-1.5 align-top hidden"
-              :title="t('button.toggle_dark')"
-              @click="toggleDark()"
-            >
-              <carbon-moon v-if="isDark" />
-              <carbon-sun v-else />
-            </button>
             <div class="hidden !outline-none lg:flex items-center ">
+              <button
+                class="icon-btn m-1 text-white"
+                :title="t('button.toggle_dark')"
+                @click="toggleDark()"
+              >
+                <carbon-moon v-if="isDark" />
+                <carbon-sun v-else />
+              </button>
               <a href="https://opensea.io/collection/sevendots/" target="_blank" class="inline-block">
                 <button class="icon-btn m-1" to="/">
                   <simple-icons:opensea class="text-white" />
