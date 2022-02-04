@@ -63,11 +63,11 @@ const onClick = async() => {
 
 <template>
   <div>
-    <h2 class="font-semibold ">
+    <h2 class="text-xl pb-4 font-bold">
       {{ t("staking.stacks") }}
     </h2>
-    <div class="md:flex">
-      <div class="basis-2/3 mb-8">
+    <div class="lg:flex lg:gap-8">
+      <div class="flex-1 mb-8">
         <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
           <div class="basis-1/3">
             {{ isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
@@ -101,33 +101,41 @@ const onClick = async() => {
           </button>
         </div>
       </div>
-      <div class="basis-1/3 md:pl-4">
-        <table>
-          <tr>
-            <td class="p1">
-              {{ t("staking.earlyUserMultipler") }}:
-            </td>
-            <td class="pl-4 p-1">
-              {{ mor }}
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              {{ t("staking.rewardTokenBalance") }}:
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              {{ t("staking.stakedRewardTokenBalance") }}:
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
-            </td>
-          </tr>
-        </table>
+      <div class="flex-1 md:pl-4">
+        <div class="max-w-140">
+          <h2 class="text-xl pb-4 font-bold text-center">
+            Staking stats
+          </h2>
+          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-semibold">
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Early User Multiplier
+              </div>
+              <div class="flex-1 text-right">
+                {{ mor }}
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Your $7DOTS:
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Your $7DOTS staked
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

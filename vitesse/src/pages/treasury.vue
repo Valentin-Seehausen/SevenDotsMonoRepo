@@ -34,11 +34,11 @@ const onClick = async() => {
 </script>
 <template>
   <div>
-    <h2 class="font-semibold ">
-      {{ t("treasury.treasury") }}
-    </h2>
     <div class="lg:flex lg:gap-8">
       <div class="flex-1 mb-8">
+        <h2 class="text-xl pb-4 font-bold">
+          Treasury
+        </h2>
         <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
           <div class="basis-1/3">
             {{ t("staking.rewardToken") }}
@@ -67,12 +67,12 @@ const onClick = async() => {
           </button>
         </div>
       </div>
-      <div class="flex-1 text-sm md:pl-4">
+      <div class="flex-1 md:pl-4">
         <div class="max-w-140">
-          <h2 class="text-xl py-4 font-bold text-center">
+          <h2 class="text-xl pb-4 font-bold text-center">
             Treasury stats
           </h2>
-          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-bold">
+          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-semibold">
             <div class="flex h-14 items-center">
               <div class="grow">
                 Treasury Amount:
@@ -107,7 +107,7 @@ const onClick = async() => {
           <h2 class="text-xl py-4 pt-8 font-bold text-center">
             Your wallet stats
           </h2>
-          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-bold">
+          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-semibold">
             <div class="flex h-14 items-center">
               <div class="grow">
                 Share of treasury
