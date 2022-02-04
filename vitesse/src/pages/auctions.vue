@@ -4,6 +4,7 @@ import { AuctionsFilter, useAuctionStore } from '~/stores/auctions'
 const { t } = useI18n()
 const auctionStore = useAuctionStore()
 auctionStore.loadAuctions()
+auctionStore.setFilter(AuctionsFilter.Open)
 
 </script>
 

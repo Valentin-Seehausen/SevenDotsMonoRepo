@@ -111,6 +111,8 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     }
   })
 
+  loadAuctions()
+
   return {
     auctions,
     openSlots,
