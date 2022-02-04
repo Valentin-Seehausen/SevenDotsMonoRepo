@@ -37,8 +37,8 @@ const onClick = async() => {
     <h2 class="font-semibold ">
       {{ t("treasury.treasury") }}
     </h2>
-    <div class="md:flex">
-      <div class="basis-2/3 mb-8">
+    <div class="lg:flex lg:gap-8">
+      <div class="flex-1 mb-8">
         <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
           <div class="basis-1/3">
             {{ t("staking.rewardToken") }}
@@ -67,70 +67,92 @@ const onClick = async() => {
           </button>
         </div>
       </div>
-      <div class="basis-1/3 text-sm md:pl-4">
-        <table>
-          <tr>
-            <td class="p1">
-              {{ t("treasury.treasuryAmount") }}
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.treasuryAmount).substring(0,5) }}
-              <logos:ethereum class="inline text-base" />
-            </td>
-          </tr>
-          <tr class="pt-4">
-            <td class="p1">
-              {{ t("treasury.circulatingSupply") }}
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.totalSupplyRewardToken).substring(0,5) }}
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              {{ t("treasury.staked") }}
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.treasuryRewardTokenBalance).substring(0,5) }}
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              {{ t("treasury.share") }}
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.totalShareOfTreasury).substring(0,5) }}
-              <logos:ethereum class="inline text-base text-sm" />
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              Claimable / Staked
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.shareOfTreasury).substring(0,5) }}
-              {{ ethers.utils.formatEther(treasury.stakedShareOfTreasury).substring(0,5) }}
-              <logos:ethereum class="inline text-base text-sm" />
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              Your $7Dots
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.totalRewardTokenBalance).substring(0,5) }}
-            </td>
-          </tr>
-          <tr>
-            <td class="p1">
-              Wallet / Staked
-            </td>
-            <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
-              / {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
-            </td>
-          </tr>
-        </table>
+      <div class="flex-1 text-sm md:pl-4">
+        <div class="max-w-140">
+          <h2 class="text-xl py-4 font-bold text-center">
+            Treasury stats
+          </h2>
+          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-bold">
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Treasury Amount:
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.treasuryAmount).substring(0,5) }} ETH
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center">
+                <logos:ethereum class="inline text-base h-12" />
+              </div>
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Circulating $7DOTS supply:
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.totalSupplyRewardToken).substring(0,5) }} $7DOTS
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Total $7DOTS staked:
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.treasuryRewardTokenBalance).substring(0,5) }} $7DOTS
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+              <div class="flex justify-between" />
+            </div>
+          </div>
+          <h2 class="text-xl py-4 pt-8 font-bold text-center">
+            Your wallet stats
+          </h2>
+          <div class="bg-black rounded-xl text-white pl-4 md:pl-20 py-2 md:py-4 font-bold">
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Share of treasury
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.totalShareOfTreasury).substring(0,5) }} ETH
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center">
+                <logos:ethereum class="inline text-base h-12" />
+              </div>
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Claimable / Staked
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.shareOfTreasury).substring(0,5) }} /
+                {{ ethers.utils.formatEther(treasury.stakedShareOfTreasury).substring(0,5) }} ETH
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center">
+                <logos:ethereum class="inline text-base h-12" />
+              </div>
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                $7DOTS total
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.totalRewardTokenBalance).substring(0,5) }} $7DOTS
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+            </div>
+            <div class="flex h-14 items-center">
+              <div class="grow">
+                Wallet / Staked
+              </div>
+              <div class="flex-1 text-right">
+                {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
+                / {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }} $7DOTS
+              </div>
+              <div class="w-10 md:w-20 flex-none text-center" />
+              <div class="flex justify-between" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
