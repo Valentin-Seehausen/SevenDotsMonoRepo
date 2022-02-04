@@ -68,12 +68,12 @@ const onClick = async() => {
     </h2>
     <div class="md:flex">
       <div class="basis-2/3 mb-8">
-        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140">
+        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
           <div class="basis-1/3">
             {{ isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
           </div>
-          <div class="basis-1/3">
-            <input v-model="amountIn" type="text" class="outline-none text-center text-lg " :class="{'line-through': tooMuch}" placeholder="0.0">
+          <div class="basis-1/3 text-center">
+            <input v-model="amountIn" type="text" class="w-25 sm:30 md:w-auto md:w-full inline outline-none text-center text-lg" :class="{'line-through': tooMuch}" placeholder="0.0">
           </div>
           <div class="basis-1/3 text-right">
             <button v-if="isStaking ? treasury.rewardTokenBalance.gt(0) : treasury.stakingTokenBalance.gt(0)" class="btn text-center secondary" @click="setMax">
