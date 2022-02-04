@@ -95,7 +95,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   }
 
   const setSearch = (_search: string) => {
-    search.value = _search
+    search.value = _search.toLowerCase()
   }
 
   const filteredAuctions = computed(() => {

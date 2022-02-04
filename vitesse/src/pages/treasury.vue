@@ -43,8 +43,8 @@ const onClick = async() => {
           <div class="basis-1/3">
             {{ t("staking.rewardToken") }}
           </div>
-          <div class="basis-1/3">
-            <input v-model="amountIn" type="text" class="outline-none text-center text-lg " :class="{'line-through': tooMuch}" placeholder="0.0">
+          <div class="basis-1/3 shrink-1">
+            <input v-model="amountIn" type="text" class="outline-none text-center text-lg" :class="{'line-through': tooMuch}" placeholder="0.0">
           </div>
           <div class="basis-1/3 text-right">
             <button v-if=" treasury.rewardTokenBalance.gt(0)" class="btn text-center secondary" @click="setMax">
@@ -99,7 +99,7 @@ const onClick = async() => {
               {{ t("treasury.share") }}
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.treasuryAmount.mul(treasury.rewardTokenBalance.add(treasury.stakedRewardTokenBalance)).div(treasury.totalSupplyRewardToken)).substring(0,5) }}
+              {{ ethers.utils.formatEther(treasury.totalShareOfTreasury).substring(0,5) }}
               <logos:ethereum class="inline text-base text-sm" />
             </td>
           </tr>
@@ -109,7 +109,7 @@ const onClick = async() => {
             </td>
             <td class="pl-4 p-1">
               {{ ethers.utils.formatEther(treasury.shareOfTreasury).substring(0,5) }}
-              / {{ ethers.utils.formatEther(treasury.treasuryAmount.mul(treasury.stakedRewardTokenBalance).div(treasury.totalSupplyRewardToken)).substring(0,5) }}
+              {{ ethers.utils.formatEther(treasury.stakedShareOfTreasury).substring(0,5) }}
               <logos:ethereum class="inline text-base text-sm" />
             </td>
           </tr>
@@ -118,7 +118,7 @@ const onClick = async() => {
               Your $7Dots
             </td>
             <td class="pl-4 p-1">
-              {{ ethers.utils.formatEther(treasury.rewardTokenBalance.add(treasury.stakedRewardTokenBalance)).substring(0,5) }}
+              {{ ethers.utils.formatEther(treasury.totalRewardTokenBalance).substring(0,5) }}
             </td>
           </tr>
           <tr>

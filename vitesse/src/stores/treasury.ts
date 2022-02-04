@@ -25,6 +25,9 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const WETHAllowance = ref(BigNumber.from(0))
   const currentStakingFaktor = ref(BigNumber.from(0))
   const shareOfTreasury = ref(BigNumber.from(0))
+  const totalRewardTokenBalance = ref(BigNumber.from(0))
+  const totalShareOfTreasury = ref(BigNumber.from(0))
+  const stakedShareOfTreasury = ref(BigNumber.from(0))
 
   const loadBalances = async() => {
     treasury.currentStakingFaktor().then(f => currentStakingFaktor.value = f)
@@ -44,6 +47,9 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   watchEffect(() => {
     try {
       stakedRewardTokenBalance.value = stakingTokenBalance.value.mul(currentStakingFaktor.value).div(ethers.utils.parseUnits('10', 17))
+      totalRewardTokenBalance.value = rewardTokenBalance.value.add(stakedRewardTokenBalance.value)
+      totalShareOfTreasury.value = treasuryAmount.value.mul(totalRewardTokenBalance.value).div(totalSupplyRewardToken.value)
+      stakedShareOfTreasury.value = treasuryAmount.value.mul(stakedRewardTokenBalance.value).div(totalSupplyRewardToken.value)
     }
     catch (e) {
     }
@@ -103,6 +109,9 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     rewardTokenBalance,
     stakingTokenBalance,
     stakedRewardTokenBalance,
+    totalRewardTokenBalance,
+    totalShareOfTreasury,
+    stakedShareOfTreasury,
     totalSupplyRewardToken,
     treasuryRewardTokenBalance,
     rewardTokenAllowance,
