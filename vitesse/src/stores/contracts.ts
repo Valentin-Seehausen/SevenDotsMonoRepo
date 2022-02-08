@@ -15,12 +15,16 @@ import type { SevenDotsStakingToken } from '../../../deployments/137/current/typ
 import MaticWETHInfo from '../../../deployments/137/current/abis/MaticWETH.json'
 import type { MaticWETH } from '../../../deployments/137/current/types/MaticWETH'
 import addresses137 from '../../../deployments/137/current/addresses.json'
+import addresses1337 from '../../../deployments/1337/current/addresses.json'
 
 export const useContractStore = defineStore('chain', () => {
-  const addresses = addresses137
-  // const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545') // Local Hardhat Testnet
+  let addresses = addresses137
+  let provider = new ethers.providers.JsonRpcProvider('https://polygon-mainnet.g.alchemy.com/v2/Dm5JhOrXy-tepLgDi0ptfEH3Sskkpk3P') // Polygon Matic
+  if (import.meta.env.DEV) {
+    addresses = addresses1337
+    provider = new ethers.providers.JsonRpcProvider('http://localhost:8545') // Local Hardhat Testnet
+  }
   // const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/5pFH_HJM6v9W2Vsx1eNF6tVEPViyvKPz') // Polygon Mumbai
-  const provider = new ethers.providers.JsonRpcProvider('https://polygon-mainnet.g.alchemy.com/v2/Dm5JhOrXy-tepLgDi0ptfEH3Sskkpk3P') // Polygon Matic
   const timeDifference = ref(0)
 
   const auctionHouse = () => new ethers.Contract(
