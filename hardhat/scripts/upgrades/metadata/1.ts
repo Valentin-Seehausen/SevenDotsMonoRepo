@@ -19,16 +19,18 @@ interface deployContractReturnObject {
 export default async function updateContracts() {
   let [deployer] = await ethers.getSigners();
 
-  await upgrades.upgradeProxy(
-    addresses.SevenDotsMetadata,
-    await ethers.getContractFactory("SevenDotsMetadata")
-  );
+  // await upgrades.upgradeProxy(
+  //   addresses.SevenDotsMetadata,
+  //   await ethers.getContractFactory("SevenDotsMetadata")
+  // );
 
   await upgrades.upgradeProxy(
     addresses.SevenDotsAuctionHouse,
-    await ethers.getContractFactory("SevenDotsAuctionHouse")
+    await ethers.getContractFactory("SevenDotsAuctionHouse"),
+    {
+      timeout: 0,
+    }
   );
-
 }
 
 async function main() {
@@ -40,7 +42,6 @@ async function main() {
   );
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
-
   console.log("Upgrading...");
   await updateContracts();
 
