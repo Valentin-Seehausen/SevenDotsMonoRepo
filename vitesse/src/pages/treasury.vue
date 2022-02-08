@@ -79,6 +79,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.treasuryAmount).substring(0,5) }} ETH
+                ({{ ethers.utils.commify(ethers.utils.formatUnits(treasury.treasuryAmount.mul(treasury.ethUSD), 18+8)) }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center">
                 <logos:ethereum class="inline text-base h-12" />
@@ -114,6 +115,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.totalShareOfTreasury).substring(0,5) }} ETH
+                ({{ ethers.utils.commify(ethers.utils.formatUnits(treasury.totalShareOfTreasury.mul(treasury.ethUSD), 18+8)) }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center">
                 <logos:ethereum class="inline text-base h-12" />

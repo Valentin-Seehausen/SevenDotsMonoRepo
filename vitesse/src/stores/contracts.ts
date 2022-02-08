@@ -16,6 +16,7 @@ import MaticWETHInfo from '../../../deployments/137/current/abis/MaticWETH.json'
 import type { MaticWETH } from '../../../deployments/137/current/types/MaticWETH'
 import addresses137 from '../../../deployments/137/current/addresses.json'
 import addresses1337 from '../../../deployments/1337/current/addresses.json'
+import { aggregatorAddress, aggregatorV3InterfaceABI } from '~/constants/interfaces/aggregator'
 
 export const useContractStore = defineStore('chain', () => {
   let addresses = addresses137
@@ -24,8 +25,9 @@ export const useContractStore = defineStore('chain', () => {
     addresses = addresses1337
     provider = new ethers.providers.JsonRpcProvider('http://localhost:8545') // Local Hardhat Testnet
   }
-  // const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/5pFH_HJM6v9W2Vsx1eNF6tVEPViyvKPz') // Polygon Mumbai
   const timeDifference = ref(0)
+
+  const priceFeed = () => new ethers.Contract(aggregatorAddress, aggregatorV3InterfaceABI, provider)
 
   const auctionHouse = () => new ethers.Contract(
     addresses.SevenDotsAuctionHouse,
@@ -87,6 +89,7 @@ export const useContractStore = defineStore('chain', () => {
     WETH,
     addresses,
     getDateOnChain,
+    priceFeed,
   }
 })
 

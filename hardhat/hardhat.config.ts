@@ -30,6 +30,11 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
+      forking: {
+        url: process.env.ALCHEMYAPI_POLYGON_MAINNET as string,
+        blockNumber: 23917420,
+        enabled: true,
+      },
       // mining: {
       //   auto: false,
       //   interval: [3000, 5000],

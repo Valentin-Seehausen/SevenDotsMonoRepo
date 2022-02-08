@@ -12,6 +12,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const rewardToken = contracts.rewardToken()
   const stakingToken = contracts.stakingToken()
   const WETH = contracts.WETH()
+  const priceFeed = contracts.priceFeed()
 
   const treasuryAmount = ref(BigNumber.from(0))
   const treasuryRewardTokenBalance = ref(BigNumber.from(0))
@@ -28,12 +29,14 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const totalRewardTokenBalance = ref(BigNumber.from(0))
   const totalShareOfTreasury = ref(BigNumber.from(0))
   const stakedShareOfTreasury = ref(BigNumber.from(0))
+  const ethUSD = ref(BigNumber.from(3))
 
   const loadBalances = async() => {
     treasury.currentStakingFaktor().then(f => currentStakingFaktor.value = f)
     treasury.treasuryAmount().then(b => treasuryAmount.value = b)
     rewardToken.balanceOf(contracts.addresses.SevenDotsTreasury).then(b => treasuryRewardTokenBalance.value = b)
     rewardToken.totalSupply().then(b => totalSupplyRewardToken.value = b)
+    priceFeed.latestAnswer().then((r: BigNumber) => ethUSD.value = r)
     if (!wallet.isConnected) return
     rewardToken.balanceOf(wallet.account).then(b => rewardTokenBalance.value = b)
     rewardToken.allowance(wallet.account, contracts.addresses.SevenDotsTreasury).then(r => rewardTokenAllowance.value = r)
@@ -120,6 +123,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     WETHBalance,
     currentStakingFaktor,
     shareOfTreasury,
+    ethUSD,
     loadBalances,
     stake,
     unstake,
