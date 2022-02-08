@@ -9,7 +9,7 @@ const approvalStore = useApprovalStore()
 <template>
   <div v-if="wallet.isConnected && !approvalStore.loading && !approvalStore.ignore && !approvalStore.all" class="relative">
     <carbon-close class="absolute cursor-pointer hover:font-bold w-9 h-9 p-1 top-2 right-2 z-10 text-lg bg-transaparent" @click="approvalStore.ignore = true" />
-    <div class="relative border-yellow-900 bg-yellow-400 hover:bg-yellow-200 border-2 p-2 mb-2 cursor-pointer" @click="approvalStore.getApprovals">
+    <div class="relative border-yellow-900 bg-yellow-400 dark:bg-yellow-900 hover:bg-yellow-200 border-2 p-2 mb-2 cursor-pointer" @click="approvalStore.getApprovals">
       <p class="font-semibold">
         Click here to approve smart contracts.
       </p>

@@ -31,7 +31,7 @@ watchEffect(() => {
       </h4>
 
       <table class=" table-auto p-2 rounded-t-md divide-y divide-gray-500">
-        <thead class="table-header bg-gray-200">
+        <thead class="table-header bg-gray-200 dark:bg-gray-800">
           <tr>
             <td class="px-1 py-1">
               {{ t("token.trait") }}

@@ -9,7 +9,7 @@ auctionStore.setFilter(AuctionsFilter.Open)
 </script>
 
 <template>
-  <div v-if="auctionStore.hasRedeemableAuctions" class="mb-8 p-2 border-2 border-green-800 bg-green-400 hover:bg-green-200 cursor-pointer" @click="auctionStore.setFilter(AuctionsFilter.Claimable)">
+  <div v-if="auctionStore.hasRedeemableAuctions" class="mb-8 p-2 border-2 border-green-800 bg-green-400 hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 cursor-pointer" @click="auctionStore.setFilter(AuctionsFilter.Claimable)">
     🎉 Congratulations! You won some auctions. Click here to claim them.
   </div>
   <div class="flex">

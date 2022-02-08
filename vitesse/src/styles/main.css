@@ -11,6 +11,11 @@ body,
 
 html.dark {
   background: #121212;
+  color: #ddd;
+}
+
+p {
+  @apply dark:font-thin;
 }
 
 #nprogress {
@@ -33,11 +38,14 @@ html.dark {
   @apply px-8 py-2 inline-block 
     bg-black text-white cursor-pointer border-black border-2
     hover:bg-gray-800
-    disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
+    disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50
+    dark:hover:border-gray-400;
 }
 
 .secondary {
-  @apply border-2 border-black bg-white text-black border-2 hover:bg-gray-900 hover:!text-white;
+  @apply border-2 border-black bg-transparent text-black border-2 
+  hover:bg-gray-900 hover:!text-white
+  dark:border-gray-400 dark:text-white dark:hover:bg-black;
 }
 
 .icon-btn {
@@ -47,14 +55,22 @@ html.dark {
 }
 
 .input {
-  @apply border-black border-2 p-2 outline-none text-center;
+  @apply border-black border-2 p-2 outline-none text-center items-center
+  flex h-14 max-w-140 overflow-auto
+  dark:border-gray-400;
+  input {
+    @apply bg-transparent;
+  }
 }
 
 .filter {
   @apply
-    m-1 p-1 cursor-pointer inline-block bg-white w-20 text-center hover:bg-gray-100;
+    m-1 p-1 cursor-pointer inline-block bg-transparent w-20 text-center 
+    hover:bg-gray-100
+    dark:hover:bg-gray-800;
   &.active {
-    @apply bg-gray-200 hover:bg-gray-300;
+    @apply bg-gray-200 hover:bg-gray-300
+    dark:bg-gray-700;
   }
 }
 

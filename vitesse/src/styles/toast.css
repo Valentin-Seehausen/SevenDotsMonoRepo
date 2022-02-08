@@ -7,6 +7,7 @@
   }
 }
 .Vue-Toastification__toast--success {
+  @apply dark:bg-green-900 dark:text-gray-200;
   background-color: #4caf50
 }
 

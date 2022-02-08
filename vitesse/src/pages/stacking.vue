@@ -40,7 +40,7 @@ tokens.loadUserTokens()
       <div class="relative">
         <OnClickOutside @trigger="isVisible2 = false">
           <div class="btn secondary w-50 h-15 cursor-pointer flex p-0" @click="isVisible2 = !isVisible2">
-            <img v-if="token2" class="w-14 h-14 border-4 border-white" alt="Dots" :src="token2.image">
+            <img v-if="token2" class="w-14 h-14 border-4 border-white dark:border-gray-900" alt="Dots" :src="token2.image">
             <div v-if="token2" class="pl-1 pt-1 font-semibold overflow-hidden">
               {{ token2.name }}
               <p v-if="token2" class="font-thin">
@@ -51,11 +51,11 @@ tokens.loadUserTokens()
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible2}">
-            <div v-if="tokens.isLoading" class="flex p-1 hover:bg-gray-100 cursor-pointer">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 dark:bg-gray-900 dark:border-gray-400 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible2}">
+            <div v-if="tokens.isLoading" class="flex p-1 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
               {{ t("button.loading") }}
             </div>
-            <div v-for="token in tokens.tokens" :key="token.id" class="flex h-14 p-1 hover:bg-gray-100 cursor-pointer" @click="token2 = token; isVisible2 = false">
+            <div v-for="token in tokens.tokens" :key="token.id" class="flex h-14 p-1 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer" @click="token2 = token; isVisible2 = false">
               <img class="w-12" alt="Dots" :src="token.image">
               <div class="pl-2">
                 {{ token.name }}
@@ -75,7 +75,7 @@ tokens.loadUserTokens()
       <div class="relative">
         <OnClickOutside @trigger="isVisible1 = false">
           <div class="btn secondary w-50 h-15 cursor-pointer flex p-0" @click="isVisible1 = !isVisible1">
-            <img v-if="token1" class="w-14 h-14 border-4 border-white" alt="Dots" :src="token1.image">
+            <img v-if="token1" class="w-14 h-14 border-4 border-white dark:border-gray-400" alt="Dots" :src="token1.image">
             <div v-if="token1" class="pl-1 pt-1 font-semibold overflow-hidden">
               {{ token1.name }}
               <p v-if="token1" class="font-thin">
@@ -86,11 +86,11 @@ tokens.loadUserTokens()
               {{ t("stacking.selectToken") }}
             </div>
           </div>
-          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible1}">
-            <div v-if="tokens.isLoading" class="p-1 hover:bg-gray-100 cursor-pointer">
+          <div class="border-black border-2 shadow-lg z-40 bg-gray-50 dark:bg-gray-900 dark:border-gray-400 grid grid-cols-1 divide-y w-50 border-t-0 top-14 absolute overflow-y-scroll max-h-60" :class="{hidden: !isVisible1}">
+            <div v-if="tokens.isLoading" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
               {{ t("button.loading") }}
             </div>
-            <div v-for="token in tokens.tokens" :key="token.id" class="flex p-1 h-14 hover:bg-gray-100 cursor-pointer" @click="token1 = token; isVisible1 = false">
+            <div v-for="token in tokens.tokens" :key="token.id" class="flex p-1 h-14 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer" @click="token1 = token; isVisible1 = false">
               <img class="w-12" alt="Dots" :src="token.image">
               <div class="pl-2 font-semibold">
                 {{ token.name }}

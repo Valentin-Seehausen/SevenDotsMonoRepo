@@ -68,7 +68,7 @@ const onClick = async() => {
     </h2>
     <div class="lg:flex lg:gap-8">
       <div class="flex-1 mb-8">
-        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
+        <div class="input">
           <div class="basis-1/3">
             {{ isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
           </div>
@@ -86,7 +86,7 @@ const onClick = async() => {
             <gg:arrows-exchange-v class="text-3xl" />
           </button>
         </div>
-        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140">
+        <div class="input">
           <div class="basis-1/3">
             {{ !isStaking ? t("staking.rewardToken") : t("staking.stakingToken") }}
           </div>

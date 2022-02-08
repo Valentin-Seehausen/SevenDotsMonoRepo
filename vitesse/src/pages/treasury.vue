@@ -39,7 +39,7 @@ const onClick = async() => {
         <h2 class="text-xl pb-4 font-bold">
           Treasury
         </h2>
-        <div class="border-black border-2 p-2 flex h-14 items-center max-w-140 overflow-auto">
+        <div class="input">
           <div class="basis-1/3">
             {{ t("staking.rewardToken") }}
           </div>
@@ -52,7 +52,7 @@ const onClick = async() => {
             </button>
           </div>
         </div>
-        <div class="mt-14 border-black border-2 p-2 flex h-14 items-center max-w-140">
+        <div class="mt-14 input">
           <div class="basis-1/3">
             <logos:ethereum class="inline text-base" />
           </div>

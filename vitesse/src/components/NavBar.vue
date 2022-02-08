@@ -88,6 +88,14 @@ router.beforeEach(() => { showMenu.value = false })
               {{ t("button.whitepaper") }}
             </router-link>
             <div class="lg:hidden text-center">
+              <button
+                class="icon-btn m-1 text-white"
+                :title="t('button.toggle_dark')"
+                @click="toggleDark()"
+              >
+                <carbon-moon v-if="isDark" />
+                <carbon-sun v-else />
+              </button>
               <a href="https://opensea.io/collection/sevendots/" target="_blank">
                 <button class="icon-btn m-4" to="/">
                   <simple-icons:opensea class="text-white" />
