@@ -16,22 +16,26 @@ interface deployContractReturnObject {
   distributor: string;
 }
 
-export default async function updateContracts(): Promise<string> {
+export default async function updateContracts() {
   let [deployer] = await ethers.getSigners();
 
-  const result = await upgrades.upgradeProxy(
+  await upgrades.upgradeProxy(
     addresses.SevenDotsMetadata,
     await ethers.getContractFactory("SevenDotsMetadata")
   );
 
-  return result.address;
+  await upgrades.upgradeProxy(
+    addresses.SevenDotsAuctionHouse,
+    await ethers.getContractFactory("SevenDotsAuctionHouse")
+  );
+
 }
 
 async function main() {
   const [deployer] = await ethers.getSigners();
 
   console.log(
-    "Updating Metadata contracts with the account:",
+    "Updating Contracts contracts with the account:",
     deployer.address
   );
 
