@@ -1,3 +1,4 @@
 # Ignore deployments in local networks
 /deployments/1337/*
-/deployments/31337/*
+/deployments/31337/*.DS_Store
+.DS_Store
