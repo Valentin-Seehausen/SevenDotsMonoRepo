@@ -12,7 +12,7 @@
         If you are interested, here is a 5 minute introduction:
       </p>
 
-      <p class="my-4 border-black border-2 p-2">
+      <p class="my-4 border-black dark:border-gray-400 border-2 p-2">
         Before we start: You need Matic (the native coin of Polygon) and wETH (wrapped ETH on Polygon) to interact with Seven Dots. Seven Dots uses a lot of gas, and Polygon offers cheap and efficient transaction costs. <a href="https://wallet.polygon.technology/bridge/" target="_blank" class="underline">Bridge wETH here</a>.
       </p>
 
