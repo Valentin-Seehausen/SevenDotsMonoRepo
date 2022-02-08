@@ -30,30 +30,18 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
-      // forking: {
-      //   url: process.env.ALCHEMYAPI_POLYGON_MAINNET as string,
-      //   blockNumber: 23917420,
-      //   enabled: false,
+      // mining: {
+      //   auto: false,
+      //   interval: [3000, 5000],
       // },
-      mining: {
-        auto: false,
-        interval: [3000, 5000],
-      },
     },
     local: {
       url: "http://localhost:8545",
     },
-    // matic: {
-    //   url: process.env.ALCHEMYAPI_POLYGON_MAINNET,
-    //   accounts: [`${process.env.DEPLOYER}`],
-    // },
-    // mumbai: {
-    //   url: process.env.ALCHEMYAPI_MUMBAI,
-    //   accounts: [`${process.env.FRFREM_PK}`],
-    // },
-    // mainnet: {
-    //   url: process.env.ALCHEMYAPI_MAINNET,
-    // },
+    matic: {
+      url: process.env.ALCHEMYAPI_POLYGON_MAINNET,
+      accounts: [`${process.env.DEPLOYER}`],
+    },
   },
 };
 
