@@ -218,11 +218,12 @@ async function seedFixtures() {
   await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
   await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
   await WETH.transfer(alice.address, constants.amounts.ten);
-  await WETH.transfer(treasury.address, constants.amounts.ten);
-  await rewardToken.mint(alice.address, constants.amounts.ten);
-  await rewardToken.mint(deployer.address, constants.amounts.ten);
-  await stakingToken.mint(alice.address, constants.amounts.ten);
-  await stakingToken.mint(deployer.address, constants.amounts.ten);
+  await WETH.transfer(treasury.address, constants.amounts.auctionCreatorReward);
+  await rewardToken.mint(alice.address, constants.amounts.five);
+  await rewardToken.mint(deployer.address, constants.amounts.five);
+  await rewardToken.mint(treasury.address, constants.amounts.ten);
+  await stakingToken.mint(alice.address, constants.amounts.five);
+  await stakingToken.mint(deployer.address, constants.amounts.five);
   await token.connect(alice).setApprovalForAll(stackFactory.address, true);
   await WETH.connect(alice).approve(
     auctionHouse.address,
