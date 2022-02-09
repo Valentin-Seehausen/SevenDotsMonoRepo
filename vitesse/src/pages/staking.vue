@@ -10,6 +10,8 @@ const amountIn = ref('')
 const amountOut = ref('')
 const tooMuch = ref(false)
 const mor = ref()
+const userRewardTokenUSD = ref('777')
+const userStakedRewardTokenUSD = ref('777')
 
 watchEffect(() => {
   try {
@@ -38,6 +40,8 @@ watchEffect(() => {
 
 watchEffect(() => {
   try {
+    userRewardTokenUSD.value = parseFloat(ethers.utils.formatUnits(treasury.rewardTokenBalance.mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
+    userStakedRewardTokenUSD.value = parseFloat(ethers.utils.formatUnits(treasury.stakedRewardTokenBalance.mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
     mor.value = ethers.utils.formatUnits(ethers.utils.parseUnits('7', 22).div(treasury.currentStakingFaktor), 4)
   }
   catch (e) {
@@ -122,6 +126,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.rewardTokenBalance).substring(0,5) }}
+                ({{ userRewardTokenUSD }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center" />
             </div>
@@ -131,6 +136,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.stakedRewardTokenBalance).substring(0,5) }}
+                ({{ userStakedRewardTokenUSD }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center" />
             </div>
