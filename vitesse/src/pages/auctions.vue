@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { ethers } from 'ethers'
 import Auction from '../components/Auction.vue'
 import { AuctionsFilter, useAuctionStore } from '~/stores/auctions'
+import { useTreasuryStore } from '~/stores/treasury'
 const { t } = useI18n()
 const auctionStore = useAuctionStore()
+const treasury = useTreasuryStore()
 auctionStore.loadAuctions()
 auctionStore.setFilter(AuctionsFilter.Open)
+const creatorRewardUSD = ref('7777777')
+
+watchEffect(() => {
+  creatorRewardUSD.value = parseFloat(ethers.utils.formatUnits(ethers.utils.parseUnits('0.1', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
+})
 
 </script>
 
@@ -17,7 +25,7 @@ auctionStore.setFilter(AuctionsFilter.Open)
       <button class="btn" @click="auctionStore.createAuction">
         <span>{{ t("auctions.createAuction") }}</span>
       </button>
-      <span class="block text-center text-xs">receive 0.1 $7DOTS</span>
+      <span class="block text-center text-xs">receive 0.1 $7DOTS ({{ creatorRewardUSD }} USD)</span>
     </div>
     <div class="pl-4 pt-3 test-left shrink-0">
       {{ 196- auctionStore.openSlots }} / 196
