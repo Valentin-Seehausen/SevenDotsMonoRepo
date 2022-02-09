@@ -31,6 +31,8 @@ contract SevenDotsAuctionHouse is
     uint256 constant MIN_AUCTION_INCREMENT = 0.001 ether;
     uint256 constant AUCTION_CREATOR_REWARD = 0.1 ether;
     uint256 constant MAX_TOTAL_AUCTIONS = 77777;
+    uint256 constant AUCTION_FILLER_REWARD = 0.5 ether;
+    uint256 constant FILL_AUCTION_COUNT = 10;
 
     /** Contracts */
     IERC20 WETH;
@@ -138,6 +140,19 @@ contract SevenDotsAuctionHouse is
         require(0 < freeAuctionSlots(), "SD: No free auction slot.");
         _createAuction();
         rewardToken.mint(msg.sender, AUCTION_CREATOR_REWARD);
+    }
+
+    function fillAuctions() public {
+        _pruneAuctions();
+        uint256 free = freeAuctionSlots();
+        uint256 slots = FILL_AUCTION_COUNT;
+        if (slots > free) {
+            slots = free;
+        }
+        for (uint256 i; i < slots; i++) {
+            _createAuction();
+        }
+        rewardToken.mint(msg.sender, AUCTION_FILLER_REWARD);
     }
 
     /**

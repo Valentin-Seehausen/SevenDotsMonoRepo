@@ -54,6 +54,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     "closedAuctionCount()": FunctionFragment;
     "closedAuctions()": FunctionFragment;
     "createAuction()": FunctionFragment;
+    "fillAuctions()": FunctionFragment;
     "freeAuctionSlots()": FunctionFragment;
     "generateColor(uint256)": FunctionFragment;
     "generateField(uint256)": FunctionFragment;
@@ -109,6 +110,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createAuction",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "fillAuctions",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -213,6 +218,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "createAuction",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "fillAuctions",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -446,6 +455,10 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    fillAuctions(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     freeAuctionSlots(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     generateColor(
@@ -574,6 +587,10 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  fillAuctions(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   freeAuctionSlots(overrides?: CallOverrides): Promise<BigNumber>;
 
   generateColor(
@@ -699,6 +716,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     ): Promise<SevenDotsAuctionHouse.AuctionStructOutput[]>;
 
     createAuction(overrides?: CallOverrides): Promise<void>;
+
+    fillAuctions(overrides?: CallOverrides): Promise<void>;
 
     freeAuctionSlots(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -933,6 +952,10 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    fillAuctions(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     freeAuctionSlots(overrides?: CallOverrides): Promise<BigNumber>;
 
     generateColor(
@@ -1060,6 +1083,10 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     closedAuctions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     createAuction(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    fillAuctions(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

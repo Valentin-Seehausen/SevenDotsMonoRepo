@@ -48,6 +48,18 @@ describe("Auction", function () {
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(195);
   });
 
+  it("Fill Auctions", async function () {
+    await expect(await auctionHouse.freeAuctionSlots()).to.equal(196);
+    for (let i = 186; i > 0; i -= 10) {
+      await auctionHouse.fillAuctions();
+      await expect(await auctionHouse.freeAuctionSlots()).to.equal(i);
+      console.log(i);
+    }
+    await auctionHouse.fillAuctions();
+    await expect(await auctionHouse.freeAuctionSlots()).to.equal(0);
+    await expect(await auctionHouse.openAuctionCount()).to.equal(196);
+  });
+
   xit("[LONG] Has Maximum number of auctions", async function () {
     this.timeout(300000);
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(196);
