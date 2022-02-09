@@ -69,9 +69,9 @@ describe("Stresstest", function () {
   });
 
   xit("[LONG] 500 Auctions", async function () {
-    this.timeout(300000);
-    for (let i = 0; i < 500; i++) {
-      await auctionHouse.createAuction();
+    this.timeout(30000);
+    for (let i = 0; i < 500; i += 10) {
+      await auctionHouse.fillAuctions();
       await WETH.mint(deployer.address, constants.amounts.million);
       await WETH.connect(deployer).approve(
         auctionHouse.address,
@@ -79,16 +79,12 @@ describe("Stresstest", function () {
       );
       await auctionHouse.bidOnAuction(i, constants.bids.firstSuccess);
       // Every 196th redeem an auction
-      if (i % 19 == 0 && i > 0) {
-        await ethers.provider.send("evm_increaseTime", [
-          constants.time.auctionDuration / 10,
-        ]);
-        await ethers.provider.send("evm_mine", []);
-        console.log(i);
-      }
-      if (i > 190) {
-        await auctionHouse.redeemAuction(i - 190);
-      }
+      await ethers.provider.send("evm_increaseTime", [
+        constants.time.auctionDuration,
+      ]);
+      await ethers.provider.send("evm_mine", []);
+      console.log(i);
+      await auctionHouse.redeemAuction(i);
     }
   });
 

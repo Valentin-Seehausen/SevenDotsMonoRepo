@@ -31,8 +31,8 @@ contract SevenDotsAuctionHouse is
     uint256 constant MIN_AUCTION_INCREMENT = 0.001 ether;
     uint256 constant AUCTION_CREATOR_REWARD = 0.1 ether;
     uint256 constant MAX_TOTAL_AUCTIONS = 77777;
-    uint256 constant AUCTION_FILLER_REWARD = 0.5 ether;
-    uint256 constant FILL_AUCTION_COUNT = 10;
+    uint256 constant AUCTION_FILLER_REWARD = 1 ether;
+    uint256 constant FILL_AUCTION_COUNT = 20;
 
     /** Contracts */
     IERC20 WETH;

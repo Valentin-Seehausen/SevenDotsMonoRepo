@@ -50,10 +50,9 @@ describe("Auction", function () {
 
   it("Fill Auctions", async function () {
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(196);
-    for (let i = 186; i > 0; i -= 10) {
+    for (let i = 176; i > 0; i -= 20) {
       await auctionHouse.fillAuctions();
       await expect(await auctionHouse.freeAuctionSlots()).to.equal(i);
-      console.log(i);
     }
     await auctionHouse.fillAuctions();
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(0);
