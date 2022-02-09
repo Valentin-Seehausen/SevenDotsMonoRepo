@@ -6,6 +6,8 @@ const treasury = useTreasuryStore()
 const amountIn = ref('')
 const amountOut = ref('')
 const tooMuch = ref(false)
+const treasuryUSD = ref('7777777')
+const userShareTreasuryUSD = ref('7777777')
 
 watchEffect(() => {
   try {
@@ -20,6 +22,11 @@ watchEffect(() => {
     amountOut.value = ''
     tooMuch.value = false
   }
+})
+
+watchEffect(() => {
+  treasuryUSD.value = parseFloat(ethers.utils.formatUnits(treasury.treasuryAmount.mul(treasury.ethUSD), 18 + 8)).toFixed(2)
+  userShareTreasuryUSD.value = parseFloat(ethers.utils.formatUnits(treasury.totalShareOfTreasury.mul(treasury.ethUSD), 18 + 8)).toFixed(2)
 })
 
 const setMax = () => {
@@ -79,7 +86,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.treasuryAmount).substring(0,5) }} ETH
-                ({{ ethers.utils.commify(ethers.utils.formatUnits(treasury.treasuryAmount.mul(treasury.ethUSD), 18+8)) }} USD)
+                ({{ treasuryUSD }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center">
                 <logos:ethereum class="inline text-base h-12" />
@@ -115,7 +122,7 @@ const onClick = async() => {
               </div>
               <div class="flex-1 text-right">
                 {{ ethers.utils.formatEther(treasury.totalShareOfTreasury).substring(0,5) }} ETH
-                ({{ ethers.utils.commify(ethers.utils.formatUnits(treasury.totalShareOfTreasury.mul(treasury.ethUSD), 18+8)) }} USD)
+                ({{ userShareTreasuryUSD }} USD)
               </div>
               <div class="w-10 md:w-20 flex-none text-center">
                 <logos:ethereum class="inline text-base h-12" />
