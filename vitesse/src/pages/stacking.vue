@@ -36,7 +36,7 @@ const onCountdownEnd = () => {
 tokens.loadUserTokens()
 
 watchEffect(() => {
-  stackingRewardUSD.value = parseFloat(stackingRewardUSD.value = ethers.utils.formatUnits(ethers.utils.parseUnits('7.0', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
+  stackingRewardUSD.value = parseFloat(ethers.utils.formatUnits(ethers.utils.parseUnits('7.0', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
 })
 </script>
 
@@ -112,11 +112,11 @@ watchEffect(() => {
         </OnClickOutside>
       </div>
     </div>
-    <div class="flex-1 self-end">
+    <div class="flex-1 self-end pt-4">
       <button class="btn h-15 block ml-0 mt-2 w-50" @click="onStack">
         {{ t("stacking.createStack") }}
       </button>
-      <span class="block text-center text-xs">receive 7 $7DOTS ({{ stackingRewardUSD }} USD)</span>
+      <span class="block text-center text-xs w-50">receive 7 $7DOTS ({{ stackingRewardUSD }} USD)</span>
     </div>
   </div>
   <h2 class="mt-14 font-semibold ">
