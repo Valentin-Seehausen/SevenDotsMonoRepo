@@ -74,7 +74,7 @@ export const useWalletStore = defineStore('wallet', () => {
   }
 
   const getSigner = () => {
-    if (!isConnected.value) return
+    if (!isConnected.value) throw new Error('Wallet not connected')
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     return provider.getSigner()
   }

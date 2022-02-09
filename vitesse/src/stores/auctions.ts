@@ -51,7 +51,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
       } as Auction
     })
     hasRedeemableAuctions.value = auctions.value.findIndex(auction => auction.highestBidder.toLowerCase() === wallet.account.toLowerCase() && auction.end > contracts.getDateOnChain()) !== -1
-    openSlots.value = await auctionHouse.freeAuctionSlots()
+    openSlots.value = await (await auctionHouse.freeAuctionSlots()).toNumber()
     isLoading.value = false
   }
 
