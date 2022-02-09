@@ -22,10 +22,10 @@ watchEffect(() => {
   </div>
   <div class="flex">
     <div class="shrink-0 text-left">
-      <button class="btn" @click="auctionStore.createAuction">
-        <span>{{ t("auctions.createAuction") }}</span>
+      <button class="btn" @click="auctionStore.fillAuctions">
+        <span>Create Auctions</span>
       </button>
-      <span class="block text-center text-xs">receive 0.1 $7DOTS ({{ creatorRewardUSD }} USD)</span>
+      <span class="block text-center text-xs">receive 1 $7DOTS ({{ creatorRewardUSD }} USD)</span>
     </div>
     <div class="pl-4 pt-3 test-left shrink-0">
       {{ 196- auctionStore.openSlots }} / 196

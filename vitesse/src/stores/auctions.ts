@@ -55,12 +55,12 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     isLoading.value = false
   }
 
-  const createAuction = async() => {
+  const fillAuctions = async() => {
     if (!wallet.isConnected) return
-    const tx = await auctionHouse.connect(wallet.getSigner()).createAuction()
-    const toastId = await toast('Creating auction.')
+    const tx = await auctionHouse.connect(wallet.getSigner()).fillAuctions()
+    const toastId = await toast('Creating auctions.')
     await tx.wait()
-    await toast.update(toastId, { content: '💰 Done. Clever you, creating an auction to earn some token.', options: { timeout: 4000, type: TYPE.SUCCESS } })
+    await toast.update(toastId, { content: '💰 Auctions created. You received 1 $7DOTS.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     loadAuctions()
   }
 
@@ -120,7 +120,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     hasRedeemableAuctions,
     search,
     loadAuctions,
-    createAuction,
+    fillAuctions,
     bidOnAuction,
     redeemAuction,
     setFilter,
