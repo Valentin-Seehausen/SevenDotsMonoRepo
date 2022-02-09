@@ -301,14 +301,64 @@ contract SevenDotsAuctionHouse is
             "SD: Account is not highest bidder."
         );
         require(_auction.end < block.timestamp, "SD: Auction did not end yet.");
+        _pruneAuctions();
         _redeemAuction(auctionId);
+    }
+
+    /**
+     * @notice Buys an auction for the minimum price and transfers NFT.
+     */
+    function buyNow(uint24 auctionId) public {
+        Auction memory _auction = auctionsById[auctionId];
+        require(
+            block.timestamp > _auction.end &&
+                _auction.highestBidder == address(0),
+            "SD: Not a buy now auction."
+        );
+        _pruneAuctions();
+        _buyNow(_auction);
+    }
+
+    /**
+     * @notice Buys Auction and redeems NFT.
+     */
+    function _buyNow(Auction memory auction) internal {
+        require(
+            block.timestamp > auction.end &&
+                auction.highestBidder == address(0),
+            "SD: Not a buy now auction."
+        );
+
+        // Transfer WETH
+        WETH.transferFrom(msg.sender, address(this), START_BID);
+        WETH.transfer(artist, (START_BID * 1) / 5);
+        WETH.transfer(address(treasury), (START_BID * 4) / 5);
+
+        // Delete auction
+        for (uint24 i = 0; i < openAuctionIds.length; i++) {
+            uint24 _auctionId = openAuctionIds[i];
+            if (_auctionId == auction.id) {
+                openAuctionIds[i] = openAuctionIds[openAuctionIds.length - 1];
+                openAuctionIds.pop();
+                delete auctionsById[auction.id];
+            }
+        }
+
+        // Mind NFT to buyer
+        token.safeMint(msg.sender, auction.seed);
+        emit Redeem(
+            auction.id,
+            auction.id,
+            msg.sender,
+            START_BID,
+            block.timestamp
+        );
     }
 
     /**
      * @notice Transfers Token and RewardToken
      */
     function _redeemAuction(uint24 auctionId) internal {
-        _pruneAuctions();
         Auction memory _auction = auctionsById[auctionId];
         address highestBidder = _auction.highestBidder;
         uint256 highestBid = _auction.highestBid;
@@ -513,8 +563,8 @@ contract SevenDotsAuctionHouse is
      */
     function cleanAuction(uint24 auctionId) public onlyRole(OWNER_ROLE) {
         Auction memory _auction = auctionsById[auctionId];
-
         require(_auction.end < block.timestamp, "SD: Auction did not end yet.");
+        _pruneAuctions();
         _redeemAuction(auctionId);
     }
 

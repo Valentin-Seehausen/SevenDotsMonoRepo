@@ -50,6 +50,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     "allAuctions()": FunctionFragment;
     "allAuctionsCount()": FunctionFragment;
     "bidOnAuction(uint24,uint256)": FunctionFragment;
+    "buyNow(uint24)": FunctionFragment;
     "cleanAuction(uint24)": FunctionFragment;
     "closedAuctionCount()": FunctionFragment;
     "closedAuctions()": FunctionFragment;
@@ -95,6 +96,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "bidOnAuction",
     values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buyNow",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "cleanAuction",
@@ -204,6 +209,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     functionFragment: "bidOnAuction",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "buyNow", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "cleanAuction",
     data: BytesLike
@@ -440,6 +446,11 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    buyNow(
+      auctionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     cleanAuction(
       auctionId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -569,6 +580,11 @@ export interface SevenDotsAuctionHouse extends BaseContract {
   bidOnAuction(
     auctionId: BigNumberish,
     amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  buyNow(
+    auctionId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -703,6 +719,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    buyNow(auctionId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     cleanAuction(
       auctionId: BigNumberish,
@@ -939,6 +957,11 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    buyNow(
+      auctionId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     cleanAuction(
       auctionId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1068,6 +1091,11 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     bidOnAuction(
       auctionId: BigNumberish,
       amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    buyNow(
+      auctionId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

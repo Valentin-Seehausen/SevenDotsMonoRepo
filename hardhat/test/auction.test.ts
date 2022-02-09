@@ -59,6 +59,56 @@ describe("Auction", function () {
     await expect(await auctionHouse.openAuctionCount()).to.equal(196);
   });
 
+  it("Buy now", async function () {
+    await auctionHouse.fillAuctions();
+    await WETH.mint(alice.address, constants.bids.firstSuccess);
+    await WETH.connect(alice).approve(
+      auctionHouse.address,
+      constants.bids.firstSuccess
+    );
+
+    // Cannot buy now
+    await expect(auctionHouse.connect(alice).buyNow(0)).to.be.reverted;
+
+    // Move time to end auction
+    await ethers.provider.send("evm_increaseTime", [
+      constants.time.auctionDuration,
+    ]);
+    await ethers.provider.send("evm_mine", []);
+
+    // Now buy now should work
+    await expect(auctionHouse.connect(alice).buyNow(0)).not.to.be.reverted;
+    await expect(await token.ownerOf(0)).to.be.equal(alice.address);
+    await expect(await WETH.balanceOf(alice.address)).to.be.equal(
+      constants.bids.startBid
+    );
+    await expect(await WETH.balanceOf(treasury.address)).to.be.equal(
+      constants.bids.firstTreasuryReward.div(2)
+    );
+  });
+
+  it("Cannot Buy now when bid", async function () {
+    await auctionHouse.fillAuctions();
+    await WETH.mint(alice.address, constants.bids.firstSuccess);
+    await WETH.connect(alice).approve(
+      auctionHouse.address,
+      constants.bids.firstSuccess
+    );
+
+    await auctionHouse
+      .connect(alice)
+      .bidOnAuction(0, constants.bids.firstSuccess);
+
+    // Move time to end auction
+    await ethers.provider.send("evm_increaseTime", [
+      constants.time.auctionDuration,
+    ]);
+    await ethers.provider.send("evm_mine", []);
+
+    // Cannot buy now
+    await expect(auctionHouse.connect(alice).buyNow(0)).to.be.reverted;
+  });
+
   xit("[LONG] Has Maximum number of auctions", async function () {
     this.timeout(300000);
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(196);
