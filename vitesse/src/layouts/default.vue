@@ -14,5 +14,8 @@ import ApprovalWarner from '~/components/ApprovalWarner.vue'
     <div class="mt-5 mx-auto text-center opacity-25 text-sm">
       This is a DAO in the making. Stay tuned.
     </div>
+    <div class="mt-5 mx-auto text-center opacity-25 text-sm">
+      <a href="https://few-poet-482.notion.site/f38577553207478798ead38778eb5f03?v=bf96efb3741b4b6ca332ad0e76ba2769" target="_blank">Roadmap</a>
+    </div>
   </main>
 </template>
