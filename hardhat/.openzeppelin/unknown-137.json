@@ -1813,6 +1813,228 @@
           }
         }
       }
+    },
+    "e8a0387705ab3f0d1de8c077585f0ce5e2cf56082e1edb57d58de42152990bd2": {
+      "address": "0xa38ca75782b3D6123f3F8780E10aca9421Af117b",
+      "txHash": "0xec4e51b4b26347e62a0a6510a4764be99a9636ee198026b61b58a1e8686c8b47",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+          },
+          {
+            "contract": "ERC1967UpgradeUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:215"
+          },
+          {
+            "contract": "UUPSUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:81"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:36"
+          },
+          {
+            "contract": "AccessControlUpgradeable",
+            "label": "_roles",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)43_storage)",
+            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:64"
+          },
+          {
+            "contract": "AccessControlUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:232"
+          },
+          {
+            "contract": "ERC721HolderUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/utils/ERC721HolderUpgradeable.sol:35"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "WETH",
+            "type": "t_contract(IERC20)4712",
+            "src": "contracts/SevenDotsAuctionHouse.sol:38"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "token",
+            "type": "t_contract(SevenDotsToken)8582",
+            "src": "contracts/SevenDotsAuctionHouse.sol:39"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "rewardToken",
+            "type": "t_contract(SevenDotsRewardToken)7518",
+            "src": "contracts/SevenDotsAuctionHouse.sol:40"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "treasury",
+            "type": "t_contract(SevenDotsTreasury)8912",
+            "src": "contracts/SevenDotsAuctionHouse.sol:41"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "metadata",
+            "type": "t_contract(SevenDotsMetadata)7361",
+            "src": "contracts/SevenDotsAuctionHouse.sol:42"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "openAuctionIds",
+            "type": "t_array(t_uint24)dyn_storage",
+            "src": "contracts/SevenDotsAuctionHouse.sol:45"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "closedAuctionIds",
+            "type": "t_array(t_uint24)dyn_storage",
+            "src": "contracts/SevenDotsAuctionHouse.sol:46"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "auctionsById",
+            "type": "t_mapping(t_uint24,t_struct(Auction)4902_storage)",
+            "src": "contracts/SevenDotsAuctionHouse.sol:47"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "_auctionIdCounter",
+            "type": "t_struct(Counter)3699_storage",
+            "src": "contracts/SevenDotsAuctionHouse.sol:50"
+          },
+          {
+            "contract": "SevenDotsAuctionHouse",
+            "label": "_mintEditionCounter",
+            "type": "t_struct(Counter)3699_storage",
+            "src": "contracts/SevenDotsAuctionHouse.sol:51"
+          }
+        ],
+        "types": {
+          "t_contract(IERC20)4712": {
+            "label": "contract IERC20"
+          },
+          "t_contract(SevenDotsToken)8582": {
+            "label": "contract SevenDotsToken"
+          },
+          "t_contract(SevenDotsRewardToken)7518": {
+            "label": "contract SevenDotsRewardToken"
+          },
+          "t_contract(SevenDotsTreasury)8912": {
+            "label": "contract SevenDotsTreasury"
+          },
+          "t_contract(SevenDotsMetadata)7361": {
+            "label": "contract SevenDotsMetadata"
+          },
+          "t_array(t_uint24)dyn_storage": {
+            "label": "uint24[]"
+          },
+          "t_uint24": {
+            "label": "uint24"
+          },
+          "t_mapping(t_uint24,t_struct(Auction)4902_storage)": {
+            "label": "mapping(uint24 => struct SevenDotsAuctionHouse.Auction)"
+          },
+          "t_struct(Auction)4902_storage": {
+            "label": "struct SevenDotsAuctionHouse.Auction",
+            "members": [
+              {
+                "label": "highestBid",
+                "type": "t_uint256"
+              },
+              {
+                "label": "highestBidder",
+                "type": "t_address"
+              },
+              {
+                "label": "end",
+                "type": "t_uint40"
+              },
+              {
+                "label": "seed",
+                "type": "t_bytes32"
+              },
+              {
+                "label": "id",
+                "type": "t_uint24"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint40": {
+            "label": "uint40"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_struct(Counter)3699_storage": {
+            "label": "struct CountersUpgradeable.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)43_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)"
+          },
+          "t_struct(RoleData)43_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32"
+              }
+            ]
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          }
+        }
+      }
     }
   }
 }
