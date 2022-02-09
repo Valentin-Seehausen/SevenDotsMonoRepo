@@ -52,7 +52,6 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     if (!treasuryAmount.value) return
     try {
       rewardTokenUSD.value = treasuryAmount.value.mul(ethUSD.value).div(totalSupplyRewardToken.value)
-      console.log(rewardTokenUSD.value)
     }
     catch (e) {}
   })
