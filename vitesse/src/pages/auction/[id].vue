@@ -8,6 +8,13 @@ import { useWalletStore } from '~/stores/wallet'
 import { useTreasuryStore } from '~/stores/treasury'
 const { t } = useI18n()
 
+enum Status {
+  Open,
+  Claimable,
+  BuyNow,
+  Closed,
+}
+
 const props = defineProps<{ id: string }>()
 const contracts = useContractStore()
 const auctionStore = useAuctionStore()
@@ -22,6 +29,7 @@ const minBid = ref<BigNumber>(BigNumber.from('0'))
 const tooMuch = ref(false)
 const tooLittle = ref(false)
 const needsAllowance = ref(false)
+const status = ref(Status.Open)
 
 auctionStore.loadAuctions()
 
@@ -30,9 +38,17 @@ watchEffect(() => {
   if (!auction.value) return
   remainingTime.value = auction.value.end.getTime() - contracts.getDateOnChain().getTime()
   isOpen.value = auction.value.highestBidder === constants.zeroAddress || auction.value.end > contracts.getDateOnChain()
-  isUsers.value = auction.value.highestBidder.toLowerCase() === wallet.account
+  isUsers.value = auction.value.highestBidder.toLowerCase() === wallet.account.toLowerCase()
   minBid.value = auction.value.highestBid.add(constants.minBidIncrease)
   bid.value = ethers.utils.formatEther(auction.value.highestBid.add(constants.minBidIncrease))
+  if (remainingTime.value > 0)
+    status.value = Status.Open
+  else if (auction.value.highestBidder.toLowerCase() === wallet.account.toLowerCase())
+    status.value = Status.Claimable
+  else if (auction.value.highestBidder === constants.nullAddress)
+    status.value = Status.BuyNow
+  else
+    status.value = Status.Closed
 })
 
 watchEffect(() => {
@@ -51,13 +67,16 @@ watchEffect(() => {
 const onBid = async() => {
   if (!auction.value) return
   await auctionStore.bidOnAuction(auction.value.id, ethers.utils.parseEther(bid.value))
-  auctionStore.loadAuctions()
 }
 
 const onRedeem = async() => {
   if (!auction.value) return
   await auctionStore.redeemAuction(auction.value.id)
-  await auctionStore.loadAuctions()
+}
+
+const onBuyNow = async() => {
+  if (!auction.value) return
+  await auctionStore.buyNow(auction.value.id)
 }
 
 </script>
@@ -86,36 +105,33 @@ const onRedeem = async() => {
         </div>
         <div>
           <div class="bg-black text-white inline p-2">
-            <vue-countdown v-if="remainingTime > 0" v-slot="{hours, minutes, seconds}" :time="remainingTime">
-              <span v-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
+            <vue-countdown v-if="status == Status.Open" v-slot="{hours, minutes, seconds}" :time="remainingTime">
+              <span v-if="isUsers">
                 You win
               </span>
               in {{ hours }}:{{ minutes }}:{{ seconds }}
             </vue-countdown>
-            <span v-else-if="auction.highestBidder.toLowerCase() === wallet.account.toLowerCase()">
+            <span v-else-if="status == Status.Claimable">
               Claim now
             </span>
-            <span v-else-if="auction.highestBidder === constants.nullAddress">
+            <span v-else-if="status == Status.BuyNow">
               Buy now
             </span>
             <span v-else>Closed</span>
           </div>
         </div>
       </div>
-      <p class="mt-4 text-lg font-thin">
+      <p v-if="auction.highestBidder != constants.nullAddress" class="mt-4 text-lg font-thin">
         {{ t("auction.highestBidder") }}: {{ auction.highestBidder }}
       </p>
-      <p class="mt-4 text-lg font-thin">
+      <p v-if="status == Status.Open" class="mt-4 text-lg font-thin">
         {{ t("auction.highestBid") }}: {{ ethers.utils.formatEther(auction.highestBid) }}
       </p>
-      <p class="mt-4 text-lg font-thin">
+      <p v-if="status == Status.Open" class="mt-4 text-lg font-thin">
         {{ t("auction.minBid") }}: {{ ethers.utils.formatEther(minBid) }}
       </p>
-      <p class="mt-4 text-lg font-thin">
-        {{ t("auction.wethBalance") }}: {{ ethers.utils.formatEther(treasury.WETHBalance) }}
-      </p>
       <div class="flex mt-4">
-        <div v-if="isOpen">
+        <div v-if="status === Status.Open">
           <div class="input flex items-center">
             <div class="basis-1/3">
               <logos:ethereum class="" />
@@ -126,10 +142,13 @@ const onRedeem = async() => {
           </div>
         </div>
         <div class="ml-4">
-          <button v-if="isOpen" class="btn" :disabled="tooMuch || tooLittle" @click="onBid">
+          <button v-if="status == Status.BuyNow" class="btn" @click="onBuyNow">
+            Buy now (0.001 WETH)
+          </button>
+          <button v-else-if="isOpen" class="btn" :disabled="tooMuch || tooLittle" @click="onBid">
             {{ tooMuch ? t("auction.notEnough") : tooLittle ? t("auction.tooLittle") : needsAllowance ? t("auction.needsAllowance") : t("auction.bid") }}
           </button>
-          <button v-if="isUsers && !isOpen" class="btn" @click="onRedeem">
+          <button v-else-if="isUsers && !isOpen" class="btn" @click="onRedeem">
             {{ t("auction.redeem") }}
           </button>
         </div>

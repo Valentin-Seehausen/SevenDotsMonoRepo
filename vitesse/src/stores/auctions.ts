@@ -2,6 +2,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import type Auction from 'types/Auction'
 import type { BigNumber } from 'ethers'
 import { TYPE, useToast } from 'vue-toastification'
+import { parseEther } from 'ethers/lib/utils'
 import seeds from './../constants/seeds.json'
 import { useWalletStore } from './wallet'
 import { useContractStore } from './contracts'
@@ -32,6 +33,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
   const isLoading = ref(false)
   const hasRedeemableAuctions = ref(false)
   const search = ref('')
+  const START_BID = parseEther('0.001')
 
   const loadAuctions = async() => {
     isLoading.value = true
@@ -77,6 +79,24 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     const toastId = await toast(`Bidding on Auction #${auctionId}.`)
     await tx.wait()
     await toast.update(toastId, { content: '👍🏻 Successfully bid on auction. Hey, you will earn this dot soon!', options: { timeout: 4000, type: TYPE.SUCCESS } })
+    loadAuctions()
+  }
+
+  const buyNow = async(auctionId: number) => {
+    if (!wallet.isConnected) return
+    if (START_BID.gt(treasury.WETHAllowance)) {
+      const txw = await WETH.connect(wallet.getSigner()).approve(contracts.addresses.SevenDotsAuctionHouse, START_BID)
+      const toastId = await toast('Waiting for Weth approval')
+      await txw.wait()
+      await toast.update(toastId, { content: '👍🏻 Nice one, approved your WETH!', options: { timeout: 4000, type: TYPE.SUCCESS } })
+      treasury.loadBalances()
+    }
+    const tx = await auctionHouse.connect(wallet.getSigner()).buyNow(auctionId)
+    const toastId = await toast(`Buying mint #${auctionId}.`)
+    await tx.wait()
+    await toast.update(toastId, { content: '👍🏻 Successfully bought Dot. Find it in your NFTs!', options: { timeout: 4000, type: TYPE.SUCCESS } })
+    loadAuctions()
+    useTokenStore().loadUserTokens()
   }
 
   const redeemAuction = async(auctionId: number) => {
@@ -119,6 +139,7 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     isLoading,
     hasRedeemableAuctions,
     search,
+    buyNow,
     loadAuctions,
     fillAuctions,
     bidOnAuction,
