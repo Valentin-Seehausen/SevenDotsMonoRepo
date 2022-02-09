@@ -33,7 +33,7 @@ const config: HardhatUserConfig = {
       forking: {
         url: process.env.ALCHEMYAPI_POLYGON_MAINNET as string,
         blockNumber: 23917420,
-        enabled: true,
+        enabled: false,
       },
       // mining: {
       //   auto: false,
