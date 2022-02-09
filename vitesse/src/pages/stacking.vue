@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { ethers } from 'ethers'
 import { OnClickOutside } from '@vueuse/components'
 import type Token from 'types/Token'
 import constants from '~/constants/constants'
 import { useStackingStore } from '~/stores/stacking'
 import { useTokenStore } from '~/stores/token'
+import { useTreasuryStore } from '~/stores/treasury'
 const { t } = useI18n()
 const stackingStore = useStackingStore()
+const treasury = useTreasuryStore()
 
 const tokens = useTokenStore()
 const token1 = ref<Token>()
@@ -13,6 +16,8 @@ const token2 = ref<Token>()
 const isVisible1 = ref(false)
 const isVisible2 = ref(false)
 const threshold = ref(Date.now() - constants.stackDuration)
+const stackingRewardUSD = ref('7.0')
+
 const onStack = async() => {
   if (token1.value && token2.value)
     await stackingStore.stackTokens(token1.value, token2.value)
@@ -29,6 +34,10 @@ const onCountdownEnd = () => {
 }
 
 tokens.loadUserTokens()
+
+watchEffect(() => {
+  stackingRewardUSD.value = parseFloat(stackingRewardUSD.value = ethers.utils.formatUnits(ethers.utils.parseUnits('7.0', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
+})
 </script>
 
 <template>
@@ -107,6 +116,7 @@ tokens.loadUserTokens()
       <button class="btn h-15 block ml-0 mt-2 w-50" @click="onStack">
         {{ t("stacking.createStack") }}
       </button>
+      <span class="block text-center text-xs">receive 7 $7DOTS ({{ stackingRewardUSD }} USD)</span>
     </div>
   </div>
   <h2 class="mt-14 font-semibold ">

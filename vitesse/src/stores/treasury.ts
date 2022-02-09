@@ -30,6 +30,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
   const totalShareOfTreasury = ref(BigNumber.from(0))
   const stakedShareOfTreasury = ref(BigNumber.from(0))
   const ethUSD = ref(BigNumber.from(3))
+  const rewardTokenUSD = ref(BigNumber.from(0))
 
   const loadBalances = async() => {
     treasury.currentStakingFaktor().then(f => currentStakingFaktor.value = f)
@@ -46,6 +47,15 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     stakingToken.allowance(wallet.account, contracts.addresses.SevenDotsTreasury).then(r => stakingTokenAllowance.value = r)
     treasury.shareOfTreasury(wallet.account).then(s => shareOfTreasury.value = s)
   }
+
+  watchEffect(() => {
+    if (!treasuryAmount.value) return
+    try {
+      rewardTokenUSD.value = treasuryAmount.value.mul(ethUSD.value).div(totalSupplyRewardToken.value)
+      console.log(rewardTokenUSD.value)
+    }
+    catch (e) {}
+  })
 
   watchEffect(() => {
     try {
@@ -124,6 +134,7 @@ export const useTreasuryStore = defineStore('treasuryStore', () => {
     currentStakingFaktor,
     shareOfTreasury,
     ethUSD,
+    rewardTokenUSD,
     loadBalances,
     stake,
     unstake,

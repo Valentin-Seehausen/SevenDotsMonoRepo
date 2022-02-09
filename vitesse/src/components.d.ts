@@ -11,6 +11,7 @@ declare module 'vue' {
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     ChainWarner: typeof import('./components/ChainWarner.vue')['default']
     Counter: typeof import('./components/Counter.vue')['default']
+    'Gg:arrowsExchangeV': typeof import('~icons/gg/arrows-exchange-v')['default']
     'Logos:ethereum': typeof import('~icons/logos/ethereum')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     README: typeof import('./components/README.md')['default']
