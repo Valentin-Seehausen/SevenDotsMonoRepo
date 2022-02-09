@@ -132,11 +132,19 @@ contract SevenDotsAuctionHouse is
 
     /**
      * @notice Creates an auction, if there is a free auction slot.
-     * @dev Auction Ids are uint24 (max value 16,777,216), as there will be max 77,777 Auctions.
      */
     function createAuction() public {
         _pruneAuctions();
         require(0 < freeAuctionSlots(), "SD: No free auction slot.");
+        _createAuction();
+        rewardToken.mint(msg.sender, AUCTION_CREATOR_REWARD);
+    }
+
+    /**
+     * @notice Creates a new auction
+     * @dev Auction Ids are uint24 (max value 16,777,216), as there will be max 77,777 Auctions.
+     */
+    function _createAuction() internal {
         uint24 id = _popNewAuctionId();
         bytes32 seed = _popNewSeed();
         openAuctionIds.push(id);
@@ -147,7 +155,6 @@ contract SevenDotsAuctionHouse is
             seed,
             id
         );
-        rewardToken.mint(msg.sender, AUCTION_CREATOR_REWARD);
         emit Create(id, seed, msg.sender);
     }
 
