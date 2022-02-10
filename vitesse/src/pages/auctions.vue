@@ -11,7 +11,7 @@ auctionStore.setFilter(AuctionsFilter.Open)
 const creatorRewardUSD = ref('7777777')
 
 watchEffect(() => {
-  creatorRewardUSD.value = parseFloat(ethers.utils.formatUnits(ethers.utils.parseUnits('0.1', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
+  creatorRewardUSD.value = parseFloat(ethers.utils.formatUnits(ethers.utils.parseUnits('1', 18).mul(treasury.rewardTokenUSD), 18 + 8)).toFixed(2)
 })
 
 </script>
