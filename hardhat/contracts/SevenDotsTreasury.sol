@@ -23,6 +23,36 @@ contract SevenDotsTreasury is
     SevenDotsStakingToken stakingToken;
     IERC20 WETH;
 
+    /** Events */
+
+    event Stake(
+        address indexed _account,
+        address account,
+        uint256 rewardTokenAmount,
+        uint256 stakingTokenAmount,
+        uint256 stakingFaktor,
+        uint256 time
+    );
+
+    event Unstake(
+        address indexed _account,
+        address account,
+        uint256 stakingTokenAmount,
+        uint256 rewardTokenAmount,
+        uint256 stakingFaktor,
+        uint256 time
+    );
+
+    event Withdraw(
+        address indexed _account,
+        address account,
+        uint256 rewardTokenAmount,
+        uint256 wethAmount,
+        uint256 time
+    );
+
+    event IncreaseStakingFaktor(uint256 stakingFaktor, uint256 time);
+
     /**
      * @notice Overwrite for Upgradeblae
      */
@@ -60,6 +90,13 @@ contract SevenDotsTreasury is
             rewardToken.totalSupply();
         rewardToken.burnFrom(msg.sender, amount);
         WETH.transfer(msg.sender, wethAmount);
+        emit Withdraw(
+            msg.sender,
+            msg.sender,
+            amount,
+            wethAmount,
+            block.timestamp
+        );
     }
 
     /**
@@ -104,6 +141,14 @@ contract SevenDotsTreasury is
             currentStakingFaktor;
         rewardToken.transferFrom(msg.sender, address(this), rewardTokenAmount);
         stakingToken.mint(msg.sender, _stakeTokenAmount);
+        emit Stake(
+            msg.sender,
+            msg.sender,
+            rewardTokenAmount,
+            _stakeTokenAmount,
+            currentStakingFaktor,
+            block.timestamp
+        );
     }
 
     /**
@@ -116,6 +161,14 @@ contract SevenDotsTreasury is
             DENOMINATOR;
         stakingToken.burnFrom(msg.sender, stakeTokenAmount);
         rewardToken.transfer(msg.sender, _rewardTokenAmount);
+        emit Unstake(
+            msg.sender,
+            msg.sender,
+            stakeTokenAmount,
+            _rewardTokenAmount,
+            currentStakingFaktor,
+            block.timestamp
+        );
     }
 
     /**
@@ -126,6 +179,7 @@ contract SevenDotsTreasury is
         currentStakingFaktor =
             (currentStakingFaktor * STAKING_RATE) /
             DENOMINATOR;
+        emit IncreaseStakingFaktor(currentStakingFaktor, block.timestamp);
     }
 
     /**
