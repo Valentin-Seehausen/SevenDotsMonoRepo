@@ -1,4 +1,5 @@
 {
   "solidity.compileUsingRemoteVersion": "v0.8.11+commit.d7f03943",
-  "mochaExplorer.files": "test/**/*.{j,t}s"
+  "mochaExplorer.files": "test/**/*.{j,t}s",
+  "solidity.validationDelay": 500
 }
