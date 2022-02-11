@@ -82,6 +82,13 @@ contract SevenDotsAuctionHouse is
         uint256 time
     );
 
+    event BuyNow(
+        uint256 indexed _id,
+        uint256 id,
+        address highestBidder,
+        uint256 time
+    );
+
     event End(
         uint256 indexed _id,
         bytes32 indexed _seed,
@@ -317,6 +324,7 @@ contract SevenDotsAuctionHouse is
         );
         _pruneAuctions();
         _buyNow(_auction);
+        emit BuyNow(auctionId, auctionId, msg.sender, block.timestamp);
     }
 
     /**

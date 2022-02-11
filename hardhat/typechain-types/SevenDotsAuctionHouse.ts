@@ -293,6 +293,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
     "Bid(uint256,address,uint256,address,address,uint256,uint256)": EventFragment;
+    "BuyNow(uint256,uint256,address,uint256)": EventFragment;
     "Create(uint256,bytes32,address)": EventFragment;
     "End(uint256,bytes32,address,uint256,bytes32,address,uint256,uint256)": EventFragment;
     "Redeem(uint256,uint256,address,uint256,uint256)": EventFragment;
@@ -305,6 +306,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BeaconUpgraded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Bid"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BuyNow"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Create"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "End"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Redeem"): EventFragment;
@@ -339,6 +341,13 @@ export type BidEvent = TypedEvent<
 >;
 
 export type BidEventFilter = TypedEventFilter<BidEvent>;
+
+export type BuyNowEvent = TypedEvent<
+  [BigNumber, BigNumber, string, BigNumber],
+  { _id: BigNumber; id: BigNumber; highestBidder: string; time: BigNumber }
+>;
+
+export type BuyNowEventFilter = TypedEventFilter<BuyNowEvent>;
 
 export type CreateEvent = TypedEvent<
   [BigNumber, string, string],
@@ -861,6 +870,19 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       highestBid?: null,
       time?: null
     ): BidEventFilter;
+
+    "BuyNow(uint256,uint256,address,uint256)"(
+      _id?: BigNumberish | null,
+      id?: null,
+      highestBidder?: null,
+      time?: null
+    ): BuyNowEventFilter;
+    BuyNow(
+      _id?: BigNumberish | null,
+      id?: null,
+      highestBidder?: null,
+      time?: null
+    ): BuyNowEventFilter;
 
     "Create(uint256,bytes32,address)"(
       _id?: null,
