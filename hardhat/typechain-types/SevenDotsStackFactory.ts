@@ -181,7 +181,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
-    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,address,uint256)": EventFragment;
+    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -219,6 +219,8 @@ export type MergeEvent = TypedEvent<
     string,
     string,
     string,
+    BigNumber,
+    BigNumber,
     string,
     BigNumber
   ],
@@ -232,6 +234,8 @@ export type MergeEvent = TypedEvent<
     seed: string;
     parentSeed1: string;
     parentSeed2: string;
+    dots: BigNumber;
+    rarityPoints: BigNumber;
     merger: string;
     time: BigNumber;
   }
@@ -584,7 +588,7 @@ export interface SevenDotsStackFactory extends BaseContract {
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
 
-    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,address,uint256)"(
+    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)"(
       _tokenId?: BigNumberish | null,
       _parentTokenId1?: BigNumberish | null,
       _parentTokenId2?: BigNumberish | null,
@@ -594,6 +598,8 @@ export interface SevenDotsStackFactory extends BaseContract {
       seed?: null,
       parentSeed1?: null,
       parentSeed2?: null,
+      dots?: null,
+      rarityPoints?: null,
       merger?: null,
       time?: null
     ): MergeEventFilter;
@@ -607,6 +613,8 @@ export interface SevenDotsStackFactory extends BaseContract {
       seed?: null,
       parentSeed1?: null,
       parentSeed2?: null,
+      dots?: null,
+      rarityPoints?: null,
       merger?: null,
       time?: null
     ): MergeEventFilter;

@@ -33,6 +33,7 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
     "getColor(uint256,uint256)": FunctionFragment;
     "getDots(bytes32)": FunctionFragment;
     "getLength(uint256)": FunctionFragment;
+    "getRarityPoints(bytes32)": FunctionFragment;
     "getRect(uint256,uint256,uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
@@ -85,6 +86,10 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getLength",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRarityPoints",
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "getRect",
@@ -150,6 +155,10 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getColor", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getDots", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getLength", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRarityPoints",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getRect", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getRoleAdmin",
@@ -299,6 +308,11 @@ export interface SevenDotsMetadata extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    getRarityPoints(
+      seed: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     getRect(
       x: BigNumberish,
       y: BigNumberish,
@@ -401,6 +415,11 @@ export interface SevenDotsMetadata extends BaseContract {
 
   getLength(col: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+  getRarityPoints(
+    seed: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   getRect(
     x: BigNumberish,
     y: BigNumberish,
@@ -502,6 +521,11 @@ export interface SevenDotsMetadata extends BaseContract {
     getDots(seed: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     getLength(col: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    getRarityPoints(
+      seed: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getRect(
       x: BigNumberish,
@@ -659,6 +683,11 @@ export interface SevenDotsMetadata extends BaseContract {
 
     getLength(col: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+    getRarityPoints(
+      seed: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getRect(
       x: BigNumberish,
       y: BigNumberish,
@@ -785,6 +814,11 @@ export interface SevenDotsMetadata extends BaseContract {
 
     getLength(
       col: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getRarityPoints(
+      seed: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

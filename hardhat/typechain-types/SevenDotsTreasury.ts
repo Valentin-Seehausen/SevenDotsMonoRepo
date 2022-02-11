@@ -205,18 +205,26 @@ export interface SevenDotsTreasuryInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
+    "IncreaseStakingFaktor(uint256,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
+    "Stake(address,address,uint256,uint256,uint256,uint256)": EventFragment;
+    "Unstake(address,address,uint256,uint256,uint256,uint256)": EventFragment;
     "Upgraded(address)": EventFragment;
+    "Withdraw(address,address,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BeaconUpgraded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "IncreaseStakingFaktor"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Stake"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unstake"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdraw"): EventFragment;
 }
 
 export type AdminChangedEvent = TypedEvent<
@@ -229,6 +237,14 @@ export type AdminChangedEventFilter = TypedEventFilter<AdminChangedEvent>;
 export type BeaconUpgradedEvent = TypedEvent<[string], { beacon: string }>;
 
 export type BeaconUpgradedEventFilter = TypedEventFilter<BeaconUpgradedEvent>;
+
+export type IncreaseStakingFaktorEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  { stakingFaktor: BigNumber; time: BigNumber }
+>;
+
+export type IncreaseStakingFaktorEventFilter =
+  TypedEventFilter<IncreaseStakingFaktorEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -252,9 +268,50 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
+export type StakeEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, BigNumber, BigNumber],
+  {
+    _account: string;
+    account: string;
+    rewardTokenAmount: BigNumber;
+    stakingTokenAmount: BigNumber;
+    stakingFaktor: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type StakeEventFilter = TypedEventFilter<StakeEvent>;
+
+export type UnstakeEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, BigNumber, BigNumber],
+  {
+    _account: string;
+    account: string;
+    stakingTokenAmount: BigNumber;
+    rewardTokenAmount: BigNumber;
+    stakingFaktor: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type UnstakeEventFilter = TypedEventFilter<UnstakeEvent>;
+
 export type UpgradedEvent = TypedEvent<[string], { implementation: string }>;
 
 export type UpgradedEventFilter = TypedEventFilter<UpgradedEvent>;
+
+export type WithdrawEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, BigNumber],
+  {
+    _account: string;
+    account: string;
+    rewardTokenAmount: BigNumber;
+    wethAmount: BigNumber;
+    time: BigNumber;
+  }
+>;
+
+export type WithdrawEventFilter = TypedEventFilter<WithdrawEvent>;
 
 export interface SevenDotsTreasury extends BaseContract {
   contractName: "SevenDotsTreasury";
@@ -582,6 +639,15 @@ export interface SevenDotsTreasury extends BaseContract {
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
 
+    "IncreaseStakingFaktor(uint256,uint256)"(
+      stakingFaktor?: null,
+      time?: null
+    ): IncreaseStakingFaktorEventFilter;
+    IncreaseStakingFaktor(
+      stakingFaktor?: null,
+      time?: null
+    ): IncreaseStakingFaktorEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
       previousAdminRole?: BytesLike | null,
@@ -615,8 +681,57 @@ export interface SevenDotsTreasury extends BaseContract {
       sender?: string | null
     ): RoleRevokedEventFilter;
 
+    "Stake(address,address,uint256,uint256,uint256,uint256)"(
+      _account?: string | null,
+      account?: null,
+      rewardTokenAmount?: null,
+      stakingTokenAmount?: null,
+      stakingFaktor?: null,
+      time?: null
+    ): StakeEventFilter;
+    Stake(
+      _account?: string | null,
+      account?: null,
+      rewardTokenAmount?: null,
+      stakingTokenAmount?: null,
+      stakingFaktor?: null,
+      time?: null
+    ): StakeEventFilter;
+
+    "Unstake(address,address,uint256,uint256,uint256,uint256)"(
+      _account?: string | null,
+      account?: null,
+      stakingTokenAmount?: null,
+      rewardTokenAmount?: null,
+      stakingFaktor?: null,
+      time?: null
+    ): UnstakeEventFilter;
+    Unstake(
+      _account?: string | null,
+      account?: null,
+      stakingTokenAmount?: null,
+      rewardTokenAmount?: null,
+      stakingFaktor?: null,
+      time?: null
+    ): UnstakeEventFilter;
+
     "Upgraded(address)"(implementation?: string | null): UpgradedEventFilter;
     Upgraded(implementation?: string | null): UpgradedEventFilter;
+
+    "Withdraw(address,address,uint256,uint256,uint256)"(
+      _account?: string | null,
+      account?: null,
+      rewardTokenAmount?: null,
+      wethAmount?: null,
+      time?: null
+    ): WithdrawEventFilter;
+    Withdraw(
+      _account?: string | null,
+      account?: null,
+      rewardTokenAmount?: null,
+      wethAmount?: null,
+      time?: null
+    ): WithdrawEventFilter;
   };
 
   estimateGas: {

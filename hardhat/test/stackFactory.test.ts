@@ -99,6 +99,8 @@ describe("StackFactory", function () {
         constants.seed.f4c11,
         constants.seed.f4c1,
         constants.seed.f4c1,
+        2,
+        6,
         deployer.address,
         now + 1
       );

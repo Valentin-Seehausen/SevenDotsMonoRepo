@@ -78,6 +78,13 @@ contract SevenDotsMetadata is
     }
 
     /**
+     * @notice Returns Rarity Points
+     */
+    function getRarityPoints(bytes32 seed) public pure returns (uint256) {
+        return _getRarity(seed);
+    }
+
+    /**
      * @notice Encodes a col like 113 into a dna to save bytes.
      * @param col_i Each char represents one dot.
      */

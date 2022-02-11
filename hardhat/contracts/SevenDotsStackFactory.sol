@@ -62,6 +62,8 @@ contract SevenDotsStackFactory is
         bytes32 seed,
         bytes32 parentSeed1,
         bytes32 parentSeed2,
+        uint256 dots,
+        uint256 rarityPoints,
         address merger,
         uint256 time
     );
@@ -159,6 +161,8 @@ contract SevenDotsStackFactory is
         bytes32 seed2 = token.seedOfToken(token2);
 
         bytes32 newSeed = metadata.merge(seed1, seed2);
+        uint256 dots = metadata.countDots(newSeed);
+        uint256 rarityPoints = metadata.getRarityPoints(newSeed);
 
         token.burn(token1);
         token.burn(token2);
@@ -181,6 +185,8 @@ contract SevenDotsStackFactory is
             newSeed,
             seed1,
             seed2,
+            dots,
+            rarityPoints,
             msg.sender,
             block.timestamp
         );
