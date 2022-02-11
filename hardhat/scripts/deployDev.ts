@@ -211,6 +211,8 @@ async function seedFixtures() {
   await auctionHouse.connect(alice).createAuction();
   await auctionHouse.connect(alice).createAuction();
   await auctionHouse.connect(alice).createAuction();
+  await token.safeMint(alice.address, constants.seed.f4c1);
+  await token.safeMint(alice.address, constants.seed.f4c1);
   await token.safeMint(alice.address, constants.seed.commonRainbowOne);
   await token.safeMint(alice.address, constants.seed.rareRainbowFive);
   await token.safeMint(alice.address, constants.seed.rareRainbowFive);
@@ -235,6 +237,7 @@ async function seedFixtures() {
   await stakingToken
     .connect(alice)
     .approve(treasury.address, ethers.utils.parseEther("10000000000"));
+  await stackFactory.connect(alice).instantStackTokens(0, 1);
 }
 
 async function main() {
