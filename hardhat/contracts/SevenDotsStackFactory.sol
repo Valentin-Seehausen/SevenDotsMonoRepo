@@ -54,8 +54,8 @@ contract SevenDotsStackFactory is
     /** Events */
     event Merge(
         uint256 indexed _tokenId,
-        uint256 indexed _parentTokenId1,
-        uint256 indexed _parentTokenId2,
+        bytes indexed _parentIds,
+        address indexed _merger,
         uint256 tokenId,
         uint256 parentTokenId1,
         uint256 parentTokenId2,
@@ -177,8 +177,8 @@ contract SevenDotsStackFactory is
 
         emit Merge(
             tokenId,
-            token1,
-            token2,
+            abi.encode(token1, token2),
+            msg.sender,
             tokenId,
             token1,
             token2,

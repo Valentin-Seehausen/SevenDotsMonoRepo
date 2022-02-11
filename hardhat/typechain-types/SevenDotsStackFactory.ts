@@ -181,7 +181,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
-    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)": EventFragment;
+    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -211,8 +211,8 @@ export type BeaconUpgradedEventFilter = TypedEventFilter<BeaconUpgradedEvent>;
 export type MergeEvent = TypedEvent<
   [
     BigNumber,
-    BigNumber,
-    BigNumber,
+    string,
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -226,8 +226,8 @@ export type MergeEvent = TypedEvent<
   ],
   {
     _tokenId: BigNumber;
-    _parentTokenId1: BigNumber;
-    _parentTokenId2: BigNumber;
+    _parentIds: string;
+    _merger: string;
     tokenId: BigNumber;
     parentTokenId1: BigNumber;
     parentTokenId2: BigNumber;
@@ -588,10 +588,10 @@ export interface SevenDotsStackFactory extends BaseContract {
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
 
-    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)"(
+    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)"(
       _tokenId?: BigNumberish | null,
-      _parentTokenId1?: BigNumberish | null,
-      _parentTokenId2?: BigNumberish | null,
+      _parentIds?: BytesLike | null,
+      _merger?: string | null,
       tokenId?: null,
       parentTokenId1?: null,
       parentTokenId2?: null,
@@ -605,8 +605,8 @@ export interface SevenDotsStackFactory extends BaseContract {
     ): MergeEventFilter;
     Merge(
       _tokenId?: BigNumberish | null,
-      _parentTokenId1?: BigNumberish | null,
-      _parentTokenId2?: BigNumberish | null,
+      _parentIds?: BytesLike | null,
+      _merger?: string | null,
       tokenId?: null,
       parentTokenId1?: null,
       parentTokenId2?: null,

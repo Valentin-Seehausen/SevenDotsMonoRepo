@@ -91,8 +91,8 @@ describe("StackFactory", function () {
       .to.emit(stackFactory, "Merge")
       .withArgs(
         2,
-        0,
-        1,
+        ethers.utils.defaultAbiCoder.encode(["uint", "uint"], [0, 1]),
+        deployer.address,
         2,
         0,
         1,
