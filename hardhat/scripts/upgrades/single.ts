@@ -16,8 +16,8 @@ export default async function updateContracts() {
   let [deployer] = await ethers.getSigners();
 
   await upgrades.upgradeProxy(
-    addresses.SevenDotsAuctionHouse,
-    await ethers.getContractFactory("SevenDotsAuctionHouse"),
+    addresses.SevenDotsTreasury,
+    await ethers.getContractFactory("SevenDotsTreasury"),
     {
       timeout: 0,
     }
