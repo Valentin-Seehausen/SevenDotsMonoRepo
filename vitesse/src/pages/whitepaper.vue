@@ -140,7 +140,7 @@
       <ul class="list-disc px-14 my-4">
         <li>Creating auctions and receiving $7DOTS 0.1</li>
         <li>Winnig auctions</li>
-        <li>Stacking Tokens for $7DOTS 7.0 rewards </li>
+        <li>Merging Dots for $7DOTS 7.0 rewards </li>
         <li>Staking your 7DOTS</li>
         <li>Creating beautiful unique NFTs and selling them</li>
         <li>Helping this project grow (after you safed your share by staking some 7DOTS)</li>

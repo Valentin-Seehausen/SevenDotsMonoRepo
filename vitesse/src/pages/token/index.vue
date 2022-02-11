@@ -7,6 +7,7 @@ const tokens = useTokenStore()
 </script>
 
 <template>
+  <StackingInline />
   <div v-if="tokens.isLoading">
     {{ t("button.loading") }}
   </div>

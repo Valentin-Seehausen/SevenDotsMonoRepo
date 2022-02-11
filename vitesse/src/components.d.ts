@@ -17,6 +17,8 @@ declare module 'vue' {
     'SimpleIcons:discord': typeof import('~icons/simple-icons/discord')['default']
     'SimpleIcons:opensea': typeof import('~icons/simple-icons/opensea')['default']
     'SimpleIcons:twitter': typeof import('~icons/simple-icons/twitter')['default']
+    Stacking: typeof import('./components/stacking.vue')['default']
+    StackingInline: typeof import('./components/StackingInline.vue')['default']
     Token: typeof import('./components/Token.vue')['default']
     WalletButton: typeof import('./components/WalletButton.vue')['default']
   }

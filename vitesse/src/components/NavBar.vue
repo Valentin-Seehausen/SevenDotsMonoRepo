@@ -60,13 +60,6 @@ router.beforeEach(() => { showMenu.value = false })
               {{ t("button.token") }}
             </router-link>
             <router-link
-              to="/stacking"
-              :title="t('button.stacking')"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
-            >
-              {{ t("button.stacking") }}
-            </router-link>
-            <router-link
               to="/staking"
               :title="t('button.staking')"
               class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
