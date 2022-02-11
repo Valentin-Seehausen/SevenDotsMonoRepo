@@ -76,6 +76,46 @@ describe("StackFactory", function () {
     );
   });
 
+  it("Instant Stacks two NFTs", async function () {
+    // Mint two NFTs
+    await token.safeMint(deployer.address, constants.seed.f4c1);
+    await token.safeMint(deployer.address, constants.seed.f4c1);
+    await token.approve(stackFactory.address, 0);
+    await token.approve(stackFactory.address, 1);
+
+    const now = (
+      await ethers.provider.getBlock(await ethers.provider.getBlockNumber())
+    ).timestamp;
+
+    await expect(stackFactory.instantStackTokens(0, 1))
+      .to.emit(stackFactory, "Merge")
+      .withArgs(
+        2,
+        0,
+        1,
+        2,
+        0,
+        1,
+        constants.seed.f4c11,
+        constants.seed.f4c1,
+        constants.seed.f4c1,
+        deployer.address,
+        now + 1
+      );
+
+    // New NFT should be minted
+    await expect(await token.balanceOf(deployer.address)).to.equal(1);
+    await expect(await token.ownerOf(2)).to.equal(deployer.address);
+
+    // new NFT should be minted and have two dots
+    await expect(await token.seedOfToken(2)).to.equal(constants.seed.f4c11); // old NFTs should be burned
+
+    // Stack reward should have been payed out
+    await expect(await rewardToken.balanceOf(deployer.address)).to.equal(
+      constants.amounts.stackReward
+    );
+  });
+
   it("Stack reverts if trying to stack a foreign token", async function () {
     // Deployer mints two NFTs
     await token.safeMint(deployer.address, constants.seed.f4c1);

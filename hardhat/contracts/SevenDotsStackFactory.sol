@@ -51,6 +51,21 @@ contract SevenDotsStackFactory is
         uint40 stackTime;
     }
 
+    /** Events */
+    event Merge(
+        uint256 indexed _tokenId,
+        uint256 indexed _parentTokenId1,
+        uint256 indexed _parentTokenId2,
+        uint256 tokenId,
+        uint256 parentTokenId1,
+        uint256 parentTokenId2,
+        bytes32 seed,
+        bytes32 parentSeed1,
+        bytes32 parentSeed2,
+        address merger,
+        uint256 time
+    );
+
     /**
      * @notice Overwrite for Upgradeblae
      */
@@ -116,6 +131,59 @@ contract SevenDotsStackFactory is
         );
         _stackIdCounter.increment();
         _stackCounter.increment();
+    }
+
+    /**
+     * @notice Instantly merges two tokens.
+     * @dev The parent tokens will be burned and the new token will be minted.
+     * @dev This method was created after heavy user demand.
+     * @param token1 is the bottom. Its dots will always remain
+     * @param token2 is the top. Its dots may be lost, when a column has >7 dots.
+     */
+    function instantStackTokens(uint256 token1, uint256 token2) public {
+        require(token1 != token2, "SD: Cannot stack one token twice.");
+        require(token.ownerOf(token1) == msg.sender, "SD: Not owner");
+        require(token.ownerOf(token2) == msg.sender, "SD: Not owner");
+        require(
+            token.dotCountOf(token1) < 49,
+            "SD: Unique tokens cannot be stacked"
+        );
+        require(
+            token.dotCountOf(token2) < 49,
+            "SD: Unique tokens cannot be stacked"
+        );
+        _checkUniqueness(token1, token2);
+
+        uint256 tokenId = token.getNextTokenId();
+        bytes32 seed1 = token.seedOfToken(token1);
+        bytes32 seed2 = token.seedOfToken(token2);
+
+        bytes32 newSeed = metadata.merge(seed1, seed2);
+
+        token.burn(token1);
+        token.burn(token2);
+
+        _triggerStaking();
+
+        // mint merged token
+        token.safeMint(msg.sender, newSeed);
+
+        // transfer stack reward token
+        rewardToken.mint(msg.sender, STACK_REWARD);
+
+        emit Merge(
+            tokenId,
+            token1,
+            token2,
+            tokenId,
+            token1,
+            token2,
+            newSeed,
+            seed1,
+            seed2,
+            msg.sender,
+            block.timestamp
+        );
     }
 
     /**

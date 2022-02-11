@@ -30,6 +30,7 @@ export interface SevenDotsTokenInterface extends utils.Interface {
     "burn(uint256)": FunctionFragment;
     "dotCountOf(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getNextTokenId()": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -87,6 +88,10 @@ export interface SevenDotsTokenInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNextTokenId",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -194,6 +199,10 @@ export interface SevenDotsTokenInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "dotCountOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getNextTokenId",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -414,6 +423,8 @@ export interface SevenDotsToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getNextTokenId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<[string]>;
 
     grantRole(
@@ -577,6 +588,8 @@ export interface SevenDotsToken extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getNextTokenId(overrides?: CallOverrides): Promise<BigNumber>;
+
   getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   grantRole(
@@ -730,6 +743,8 @@ export interface SevenDotsToken extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getNextTokenId(overrides?: CallOverrides): Promise<BigNumber>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -973,6 +988,8 @@ export interface SevenDotsToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getNextTokenId(overrides?: CallOverrides): Promise<BigNumber>;
+
     getRoleAdmin(
       role: BytesLike,
       overrides?: CallOverrides
@@ -1144,6 +1161,8 @@ export interface SevenDotsToken extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getNextTokenId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getRoleAdmin(
       role: BytesLike,

@@ -107,6 +107,13 @@ contract SevenDotsToken is
     }
 
     /**
+     * @notice Returns next token id.
+     */
+    function getNextTokenId() public view returns (uint256) {
+        return _tokenIdCounter.current();
+    }
+
+    /**
      *      _    ____ _____
      *     / \  |  _ \_   _|
      *    / _ \ | |_) || |

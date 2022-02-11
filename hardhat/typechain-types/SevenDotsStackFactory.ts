@@ -45,6 +45,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "initialize(address,address,address,address)": FunctionFragment;
+    "instantStackTokens(uint256,uint256)": FunctionFragment;
     "mintRewardToken(address,uint256)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
@@ -81,6 +82,10 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "initialize",
     values: [string, string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "instantStackTokens",
+    values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mintRewardToken",
@@ -137,6 +142,10 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "instantStackTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "mintRewardToken",
     data: BytesLike
   ): Result;
@@ -172,6 +181,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
+    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,address,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -180,6 +190,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BeaconUpgraded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Merge"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
@@ -196,6 +207,37 @@ export type AdminChangedEventFilter = TypedEventFilter<AdminChangedEvent>;
 export type BeaconUpgradedEvent = TypedEvent<[string], { beacon: string }>;
 
 export type BeaconUpgradedEventFilter = TypedEventFilter<BeaconUpgradedEvent>;
+
+export type MergeEvent = TypedEvent<
+  [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string,
+    string,
+    string,
+    string,
+    BigNumber
+  ],
+  {
+    _tokenId: BigNumber;
+    _parentTokenId1: BigNumber;
+    _parentTokenId2: BigNumber;
+    tokenId: BigNumber;
+    parentTokenId1: BigNumber;
+    parentTokenId2: BigNumber;
+    seed: string;
+    parentSeed1: string;
+    parentSeed2: string;
+    merger: string;
+    time: BigNumber;
+  }
+>;
+
+export type MergeEventFilter = TypedEventFilter<MergeEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -274,6 +316,12 @@ export interface SevenDotsStackFactory extends BaseContract {
       _rewardToken: string,
       _treasury: string,
       _metadata: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    instantStackTokens(
+      token1: BigNumberish,
+      token2: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -364,6 +412,12 @@ export interface SevenDotsStackFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  instantStackTokens(
+    token1: BigNumberish,
+    token2: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   mintRewardToken(
     to: string,
     amount: BigNumberish,
@@ -451,6 +505,12 @@ export interface SevenDotsStackFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    instantStackTokens(
+      token1: BigNumberish,
+      token2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     mintRewardToken(
       to: string,
       amount: BigNumberish,
@@ -524,6 +584,33 @@ export interface SevenDotsStackFactory extends BaseContract {
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
 
+    "Merge(uint256,uint256,uint256,uint256,uint256,uint256,bytes32,bytes32,bytes32,address,uint256)"(
+      _tokenId?: BigNumberish | null,
+      _parentTokenId1?: BigNumberish | null,
+      _parentTokenId2?: BigNumberish | null,
+      tokenId?: null,
+      parentTokenId1?: null,
+      parentTokenId2?: null,
+      seed?: null,
+      parentSeed1?: null,
+      parentSeed2?: null,
+      merger?: null,
+      time?: null
+    ): MergeEventFilter;
+    Merge(
+      _tokenId?: BigNumberish | null,
+      _parentTokenId1?: BigNumberish | null,
+      _parentTokenId2?: BigNumberish | null,
+      tokenId?: null,
+      parentTokenId1?: null,
+      parentTokenId2?: null,
+      seed?: null,
+      parentSeed1?: null,
+      parentSeed2?: null,
+      merger?: null,
+      time?: null
+    ): MergeEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
       previousAdminRole?: BytesLike | null,
@@ -588,6 +675,12 @@ export interface SevenDotsStackFactory extends BaseContract {
       _rewardToken: string,
       _treasury: string,
       _metadata: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    instantStackTokens(
+      token1: BigNumberish,
+      token2: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -678,6 +771,12 @@ export interface SevenDotsStackFactory extends BaseContract {
       _rewardToken: string,
       _treasury: string,
       _metadata: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    instantStackTokens(
+      token1: BigNumberish,
+      token2: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
