@@ -102,6 +102,7 @@ describe("StackFactory", function () {
         2,
         6,
         deployer.address,
+        0,
         now + 1
       );
 

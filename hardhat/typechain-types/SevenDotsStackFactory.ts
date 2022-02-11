@@ -181,7 +181,7 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   events: {
     "AdminChanged(address,address)": EventFragment;
     "BeaconUpgraded(address)": EventFragment;
-    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)": EventFragment;
+    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256,uint256)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -222,6 +222,7 @@ export type MergeEvent = TypedEvent<
     BigNumber,
     BigNumber,
     string,
+    BigNumber,
     BigNumber
   ],
   {
@@ -237,6 +238,7 @@ export type MergeEvent = TypedEvent<
     dots: BigNumber;
     rarityPoints: BigNumber;
     merger: string;
+    stackCount: BigNumber;
     time: BigNumber;
   }
 >;
@@ -588,7 +590,7 @@ export interface SevenDotsStackFactory extends BaseContract {
     ): BeaconUpgradedEventFilter;
     BeaconUpgraded(beacon?: string | null): BeaconUpgradedEventFilter;
 
-    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256)"(
+    "Merge(uint256,bytes,address,uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256,uint256,address,uint256,uint256)"(
       _tokenId?: BigNumberish | null,
       _parentIds?: BytesLike | null,
       _merger?: string | null,
@@ -601,6 +603,7 @@ export interface SevenDotsStackFactory extends BaseContract {
       dots?: null,
       rarityPoints?: null,
       merger?: null,
+      stackCount?: null,
       time?: null
     ): MergeEventFilter;
     Merge(
@@ -616,6 +619,7 @@ export interface SevenDotsStackFactory extends BaseContract {
       dots?: null,
       rarityPoints?: null,
       merger?: null,
+      stackCount?: null,
       time?: null
     ): MergeEventFilter;
 

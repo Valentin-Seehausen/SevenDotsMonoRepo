@@ -65,6 +65,7 @@ contract SevenDotsStackFactory is
         uint256 dots,
         uint256 rarityPoints,
         address merger,
+        uint256 stackCount,
         uint256 time
     );
 
@@ -163,6 +164,7 @@ contract SevenDotsStackFactory is
         bytes32 newSeed = metadata.merge(seed1, seed2);
         uint256 dots = metadata.countDots(newSeed);
         uint256 rarityPoints = metadata.getRarityPoints(newSeed);
+        uint256 _stackCount = _stackCounter.current();
 
         token.burn(token1);
         token.burn(token2);
@@ -174,6 +176,8 @@ contract SevenDotsStackFactory is
 
         // transfer stack reward token
         rewardToken.mint(msg.sender, STACK_REWARD);
+
+        _stackCounter.increment();
 
         emit Merge(
             tokenId,
@@ -188,6 +192,7 @@ contract SevenDotsStackFactory is
             dots,
             rarityPoints,
             msg.sender,
+            _stackCount,
             block.timestamp
         );
     }
