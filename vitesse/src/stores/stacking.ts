@@ -39,11 +39,10 @@ export const useStackingStore = defineStore('stackingStore', () => {
   const stackTokens = async(token1: Token, token2: Token) => {
     if (!wallet.isConnected) return
     await checkApproval()
-    const tx = await stackFactory.connect(wallet.getSigner()).stackTokens(token1.id, token2.id)
-    const toastId = await toast('Creating a nice merge for you.')
+    const tx = await stackFactory.connect(wallet.getSigner()).instantStackTokens(token1.id, token2.id)
+    const toastId = await toast('Merging tokens, its gonna be a-ma-zing!')
     await tx.wait()
-    await toast.update(toastId, { content: '🥁 Merge created. Whats gonna come out?!', options: { timeout: 4000, type: TYPE.SUCCESS } })
-    loadStacks()
+    await toast.update(toastId, { content: '🥁 Merge done! Wow, your new NFT looks great.', options: { timeout: 4000, type: TYPE.SUCCESS } })
     useTokenStore().loadUserTokens()
   }
 
