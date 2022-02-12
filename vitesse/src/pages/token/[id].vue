@@ -4,7 +4,6 @@ import { useTokenStore } from '../../stores/token'
 import type { MergeEvent } from '../../../../hardhat/typechain-types/SevenDotsStackFactory'
 import { useStackingStore } from '~/stores/stacking'
 import { useContractStore } from '~/stores/contracts'
-const { t } = useI18n()
 
 const props = defineProps<{ id: string }>()
 const tokens = useTokenStore()
@@ -13,13 +12,15 @@ const token = ref<Token>()
 const merge = ref<MergeEvent>()
 const parent1 = ref('')
 const parent2 = ref('')
+const loading = ref(false)
 
 watchEffect(async() => {
+  loading.value = true
   token.value = await tokens.tokens.find(token => token.id === parseInt(props.id))
-  if (!token.value) {
+  if (!token.value)
     token.value = await tokens.getToken(parseInt(props.id))
-    console.log(token.value)
-  }
+
+  loading.value = false
 })
 
 watchEffect(async() => {
@@ -34,8 +35,11 @@ watchEffect(async() => {
 </script>
 
 <template>
+  <div v-if="loading" class="loading">
+    Loading NFT
+  </div>
   <div
-    v-if="token"
+    v-else-if="token"
     class="flex flex-col items-center"
   >
     <div class="flex-none">
@@ -61,16 +65,16 @@ watchEffect(async() => {
       </h2>
       <div class="flex">
         <div>
-          <img class="dark:border-gray-400 border-2 w-30 mb-4" :src="parent2">
-          <img class="dark:border-gray-400 border-2 w-30" :src="parent1">
+          <img class="dark:border-gray-400 border-2 w-21 md:w-30 mb-2 md:mb-4" :src="parent2">
+          <img class="dark:border-gray-400 border-2 w-21 md:w-30" :src="parent1">
         </div>
         <div>
-          <img class="dark:border-gray-400 border-2 w-64 ml-4" :src="token.image">
+          <img class="dark:border-gray-400 border-2 w-44 md:w-64 ml-2 md:ml-4" :src="token.image">
         </div>
       </div>
     </div>
   </div>
   <div v-else class="flex">
-    <h3>{{ t("tokens.notFound") }}</h3>
+    <h3>No NFT with this id found.</h3>
   </div>
 </template>
