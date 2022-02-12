@@ -35,7 +35,7 @@ watchEffect(async() => {
 </script>
 
 <template>
-  <div v-if="loading" class="loading">
+  <div v-if="loading" class="loading text-center p-4">
     Loading NFT
   </div>
   <div
@@ -74,7 +74,7 @@ watchEffect(async() => {
       </div>
     </div>
   </div>
-  <div v-else class="flex">
-    <h3>No NFT with this id found.</h3>
-  </div>
+  <p v-else class="text-center p-4">
+    No NFT with this id found.
+  </p>
 </template>
