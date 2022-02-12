@@ -1,15 +1,34 @@
 <script setup lang="ts">
 import type Token from 'types/Token'
 import { useTokenStore } from '../../stores/token'
+import type { MergeEvent } from '../../../../hardhat/typechain-types/SevenDotsStackFactory'
+import { useStackingStore } from '~/stores/stacking'
+import { useContractStore } from '~/stores/contracts'
 const { t } = useI18n()
 
 const props = defineProps<{ id: string }>()
 const tokens = useTokenStore()
+const contracts = useContractStore()
 const token = ref<Token>()
+const merge = ref<MergeEvent>()
+const parent1 = ref('')
+const parent2 = ref('')
 
-watchEffect(() => {
-  if (!tokens.tokens) return
-  token.value = tokens.tokens.find(token => token.id === parseInt(props.id))
+watchEffect(async() => {
+  token.value = await tokens.tokens.find(token => token.id === parseInt(props.id))
+  if (!token.value) {
+    token.value = await tokens.getToken(parseInt(props.id))
+    console.log(token.value)
+  }
+})
+
+watchEffect(async() => {
+  try {
+    merge.value = await useStackingStore().getMerge(parseInt(props.id))
+    parent1.value = `data:image/svg+xml;base64,${btoa(await contracts.metadata().calcSvg(merge.value.args.parentSeed1))}`
+    parent2.value = `data:image/svg+xml;base64,${btoa(await contracts.metadata().calcSvg(merge.value.args.parentSeed2))}`
+  }
+  catch (e) {}
 })
 
 </script>
@@ -17,41 +36,38 @@ watchEffect(() => {
 <template>
   <div
     v-if="token"
-    class="flex"
+    class="flex flex-col items-center"
   >
     <div class="flex-none">
-      <img class="w-56 m-4 inline-block" alt="Dots" :src="token.image">
+      <img class="w-65 md:w-100 m-4 border-2 dark:border-gray-400 inline-block" alt="Dots" :src="token.image">
     </div>
-    <div class=" py-4 px-4 text-left">
-      <h3 class="text-md font-semibold">
+    <div class="py-4 w-65 md:w-100 text-center">
+      <h3 class="text-md font-bold text-lg">
         {{ token.name }}
       </h3>
-      <h4 class="py-4 mt-4 font-semibold">
-        {{ t("token.attributes") }}
-      </h4>
-
-      <table class=" table-auto p-2 rounded-t-md divide-y divide-gray-500">
-        <thead class="table-header bg-gray-200 dark:bg-gray-800">
-          <tr>
-            <td class="px-1 py-1">
-              {{ t("token.trait") }}
-            </td>
-            <td class="px-1 py-1">
-              {{ t("token.value") }}
-            </td>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-500">
-          <tr v-for="attribute in token.attributes" :key="attribute.trait_type" class="p-1 table-row ">
-            <td class="px-1 py-1">
-              {{ attribute.trait_type }}
-            </td>
-            <td class="px-2 py-1">
-              {{ attribute.value }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <p class="py-4 mt-4 break-words max-w-full">
+        DNA: {{ token.dna }}
+      </p>
+      <p class="py-4 mt-4 break-words max-w-full">
+        Rarity Points: {{ token.rarityPoints }}
+      </p>
+      <p class="py-4 mt-4 break-words max-w-full">
+        Dots: {{ token.dots }}
+      </p>
+    </div>
+    <div v-if="merge">
+      <h2 class="text-center font-bold dark:font-normal text-lg my-4">
+        Merge History
+      </h2>
+      <div class="flex">
+        <div>
+          <img class="dark:border-gray-400 border-2 w-30 mb-4" :src="parent2">
+          <img class="dark:border-gray-400 border-2 w-30" :src="parent1">
+        </div>
+        <div>
+          <img class="dark:border-gray-400 border-2 w-64 ml-4" :src="token.image">
+        </div>
+      </div>
     </div>
   </div>
   <div v-else class="flex">

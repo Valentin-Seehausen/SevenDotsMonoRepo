@@ -92,13 +92,19 @@ export const useWalletStore = defineStore('wallet', () => {
 
   async function initWallet() {
     if (typeof window == 'undefined') return
-    setWalletListeners()
+    try {
+      useTokenStore()
+      useAuctionStore()
+      useStackingStore()
 
-    await checkMetaMask()
-    await checkConnection()
-    useTokenStore()
-    useAuctionStore()
-    useStackingStore()
+      setWalletListeners()
+
+      await checkMetaMask()
+      await checkConnection()
+    }
+    catch (e) {
+
+    }
   }
 
   return {

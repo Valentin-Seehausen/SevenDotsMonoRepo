@@ -15,7 +15,7 @@ export const useTokenStore = defineStore('tokenStore', () => {
     isLoading.value = true
     const _tokens = <Token[]>[]
     const promises = []
-    const count = await token.balanceOf(wallet.account)
+    const count = await (await token.balanceOf(wallet.account)).toNumber()
     for (let i = 0; i < count; i++) {
       promises.push(
         token.tokenOfOwnerByIndex(wallet.account, i).then(
@@ -23,6 +23,9 @@ export const useTokenStore = defineStore('tokenStore', () => {
           (uri) => {
             const token = JSON.parse(window.atob(uri.substring(29))) as Token
             token.id = parseInt(token.name.substring(1))
+            token.dna = token.attributes.find(a => a.trait_type === 'DNA')?.value || ''
+            token.rarityPoints = parseInt(token.attributes.find(a => a.trait_type === 'Rarity Points')?.value || '0')
+            token.dots = parseInt(token.attributes.find(a => a.trait_type === 'Dots')?.value || '0')
             if (!token) return
             _tokens.push(token)
           }),
@@ -34,12 +37,25 @@ export const useTokenStore = defineStore('tokenStore', () => {
     isLoading.value = false
   }
 
+  const getToken = async(tokenId: number) => {
+    return token.tokenURI(tokenId).then(
+      (uri) => {
+        const token = JSON.parse(window.atob(uri.substring(29))) as Token
+        token.id = parseInt(token.name.substring(1))
+        token.dna = token.attributes.find(a => a.trait_type === 'DNA')?.value || ''
+        token.rarityPoints = parseInt(token.attributes.find(a => a.trait_type === 'Rarity Points')?.value || '0')
+        token.dots = parseInt(token.attributes.find(a => a.trait_type === 'Dots')?.value || '0')
+        if (!token) return
+        return token
+      })
+  }
+
   watchEffect(() => {
     if (wallet.isConnected)
       loadUserTokens()
   })
 
-  return { tokens, isLoading, loadUserTokens }
+  return { tokens, isLoading, getToken, loadUserTokens }
 })
 
 if (import.meta.hot)

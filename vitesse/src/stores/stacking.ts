@@ -56,6 +56,14 @@ export const useStackingStore = defineStore('stackingStore', () => {
     useTokenStore().loadUserTokens()
   }
 
+  const getMerge = async(tokenId: number) => {
+    const events = await stackFactory.queryFilter(
+      stackFactory.filters.Merge(tokenId),
+    )
+    stackFactory.filters.Merge()
+    return events[0]
+  }
+
   watchEffect(() => {
     if (wallet.isConnected)
       loadStacks()
@@ -66,6 +74,7 @@ export const useStackingStore = defineStore('stackingStore', () => {
     unstack,
     loadStacks,
     stackTokens,
+    getMerge,
   }
 })
 

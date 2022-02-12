@@ -12,6 +12,8 @@ import SevenDotsRewardTokenInfo from '../../../hardhat/artifacts/contracts/Seven
 import type { SevenDotsRewardToken } from '../../../hardhat/typechain-types/SevenDotsRewardToken'
 import SevenDotsStakingTokenInfo from '../../../hardhat/artifacts/contracts/SevenDotsStakingToken.sol/SevenDotsStakingToken.json'
 import type { SevenDotsStakingToken } from '../../../hardhat/typechain-types/SevenDotsStakingToken'
+import SevenDotsMetadataInfo from '../../../hardhat/artifacts/contracts/SevenDotsMetadata.sol/SevenDotsMetadata.json'
+import type { SevenDotsMetadata } from '../../../hardhat/typechain-types/SevenDotsMetadata'
 import MaticWETHInfo from '../../../hardhat/artifacts/contracts/MaticWETH.sol/MaticWETH.json'
 import type { MaticWETH } from '../../../hardhat/typechain-types/MaticWETH'
 import addresses137 from '../../../deployments/137/current/addresses.json'
@@ -65,6 +67,12 @@ export const useContractStore = defineStore('chain', () => {
     provider,
   ) as unknown as SevenDotsStakingToken
 
+  const metadata = () => new ethers.Contract(
+    addresses.SevenDotsMetadata,
+    SevenDotsMetadataInfo.abi,
+    provider,
+  ) as unknown as SevenDotsMetadata
+
   const WETH = () => new ethers.Contract(
     addresses.MaticWETH,
     MaticWETHInfo.abi,
@@ -87,6 +95,7 @@ export const useContractStore = defineStore('chain', () => {
     rewardToken,
     stakingToken,
     WETH,
+    metadata,
     addresses,
     getDateOnChain,
     priceFeed,
