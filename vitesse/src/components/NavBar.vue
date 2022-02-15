@@ -126,7 +126,7 @@ router.beforeEach(() => { showMenu.value = false })
                   <simple-icons:twitter class="text-white" />
                 </button>
               </a>
-              <a href="https://discord.gg/Y3NXvaEVES" target="_blank" class="inline-block">
+              <a href="https://discord.gg/JN3vVmjS5V" target="_blank" class="inline-block">
                 <button class="icon-btn m-1" to="/">
                   <simple-icons:discord class="text-white" />
                 </button>
