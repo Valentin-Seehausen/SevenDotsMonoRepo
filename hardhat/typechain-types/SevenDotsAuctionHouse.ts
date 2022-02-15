@@ -68,6 +68,7 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "openAuctionCount()": FunctionFragment;
     "openAuctions()": FunctionFragment;
+    "proxiableUUID()": FunctionFragment;
     "redeemAuction(uint24)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
@@ -170,6 +171,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "proxiableUUID",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "redeemAuction",
     values: [BigNumberish]
   ): string;
@@ -267,6 +272,10 @@ export interface SevenDotsAuctionHouseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "openAuctions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "proxiableUUID",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -537,6 +546,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[SevenDotsAuctionHouse.AuctionStructOutput[]]>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<[string]>;
+
     redeemAuction(
       auctionId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -674,6 +685,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     overrides?: CallOverrides
   ): Promise<SevenDotsAuctionHouse.AuctionStructOutput[]>;
 
+  proxiableUUID(overrides?: CallOverrides): Promise<string>;
+
   redeemAuction(
     auctionId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -800,6 +813,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     openAuctions(
       overrides?: CallOverrides
     ): Promise<SevenDotsAuctionHouse.AuctionStructOutput[]>;
+
+    proxiableUUID(overrides?: CallOverrides): Promise<string>;
 
     redeemAuction(
       auctionId: BigNumberish,
@@ -1060,6 +1075,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
 
     openAuctions(overrides?: CallOverrides): Promise<BigNumber>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<BigNumber>;
+
     redeemAuction(
       auctionId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1198,6 +1215,8 @@ export interface SevenDotsAuctionHouse extends BaseContract {
     openAuctionCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     openAuctions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    proxiableUUID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     redeemAuction(
       auctionId: BigNumberish,

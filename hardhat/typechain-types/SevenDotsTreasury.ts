@@ -33,6 +33,7 @@ export interface SevenDotsTreasuryInterface extends utils.Interface {
     "increaseStakingFaktor()": FunctionFragment;
     "initialize(address,address)": FunctionFragment;
     "multiplyByStakingFaktor(uint256)": FunctionFragment;
+    "proxiableUUID()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rewardTokenSupply()": FunctionFragment;
@@ -94,6 +95,10 @@ export interface SevenDotsTreasuryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "multiplyByStakingFaktor",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "proxiableUUID",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
@@ -169,6 +174,10 @@ export interface SevenDotsTreasuryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "multiplyByStakingFaktor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "proxiableUUID",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -382,6 +391,8 @@ export interface SevenDotsTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<[string]>;
+
     renounceRole(
       role: BytesLike,
       account: string,
@@ -481,6 +492,8 @@ export interface SevenDotsTreasury extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  proxiableUUID(overrides?: CallOverrides): Promise<string>;
+
   renounceRole(
     role: BytesLike,
     account: string,
@@ -574,6 +587,8 @@ export interface SevenDotsTreasury extends BaseContract {
       number: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    proxiableUUID(overrides?: CallOverrides): Promise<string>;
 
     renounceRole(
       role: BytesLike,
@@ -779,6 +794,8 @@ export interface SevenDotsTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<BigNumber>;
+
     renounceRole(
       role: BytesLike,
       account: string,
@@ -882,6 +899,8 @@ export interface SevenDotsTreasury extends BaseContract {
       number: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    proxiableUUID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceRole(
       role: BytesLike,
