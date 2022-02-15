@@ -57,6 +57,11 @@ describe("Auction", function () {
     await auctionHouse.fillAuctions();
     await expect(await auctionHouse.freeAuctionSlots()).to.equal(0);
     await expect(await auctionHouse.openAuctionCount()).to.equal(196);
+
+    // should have received 196 * 0.05 $7DOTS
+    await expect(await rewardToken.balanceOf(deployer.address)).to.be.equal(
+      constants.amounts.fillRewardPerAuction.mul(196)
+    );
   });
 
   it("Buy now", async function () {

@@ -28,6 +28,7 @@ export default {
     firstBidAfterStaking2: ethers.utils.parseEther("0.00200010080127008"),
     stakingFaktor1: ethers.utils.parseEther("1.0000252"),
     stakingFaktor2: ethers.utils.parseEther("1.00005040063504"),
+    fillRewardPerAuction: ethers.utils.parseEther("0.05"),
   },
   tokenURI: {
     "0": JSON.stringify({
