@@ -94,7 +94,7 @@ router.beforeEach(() => { showMenu.value = false })
                   <simple-icons:opensea class="text-white" />
                 </button>
               </a>
-              <a href="https://twitter.com/0xsevendots/" target="_blank">
+              <a href="https://twitter.com/0xsevendots/" target="_blank" class="hidden">
                 <button class="icon-btn m-4" to="/">
                   <simple-icons:twitter class="text-white" />
                 </button>
@@ -121,7 +121,7 @@ router.beforeEach(() => { showMenu.value = false })
                   <simple-icons:opensea class="text-white" />
                 </button>
               </a>
-              <a href="https://twitter.com/0xsevendots/" target="_blank" class="inline-block">
+              <a href="https://twitter.com/0xsevendots/" target="_blank" class="inline-block hidden">
                 <button class="icon-btn m-1" to="/">
                   <simple-icons:twitter class="text-white" />
                 </button>

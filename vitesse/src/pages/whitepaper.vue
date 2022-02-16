@@ -81,7 +81,7 @@
         All profits of the auctions will go to the artist (20%) and the community (80%). The amount gets transfered to the <strong>treasury</strong>. Community members own a portion of the treasury dependend on the amount of <strong>7DOTS ERC20 token</strong> they own. 7DOTS can be earned by: creating an auction (0.1 7DOTS) and by merging two NFTs (7 7DOTS).
       </p>
       <p class="my-4">
-        7DOTS token can be staked. Each merge will trigger the staking reward and inrease the staking faktor. The staking faktor starts at 1.0 and after 77,777 merges it will reach 7.0. The staking factor is inversed at staking. This means, that early users will be able to claim seven times more of the treasury creating art. Early users have an exponential advantage at the end of the runtime. Most probably they will also be able to buy dots for very low prices. When all 7DOTS tokens get staked, 25% of all (compounded) 7DOTS will be emitted after 10,000 merges, which is 12.5% of the time.
+        7DOTS token can be staked. Each merge will trigger the staking reward and inrease the staking factor. The staking factor starts at 1.0 and after 77,777 merges it will reach 7.0. The staking factor is inversed at staking. This means, that early users will be able to claim seven times more of the treasury creating art. Early users have an exponential advantage at the end of the runtime. Most probably they will also be able to buy dots for very low prices. When all 7DOTS tokens get staked, 25% of all (compounded) 7DOTS will be emitted after 10,000 merges, which is 12.5% of the time.
       </p>
 
       <img src="/images/tokenomics.png">
