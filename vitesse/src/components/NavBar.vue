@@ -73,13 +73,13 @@ router.beforeEach(() => { showMenu.value = false })
             >
               {{ t("button.treasury") }}
             </router-link>
-            <router-link
-              to="/whitepaper"
-              :title="t('button.whitepaper')"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200"
+            <a
+              href="https://valentin-seehausen.gitbook.io/sevendots-docs/"
+              target="_blank"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 lg:mr-4"
             >
-              {{ t("button.whitepaper") }}
-            </router-link>
+              Docs
+            </a>
             <div class="lg:hidden text-center">
               <button
                 class="icon-btn m-1 text-white"
