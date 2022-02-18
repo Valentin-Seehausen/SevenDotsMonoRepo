@@ -1,1 +1,54 @@
+SevenDots Smart Contracts
+=========================
+
+## Installation
+
+This directory is based on [Hardhat](https://hardhat.org/getting-started/#installation).
+Please make sure to install it properly.
+
+Then you have to run:
+
+```npm install```
+
+### Run a local development environment
+
+To run a local development you first have run a local node of hardhat:
+
+```npx hardhat node```
+
+And then, in another window, deploy the fixtures:
+
+```npx hardhat run scripts/deployDev.ts --network local```
+
+Nice! Now you can go to vitesse and start the frontend.
+
+It is still recommended that you:
+
+## Prepare Metamask
+
+### Add Hardhat network to Metamask
+
+This project uses chainId 1337 for the local network! 
+This is different to HardHad's default 31337 chainId.
+
+You have to add this network to Metamask:
+
+Name: `Localhost 8545`
+
+RPC: `http://localhost:8545`
+
+ChainId: `1337`
+
+### Add Testuser to Metamask
+
+Add Alice to Metamask, her private key is:
+
+```0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d```
+
+Alice has some NFTs, and all allowances set. 
+
+Have fun!
+
+## Notes
+
 Cool ASCII Font Generator: https://patorjk.com/software/taag/#p=display&f=Standard
