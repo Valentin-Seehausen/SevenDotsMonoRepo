@@ -211,14 +211,24 @@ async function seedFixtures() {
   await auctionHouse.connect(alice).createAuction();
   await auctionHouse.connect(alice).createAuction();
   await auctionHouse.connect(alice).createAuction();
-  await token.safeMint(alice.address, constants.seed.f4c1);
-  await token.safeMint(alice.address, constants.seed.f4c1);
-  await token.safeMint(alice.address, constants.seed.commonRainbowOne);
-  await token.safeMint(alice.address, constants.seed.rareRainbowFive);
-  await token.safeMint(alice.address, constants.seed.rareRainbowFive);
-  await token.safeMint(alice.address, constants.seed.rareRainbowSix);
-  await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
-  await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
+  // await token.safeMint(alice.address, constants.seed.f4c1);
+  await token.safeMint(alice.address, constants.seed.f1c2);
+  await token.safeMint(alice.address, constants.seed.f1c2);
+  await token.safeMint(alice.address, constants.seed.f1c2);
+  await token.safeMint(alice.address, constants.seed.f3c2);
+  await token.safeMint(alice.address, constants.seed.f1c5);
+  await token.safeMint(alice.address, constants.seed.f1c5);
+  await token.safeMint(alice.address, constants.seed.f1c5);
+  await token.safeMint(alice.address, constants.seed.f3c5);
+  await token.safeMint(alice.address, constants.seed.f3c5);
+  await token.safeMint(alice.address, constants.seed.f3c5);
+  await token.safeMint(alice.address, constants.seed.f3c5);
+  // await token.safeMint(alice.address, constants.seed.commonRainbowOne);
+  // await token.safeMint(alice.address, constants.seed.rareRainbowFive);
+  // await token.safeMint(alice.address, constants.seed.rareRainbowFive);
+  // await token.safeMint(alice.address, constants.seed.rareRainbowSix);
+  // await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
+  // await token.safeMint(alice.address, constants.seed.rareRainbowTwo);
   await WETH.transfer(alice.address, constants.amounts.ten);
   await WETH.transfer(treasury.address, constants.amounts.auctionCreatorReward);
   await rewardToken.mint(alice.address, constants.amounts.five);
@@ -237,7 +247,7 @@ async function seedFixtures() {
   await stakingToken
     .connect(alice)
     .approve(treasury.address, ethers.utils.parseEther("10000000000"));
-  await stackFactory.connect(alice).instantStackTokens(0, 1);
+  // await stackFactory.connect(alice).instantStackTokens(0, 1);
 }
 
 async function main() {
