@@ -4,7 +4,7 @@ import ApprovalWarner from '~/components/ApprovalWarner.vue'
 
 <template>
   <NavBar />
-  <main class="px-4 py-30">
+  <main class="px-4 py-30 max-w-340 m-auto">
     <ChainWarner />
     <ApprovalWarner />
     <router-view />
