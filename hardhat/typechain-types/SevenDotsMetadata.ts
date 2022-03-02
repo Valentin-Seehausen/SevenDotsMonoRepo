@@ -41,7 +41,6 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
     "initialize()": FunctionFragment;
     "merge(bytes32,bytes32)": FunctionFragment;
     "mergeDna(uint256[7],uint256[7])": FunctionFragment;
-    "proxiableUUID()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -121,10 +120,6 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
     values: [BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "proxiableUUID",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, string]
   ): string;
@@ -174,10 +169,6 @@ export interface SevenDotsMetadataInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "merge", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mergeDna", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "proxiableUUID",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
@@ -359,8 +350,6 @@ export interface SevenDotsMetadata extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
-    proxiableUUID(overrides?: CallOverrides): Promise<[string]>;
-
     renounceRole(
       role: BytesLike,
       account: string,
@@ -468,8 +457,6 @@ export interface SevenDotsMetadata extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
-  proxiableUUID(overrides?: CallOverrides): Promise<string>;
-
   renounceRole(
     role: BytesLike,
     account: string,
@@ -574,8 +561,6 @@ export interface SevenDotsMetadata extends BaseContract {
       dna2: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
-
-    proxiableUUID(overrides?: CallOverrides): Promise<string>;
 
     renounceRole(
       role: BytesLike,
@@ -743,8 +728,6 @@ export interface SevenDotsMetadata extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    proxiableUUID(overrides?: CallOverrides): Promise<BigNumber>;
-
     renounceRole(
       role: BytesLike,
       account: string,
@@ -878,8 +861,6 @@ export interface SevenDotsMetadata extends BaseContract {
       dna2: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    proxiableUUID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceRole(
       role: BytesLike,

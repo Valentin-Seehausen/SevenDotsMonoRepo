@@ -48,7 +48,6 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
     "instantStackTokens(uint256,uint256)": FunctionFragment;
     "mintRewardToken(address,uint256)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
-    "proxiableUUID()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "stackCount()": FunctionFragment;
@@ -95,10 +94,6 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "onERC721Received",
     values: [string, string, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "proxiableUUID",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
@@ -156,10 +151,6 @@ export interface SevenDotsStackFactoryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "onERC721Received",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "proxiableUUID",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -354,8 +345,6 @@ export interface SevenDotsStackFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    proxiableUUID(overrides?: CallOverrides): Promise<[string]>;
-
     renounceRole(
       role: BytesLike,
       account: string,
@@ -449,8 +438,6 @@ export interface SevenDotsStackFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  proxiableUUID(overrides?: CallOverrides): Promise<string>;
-
   renounceRole(
     role: BytesLike,
     account: string,
@@ -543,8 +530,6 @@ export interface SevenDotsStackFactory extends BaseContract {
       arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    proxiableUUID(overrides?: CallOverrides): Promise<string>;
 
     renounceRole(
       role: BytesLike,
@@ -725,8 +710,6 @@ export interface SevenDotsStackFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    proxiableUUID(overrides?: CallOverrides): Promise<BigNumber>;
-
     renounceRole(
       role: BytesLike,
       account: string,
@@ -822,8 +805,6 @@ export interface SevenDotsStackFactory extends BaseContract {
       arg3: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    proxiableUUID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceRole(
       role: BytesLike,
